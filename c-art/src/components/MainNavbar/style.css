@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind&display=swap');
+
+* {
+  font-family: Hind;
+}
+
+.my-search {
+  width: 250px;
+  outline: none;
+}
+
+.my-search ::placeholder {
+  font-family: Hind;
+  font-weight: bold;
+  color: red !important;
+}
