@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom"
-import Layout from "../Pages/Layout"
-import LoginForm from "../Pages/Login/Login"
-import Register from "../Pages/Register/Register"
+import ArtForm from "../components/ArtForm/artForm"
+import Layout from "../pages/Layout"
+import LoginForm from "../pages/Login/Login"
+import Register from "../pages/Register/Register"
 
 const router = createBrowserRouter([
     {
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <h1>dari dashboard</h1>
+            },
+            {
+                path:"/add-art",
+                element : <ArtForm/>
             }
         ]
     },
