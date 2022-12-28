@@ -38,14 +38,15 @@ export default function MainNavbar() {
   };
 
   return (
-    <div className="container-fluids h-14 items-center flex flex-row px-10" style={{backgroundColor: '#191B1F'}}>
-      <form onSubmit={handleSearch} className="bg-black-500 search-container">
+    <div className="container-fluids h-14 items-center flex flex-row px-10" style={{backgroundColor: "#131119"}}>
+      <form onSubmit={handleSearch} className=" search-container">
         <input
           type="search"
+          style={{backgroundColor: "#191B1F", color: "#ffffff"}}
           className="rounded-full h-8 indent-10 bg-lime-200 my-search"
           value={search}
           onChange={handleSearchChange}
-          placeholder="find here"
+          placeholder="search"
         />
       </form>
       {!localStorage.access_token ? (
