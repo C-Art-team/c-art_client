@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import logo from "./C-art-logo.png";
 
 function Register() {
@@ -52,7 +53,7 @@ function Register() {
                     <p className="text-gray-100">
                         or use email to create account
                     </p>
-                    <form action="" className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                    <form className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
                         <div className="pb-2 pt-4">
                             <input type="text" name="email" id="email" placeholder="Username" className="block w-full p-4 text-lg rounded-xl bg-black" />
                         </div>
@@ -69,10 +70,8 @@ function Register() {
                             <button className="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">register</button>
                         </div>
                         <div className=" text-center text-gray-400 hover:underline hover:text-gray-100">
-                            <a href="#">Have an account?</a>
+                            <Link to={"/login"}>already have account??</Link>
                         </div>
-
-
                     </form>
                 </div>
             </div>

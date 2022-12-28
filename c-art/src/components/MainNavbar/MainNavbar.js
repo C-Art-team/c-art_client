@@ -1,10 +1,10 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 export default function MainNavbar() {
   const [search, setSearch] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
     console.log(e.target.value);
@@ -23,12 +23,12 @@ export default function MainNavbar() {
 
   const toRegister = () => {
     console.log("ke register");
-    // navigate("/register");
+    navigate("/register");
   };
 
   const toLogin = () => {
     console.log("ke login");
-    // navigate("/login");
+    navigate("/login");
   };
 
   const handleSearch = (e) => {
@@ -52,13 +52,13 @@ export default function MainNavbar() {
         <>
           <button
             onClick={toRegister}
-            className="rounded-xl bg-lime-300 w-14 h-7 ml-auto font-semibold shadow-lg shadow-green-200"
+            className="rounded-xl bg-lime-300 w-14 h-7 ml-auto font-semibold shadow-md shadow-green-200"
           >
             Join
           </button>
           <button
             onClick={toLogin}
-            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-lg shadow-green-200"
+            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-md shadow-green-200"
           >
             Login
           </button>
