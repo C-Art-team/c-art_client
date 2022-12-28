@@ -1,10 +1,10 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 export default function MainNavbar() {
   const [search, setSearch] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
     console.log(e.target.value);
@@ -23,12 +23,12 @@ export default function MainNavbar() {
 
   const toRegister = () => {
     console.log("ke register");
-    // navigate("/register");
+    navigate("/register");
   };
 
   const toLogin = () => {
     console.log("ke login");
-    // navigate("/login");
+    navigate("/login");
   };
 
   const handleSearch = (e) => {
@@ -38,7 +38,7 @@ export default function MainNavbar() {
   };
 
   return (
-    <div className="container-fluids h-14 items-center flex flex-row px-10" style={{backgroundColor: "#131119"}}>
+    <div className="container-fluids h-14 items-center flex flex-row px-10 my-navbar" style={{backgroundColor: "#131119"}}>
       <form onSubmit={handleSearch} className=" search-container">
         <input
           type="search"

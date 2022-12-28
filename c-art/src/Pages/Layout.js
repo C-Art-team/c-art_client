@@ -7,7 +7,7 @@ function Layout() {
     return (
         <>
             <MainNavbar />
-            <div className='flex '>
+            <div className='flex min-h-full'>
                 <Sidebar />
                 <Outlet />
             </div>

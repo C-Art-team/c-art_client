@@ -17,3 +17,10 @@ textarea {
   text-align: center;
   padding: 1em;
 }
+
+.container-add {
+  top: 5em;
+  width: 100%;
+  /* height: 50rem; */
+  min-height: 70vh;
+}

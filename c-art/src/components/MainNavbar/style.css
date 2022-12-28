@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 * {
   font-family: 'Poppins', sans-serif;
 }
@@ -13,3 +14,9 @@
   font-weight: bold;
   color: red !important;
 }
+
+/* .my-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+} */

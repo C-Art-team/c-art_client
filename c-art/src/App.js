@@ -2,17 +2,17 @@
 import "./App.css";
 import MainNavbar from "./components/MainNavbar/MainNavbar";
 import Sidebar from "./components/SideBar/Sidebar";
-import { RouterProvider } from "react-router-dom"
+import { RouterProvider } from "react-router-dom";
 import router from "./router";
 
 function App() {
   return (
-    <RouterProvider router={router}>
-      <div className="App">
+    <div className="App">
+      <RouterProvider router={router}>
         <Sidebar />
         <MainNavbar />
-      </div>
-    </RouterProvider>
+      </RouterProvider>
+    </div>
   );
 }
 

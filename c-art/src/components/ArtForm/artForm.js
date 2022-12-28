@@ -66,9 +66,9 @@ export default function ArtForm() {
     });
   };
 
-  const categories = ["3d", "2d", "music", "sfx", "gif", "blender"];
+  const categories = ["3d", "2d", "music", "sfx", "gif"];
   return (
-    <div className="flex flex-col min-w-full bg-black-500 min-h-full column items-center justify-center">
+    <section className="flex flex-col w-screen h-screen rounded-sm">
       <div
         className="container min-w-full h-14 flex justify-around items-center"
         style={{ backgroundColor: "#191B1F" }}
@@ -88,7 +88,7 @@ export default function ArtForm() {
         })}
       </div>
       <div className="container flex">
-        <div className="w-1/2" style={{backgroundColor: "#191B1F"}}>
+        <div className="w-1/2 py-3 px-4" style={{backgroundColor: "#191B1F"}}>
         <img id="uploadedimage" className="rounded-md min-w-full min-h-full text-white" src={artInput.source} alt="upload here"/>
         </div>
         <form
@@ -100,7 +100,8 @@ export default function ArtForm() {
             <button
               onClick={openUpload}
               id="upload_widget"
-              className="cloudinary-button w-20 h-10 bg-red-200 mb-5 text-black"
+              className="cloudinary-button w-20 h-10 mb-5 text-black"
+              style={{backgroundColor : "#85CF81"}}
               type="button"
             >
               Upload
@@ -111,9 +112,10 @@ export default function ArtForm() {
             <label htmlFor="name">Art name : </label>
             <input
               name="name"
-              className="rounded-3xl indent-8 text-black"
+              className="rounded-3xl indent-4 text-black"
               value={artInput.name}
               onChange={handleChangeInput}
+              placeholder="your art name"
             />
           </div>
           <div className="column items-center justify-center pricing mb-5">
@@ -121,9 +123,10 @@ export default function ArtForm() {
             <input
               type="number"
               name="price"
-              className="rounded-3xl indent-8 text-black"
+              className="rounded-3xl indent-4 text-black"
               value={artInput.price}
               onChange={handleChangeInput}
+              placeholder="your art price"
             />
           </div>
           <div className="flex flex-col items-center justify-center mb-5 w-20">
@@ -137,12 +140,13 @@ export default function ArtForm() {
             ></textarea>
           </div>
           <input
-            className="rounded-2xl bg-red-200 w-14 h-8"
+            className="rounded-2xl w-14 h-8 text-black"
+            style={{backgroundColor : "#85CF81"}}
             type="submit"
-            value="add"
+            value="Add"
           />
         </form>
       </div>
-    </div>
+    </section>
   );
 }
