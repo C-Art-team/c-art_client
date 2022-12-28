@@ -1,12 +1,13 @@
 import React from "react";
 import logo from "./C-art-logo.png";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <div className="flex">
+    <div className="flex" >
       <div
-        className="flex flex-col h-screen p-3 bg-white shadow w-36 justify-between"
-        style={{ backgroundColor: "#131119", color: "#EDEDED" }}
+        data-theme="dark"
+        className="flex flex-col h-screen p-3 shadow w-36 justify-between drawer-conten bg-base-300"
       >
         <div className="space-y-3">
           <div className="flex items-center justify-center">
@@ -15,8 +16,8 @@ export default function Sidebar() {
           <div className="flex-1">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
               <li className="rounded-sm">
-                <a
-                  href="#"
+                <Link
+                  to={"/"}
                   className="flex items-center p-2 space-x-3 rounded-md"
                 >
                   <svg
@@ -34,12 +35,12 @@ export default function Sidebar() {
                     />
                   </svg>
                   <span>Home</span>
-                </a>
+                </Link>
               </li>
               <li className="rounded-sm">
-                <a
+                <button
                   href="#"
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md hover:bg-green-700 w-full"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -56,29 +57,29 @@ export default function Sidebar() {
                     />
                   </svg>
                   <span>Market</span>
-                </a>
+                </button>
               </li>
               <li className="rounded-sm">
-                <a
+                <button
                   href="#"
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md hover:bg-green-700 w-full"
                 >
                   <svg
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                     ></path>
                   </svg>
                   <span>Groups</span>
-                </a>
+                </button>
               </li>
               <li className="rounded-sm"></li>
             </ul>

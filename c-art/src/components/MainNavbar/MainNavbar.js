@@ -1,10 +1,10 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 export default function MainNavbar() {
   const [search, setSearch] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
     console.log(e.target.value);
@@ -23,12 +23,12 @@ export default function MainNavbar() {
 
   const toRegister = () => {
     console.log("ke register");
-    // navigate("/register");
+    navigate("/register");
   };
 
   const toLogin = () => {
     console.log("ke login");
-    // navigate("/login");
+    navigate("/login");
   };
 
   const handleSearch = (e) => {
@@ -38,11 +38,10 @@ export default function MainNavbar() {
   };
 
   return (
-    <div className="container-fluids h-14 items-center flex flex-row px-10" style={{backgroundColor: "#131119"}}>
+    <div className="navbar bg-base-300 container-fluids h-14 items-center flex flex-row px-10" data-theme="dark">
       <form onSubmit={handleSearch} className=" search-container">
         <input
           type="search"
-          style={{backgroundColor: "#191B1F", color: "#ffffff"}}
           className="rounded-full h-8 indent-10 bg-lime-200 my-search"
           value={search}
           onChange={handleSearchChange}
@@ -53,13 +52,13 @@ export default function MainNavbar() {
         <>
           <button
             onClick={toRegister}
-            className="rounded-xl bg-lime-300 w-14 h-7 ml-auto font-semibold shadow-lg shadow-green-200"
+            className="rounded-xl bg-lime-300 w-14 h-7 ml-auto font-semibold shadow-md shadow-green-200"
           >
             Join
           </button>
           <button
             onClick={toLogin}
-            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-lg shadow-green-200"
+            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-md shadow-green-200"
           >
             Login
           </button>
