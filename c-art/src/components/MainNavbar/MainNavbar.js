@@ -38,11 +38,11 @@ export default function MainNavbar() {
   };
 
   return (
-    <div className="navbar bg-base-300 container-fluids h-14 items-center flex flex-row px-10" data-theme="dark">
+    <div className="navbar bg-base-300 container-fluids text-center h-14 items-center flex flex-row px-10" data-theme="dark">
       <form onSubmit={handleSearch} className=" search-container">
         <input
           type="search"
-          className="rounded-full h-8 indent-10 bg-lime-200 my-search"
+          className="rounded-full h-8 indent-10 bg-lime-200 my-search text-black"
           value={search}
           onChange={handleSearchChange}
           placeholder="search"
@@ -52,13 +52,13 @@ export default function MainNavbar() {
         <>
           <button
             onClick={toRegister}
-            className="rounded-xl bg-lime-300 w-14 h-7 ml-auto font-semibold shadow-md shadow-green-200"
+            className="rounded-xl bg-lime-300 w-14 h-7 text-center ml-auto font-semibold shadow-md shadow-green-200 text-black"
           >
             Join
           </button>
           <button
             onClick={toLogin}
-            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-md shadow-green-200"
+            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-md shadow-green-200 text-black"
           >
             Login
           </button>

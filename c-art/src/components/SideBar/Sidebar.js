@@ -18,7 +18,7 @@ export default function Sidebar() {
               <li className="rounded-sm">
                 <Link
                   to={"/"}
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md hover:bg-green-700"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
