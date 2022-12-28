@@ -5,6 +5,7 @@ import { AiFillHome } from "react-icons/ai"
 import { FaLuggageCart } from "react-icons/fa"
 import { MdGroups } from "react-icons/md"
 import { RiLogoutBoxFill } from "react-icons/ri"
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const theme = useSelector((state) => {
@@ -23,12 +24,12 @@ export default function Sidebar() {
           <div className="flex-1">
             <ul className="pt-16 pb-4 space-y-1 text-sm">
               <li className="rounded-sm py-3">
-                <button
-                  href="#"
-                  className="flex justify-center p-2 space-x-3 rounded-md hover:bg-green-600 w-full"
+                <Link
+                  to={"/"}
+                  className="flex justify-center p-2 space-x-3 rounded-md hover:bg-green-700 w-full"
                 >
                   <AiFillHome size={25} />
-                </button>
+                </Link>
               </li>
               <li className="rounded-sm py-3">
                 <button

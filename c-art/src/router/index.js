@@ -3,6 +3,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard"
 import Layout from "../Pages/Layout"
 import LoginForm from "../Pages/Login/Login"
 import Register from "../Pages/Register/Register"
+import ArtForm from "../components/ArtForm/artForm"
 
 const router = createBrowserRouter([
     {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Dashboard />
+            },
+            {
+                path: "/add-art",
+                element: <ArtForm />
             }
         ]
     },
