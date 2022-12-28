@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
+import Dashboard from "../Pages/Dashboard/Dashboard"
 import Layout from "../Pages/Layout"
 import LoginForm from "../Pages/Login/Login"
 import Register from "../Pages/Register/Register"
@@ -9,7 +10,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <h1>dari dashboard</h1>
+                element: <Dashboard />
             }
         ]
     },
