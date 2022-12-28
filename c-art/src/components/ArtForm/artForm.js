@@ -76,7 +76,7 @@ export default function ArtForm() {
         {categories.map((el, i) => {
           return (
             <button
-              className="p-0 w-20 h-9 rounded-3xl"
+              className="p-0 w-20 h-9 rounded-3xl text-black"
               style={{ backgroundColor: "#85CF81" }}
               onClick={tabForm}
               value={el}
