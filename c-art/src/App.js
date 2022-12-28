@@ -10,7 +10,6 @@ function App() {
     <RouterProvider router={router}>
 
       <div className="App">
-
         <Sidebar />
         <MainNavbar />
       </div>
