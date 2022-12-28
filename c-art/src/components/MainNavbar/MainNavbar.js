@@ -38,7 +38,7 @@ export default function MainNavbar() {
   };
 
   return (
-    <div className="container-fluids h-14 bg-stone-500 items-center flex flex-row px-10">
+    <div className="container-fluids h-14 items-center flex flex-row px-10" style={{backgroundColor: '#191B1F'}}>
       <form onSubmit={handleSearch} className="bg-black-500 search-container">
         <input
           type="search"
@@ -52,13 +52,13 @@ export default function MainNavbar() {
         <>
           <button
             onClick={toRegister}
-            className="rounded-xl bg-lime-300 w-14 h-7 ml-auto font-semibold shadow-lg shadow-green-200"
+            className="rounded-xl bg-lime-300 w-14 h-7 ml-auto font-semibold shadow-md shadow-green-200"
           >
             Join
           </button>
           <button
             onClick={toLogin}
-            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-lg shadow-green-200"
+            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-md shadow-green-200"
           >
             Login
           </button>

@@ -1,0 +1,19 @@
+.upload {
+  width: 20rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.description {
+  width: 20rem !important;
+}
+
+textarea,
+input {
+  outline: none;
+}
+
+textarea {
+  text-align: center;
+  padding: 1em;
+}

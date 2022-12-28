@@ -1,5 +1,6 @@
 // import logo from "./logo.svg";
 import "./App.css";
+import ArtForm from "./components/ArtForm/artForm";
 import MainNavbar from "./components/MainNavbar/MainNavbar";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       </header>
       <h1 className="text-3xl font-bold underline">Hello world!</h1> */}
       <MainNavbar />
+      <ArtForm/>
     </div>
   );
 }
