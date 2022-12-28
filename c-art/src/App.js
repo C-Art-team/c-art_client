@@ -1,6 +1,7 @@
 // import logo from "./logo.svg";
 import "./App.css";
 import MainNavbar from "./components/MainNavbar/MainNavbar";
+import Sidebar from "./components/SideBar/Sidebar";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         </a>
       </header>
       <h1 className="text-3xl font-bold underline">Hello world!</h1> */}
+      <Sidebar/>
       <MainNavbar />
     </div>
   );

@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 * {
-  font-family: Hind;
+  font-family: 'Poppins', sans-serif;
 }
 
 .my-search {
@@ -10,7 +9,7 @@
 }
 
 .my-search ::placeholder {
-  font-family: Hind;
+  font-family: 'Poppins', sans-serif;
   font-weight: bold;
   color: red !important;
 }
