@@ -52,8 +52,8 @@ export default function MainNavbar() {
   }
 
   return (
-    <div className="navbar bg-base-300 container-fluids h-14 items-center flex flex-row px-10" data-theme={theme}>
-      <form onSubmit={handleSearch} className=" search-container">
+    <div className="navbar bg-base-300 h-14 items-center flex flex-row px-10" data-theme={theme}>
+      <form onSubmit={handleSearch} className="search-container">
         <input
           type="search"
           className="rounded-xl h-8 indent-10 bg-base-100 my-search"

@@ -9,7 +9,7 @@ function Layout() {
         return state.themeReducer.theme
     })
     return (
-        <div className='flex' data-theme={theme}>
+        <div className='flex sticky' data-theme={theme}>
             <Sidebar />
             <div className='flex-col w-full'>
                 <MainNavbar />
