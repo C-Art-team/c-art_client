@@ -52,13 +52,13 @@ export default function MainNavbar() {
         <>
           <button
             onClick={toRegister}
-            className="rounded-xl bg-lime-300 w-14 h-7 ml-auto font-semibold shadow-md shadow-green-200"
+            className="rounded-xl bg-lime-300 w-14 h-7 ml-auto font-semibold shadow-md shadow-green-200 text-black"
           >
             Join
           </button>
           <button
             onClick={toLogin}
-            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-md shadow-green-200"
+            className="rounded-xl bg-lime-300 w-20 h-7 ml-5 font-semibold shadow-md shadow-green-200 text-black"
           >
             Login
           </button>

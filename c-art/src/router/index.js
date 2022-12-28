@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom"
 import ArtForm from "../components/ArtForm/artForm"
-import Layout from "../Pages/Layout"
-import LoginForm from "../Pages/Login/Login"
-import Register from "../Pages/Register/Register"
+import Layout from "../pages/Layout"
+import LoginForm from "../pages/Login/Login"
+import Register from "../pages/Register/Register"
 
 const router = createBrowserRouter([
     {
