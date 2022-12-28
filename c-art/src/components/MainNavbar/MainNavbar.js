@@ -38,11 +38,10 @@ export default function MainNavbar() {
   };
 
   return (
-    <div className="container-fluids h-14 items-center flex flex-row px-10 my-navbar" style={{backgroundColor: "#131119"}}>
+    <div className="navbar bg-base-300 container-fluids h-14 items-center flex flex-row px-10" data-theme="dark">
       <form onSubmit={handleSearch} className=" search-container">
         <input
           type="search"
-          style={{backgroundColor: "#191B1F", color: "#ffffff"}}
           className="rounded-full h-8 indent-10 bg-lime-200 my-search"
           value={search}
           onChange={handleSearchChange}

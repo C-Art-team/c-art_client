@@ -56,7 +56,7 @@ const LoginForm = () => {
                                 <a href="#">Forgot your password?</a>
                             </div>
                             <div className="px-4 pb-2 pt-4">
-                                <button className="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">sign in</button>
+                                <button className="uppercase block w-full p-4 text-lg rounded-full hover:bg-green-900 focus:outline-none bg-green-700">sign in</button>
                             </div>
 
 
