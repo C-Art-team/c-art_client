@@ -1,10 +1,18 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import "./style.css";
+import { BsFillMoonStarsFill } from "react-icons/bs";
+import { themeAction } from "../../actions/action";
+import { GiWallet } from "react-icons/gi"
 
 export default function MainNavbar() {
   const [search, setSearch] = useState("");
-  // const navigate = useNavigate();
+  const theme = useSelector((state) => {
+    return state.themeReducer.theme
+  })
+
+  const dispatch = useDispatch()
 
   const handleSearchChange = (e) => {
     console.log(e.target.value);
@@ -37,12 +45,16 @@ export default function MainNavbar() {
     setSearch("");
   };
 
+  function changeTheme(theme) {
+    dispatch(themeAction(theme))
+  }
+
   return (
-    <div className="navbar bg-base-300 container-fluids h-14 items-center flex flex-row px-10" data-theme="dark">
+    <div className="navbar bg-base-300 container-fluids h-14 items-center flex flex-row px-10" data-theme={theme}>
       <form onSubmit={handleSearch} className=" search-container">
         <input
           type="search"
-          className="rounded-full h-8 indent-10 bg-lime-200 my-search"
+          className="rounded-xl h-8 indent-10 bg-base-100 my-search"
           value={search}
           onChange={handleSearchChange}
           placeholder="search"
@@ -65,19 +77,24 @@ export default function MainNavbar() {
         </>
       ) : (
         <>
+          <button
+            className=" px-10"
+            onClick={() => {
+              // console.log(theme)
+              changeTheme(theme)
+            }}>
+            <BsFillMoonStarsFill />
+          </button>
           <span className="ml-auto text-white">username</span>
           <div
             onClick={toProfile}
             className="w-10 h-10 ml-5 rounded-full bg-lime-200"
           >
-            <img src="" alt="profile" />
+            <img className="mask mask-circle" src="https://www.garmin.co.id/minisite/instinct/instinct-onepiece/images/onepiece-kv-luffy.png" />
           </div>
-          <span
-            onClick={toCart}
-            className="w-10 h-10 ml-5 rounded-full bg-lime-200"
-          >
-            logo cart
-          </span>
+          <button onClick={toCart} className="px-10">
+            <GiWallet size={30} />
+          </button>
         </>
       )}
     </div>
