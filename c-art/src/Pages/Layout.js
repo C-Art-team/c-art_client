@@ -5,13 +5,14 @@ import Sidebar from '../components/SideBar/Sidebar'
 
 function Layout() {
     return (
-        <>
+        <div data-theme="dark">
             <MainNavbar />
             <div className='flex '>
                 <Sidebar />
                 <Outlet />
             </div>
-        </>
+        </div>
+
     )
 }
 

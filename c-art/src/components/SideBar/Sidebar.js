@@ -3,10 +3,10 @@ import logo from "./C-art-logo.png";
 
 export default function Sidebar() {
   return (
-    <div className="flex">
+    <div className="flex" >
       <div
-        className="flex flex-col h-screen p-3 bg-white shadow w-36 justify-between"
-        style={{ backgroundColor: "#131119", color: "#EDEDED" }}
+        data-theme="dark"
+        className="flex flex-col h-screen p-3 shadow w-36 justify-between drawer-conten bg-base-300"
       >
         <div className="space-y-3">
           <div className="flex items-center justify-center">
@@ -15,9 +15,9 @@ export default function Sidebar() {
           <div className="flex-1">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
               <li className="rounded-sm">
-                <a
+                <button
                   href="#"
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md hover:bg-green-700 w-full"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -34,12 +34,12 @@ export default function Sidebar() {
                     />
                   </svg>
                   <span>Home</span>
-                </a>
+                </button>
               </li>
               <li className="rounded-sm">
-                <a
+                <button
                   href="#"
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md hover:bg-green-700 w-full"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -56,12 +56,12 @@ export default function Sidebar() {
                     />
                   </svg>
                   <span>Market</span>
-                </a>
+                </button>
               </li>
               <li className="rounded-sm">
-                <a
+                <button
                   href="#"
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md hover:bg-green-700 w-full"
                 >
                   <svg
                     class="w-6 h-6"
@@ -78,7 +78,7 @@ export default function Sidebar() {
                     ></path>
                   </svg>
                   <span>Groups</span>
-                </a>
+                </button>
               </li>
               <li className="rounded-sm"></li>
             </ul>
