@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom"
-import ArtForm from "../components/ArtForm/artForm"
-import DetailPage from "../pages/DetailPage/detailPage"
+import Dashboard from "../pages/Dashboard/Dashboard"
 import Layout from "../pages/Layout"
 import LoginForm from "../pages/Login/Login"
 import Register from "../pages/Register/Register"
+import ArtForm from "../components/ArtForm/artForm"
 
 const router = createBrowserRouter([
     {
@@ -11,16 +11,15 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <h1>dari dashboard</h1>,
+                element: <Dashboard />
             },
             {
-                path:"/add-art",
-                element : <ArtForm/>
+                path: "/add-art",
+                element: <ArtForm />
             },
             {
                 path: "/art/:id",
-                element: <DetailPage/>
-                
+                element : <h1>Ini dari halaman edit</h1>
             }
         ]
     },

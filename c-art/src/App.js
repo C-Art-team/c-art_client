@@ -1,18 +1,14 @@
-// import logo from "./logo.svg";
 import "./App.css";
-import MainNavbar from "./components/MainNavbar/MainNavbar";
-import Sidebar from "./components/SideBar/Sidebar";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom"
 import router from "./router";
+import { Provider } from "react-redux";
+import store from "./stores";
 
 function App() {
   return (
-    <RouterProvider router={router}>
-      <div className="App">
-        <Sidebar />
-        <MainNavbar />
-      </div>
-    </RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   );
 }
 

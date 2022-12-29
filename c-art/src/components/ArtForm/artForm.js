@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchAllCategory } from "../../actions/actionCategory";
 import "./style.css";
 
 export default function ArtForm() {
   const cloudName = "dilzm9jdf";
   const uploadPreset = "fdag7ums";
+  const categories = useSelector((state) => state.categoryReducer.categories)
+  const [loading,setLoading] = useState(true)
+  const dispatch = useDispatch()
 
   var myWidget = window.cloudinary.createUploadWidget(
     {
       cloudName,
       uploadPreset,
-      theme: "black",
     },
     (error, result) => {
       if (!error && result && result.event === "success") {
@@ -66,64 +70,78 @@ export default function ArtForm() {
     });
   };
 
-  const categories = ["3d", "2d", "music", "sfx", "gif"];
+  useEffect(() => {
+    dispatch(fetchAllCategory()).then(() => {
+      setLoading(false)
+    })
+    // eslint-disable-next-line
+  },[])
+
+  // const categories = ["3d", "2d", "music", "sfx", "gif"];
   return (
-    <section className="flex flex-col w-screen h-screen rounded-sm">
+    <section className="flex flex-col container-add rounded-sm">
       <div
-        className="container min-w-full h-14 flex justify-around items-center"
+        className="min-w-full h-20 flex justify-center items-center pt-4 tab-form"
         style={{ backgroundColor: "#191B1F" }}
       >
-        {categories.map((el, i) => {
+        { !loading ? categories.map(el => {
           return (
             <button
+<<<<<<< HEAD
               className="p-0 w-20 h-9 rounded-3xl text-black"
+=======
+              className="p-0 w-20 h-14 rounded-3xl text-black mx-7"
+>>>>>>> 822614f00fc35c36bfac3a4970d308ebd854365d
               style={{ backgroundColor: "#85CF81" }}
               onClick={tabForm}
-              value={el}
-              key={i}
+              value={el.name}
+              key={el.id}
             >
-              {el}
+              {el.name}
             </button>
           );
-        })}
+        }) : null}
       </div>
-      <div className="container flex">
-        <div className="w-1/2 py-3 px-4" style={{backgroundColor: "#191B1F"}}>
-        <img id="uploadedimage" className="rounded-md min-w-full min-h-full text-white" src={artInput.source} alt="upload here"/>
+      <div className="flex cotainer-add">
+        <div className="w-1/2 py-3 px-4 container-add flex flex-col items-center" style={{ backgroundColor: "#191B1F" }}>
+          <img
+            id="uploadedimage"
+            className="rounded-md min-h-full text-white"
+            src={artInput.source}
+            alt="upload here"
+          />
         </div>
         <form
           onSubmit={handleSubmit}
-          className="flex justify-center flex-col w-1/2 items-center py-5"
+          className="flex flex-col w-1/2 items-center pt-4 container-add"
           style={{ backgroundColor: "#191B1F", color: "#EDEDED" }}
         >
-          <div className="container items-center justify-center upload">
+          <div className="flex items-center justify-center">
             <button
               onClick={openUpload}
               id="upload_widget"
-              className="cloudinary-button w-20 h-10 mb-5 text-black"
-              style={{backgroundColor : "#85CF81"}}
+              className="w-20 h-8 mb-5 text-black rounded-2xl text-center items-center"
+              style={{ backgroundColor: "#85CF81" }}
               type="button"
-            >
-              Upload
+            >upload
             </button>
-            
           </div>
-          <div className="container items-center justify-center mb-5">
+          <div className="flex items-center justify-center mb-5">
             <label htmlFor="name">Art name : </label>
             <input
               name="name"
-              className="rounded-3xl indent-4 text-black"
+              className="rounded-3xl indent-4 text-white ml-2"
               value={artInput.name}
               onChange={handleChangeInput}
               placeholder="your art name"
             />
           </div>
-          <div className="column items-center justify-center pricing mb-5">
+          <div className="flex items-center justify-center pricing mb-5">
             <label>Starting price : </label>
             <input
               type="number"
               name="price"
-              className="rounded-3xl indent-4 text-black"
+              className="rounded-3xl indent-4 text-white ml-2"
               value={artInput.price}
               onChange={handleChangeInput}
               placeholder="your art price"
@@ -132,7 +150,7 @@ export default function ArtForm() {
           <div className="flex flex-col items-center justify-center mb-5 w-20">
             <label htmlFor="decription">Description</label>
             <textarea
-              className="rounded-3xl description text-black"
+              className="rounded-3xl description text-white"
               rows={5}
               name="description"
               value={artInput.description}
@@ -141,7 +159,7 @@ export default function ArtForm() {
           </div>
           <input
             className="rounded-2xl w-14 h-8 text-black"
-            style={{backgroundColor : "#85CF81"}}
+            style={{ backgroundColor: "#85CF81" }}
             type="submit"
             value="Add"
           />
