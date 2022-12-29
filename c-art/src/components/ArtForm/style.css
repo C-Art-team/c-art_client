@@ -8,6 +8,10 @@
   width: 20rem !important;
 }
 
+.tab-form {
+  top: 4em,
+}
+
 textarea,
 input {
   outline: none;
@@ -19,8 +23,5 @@ textarea {
 }
 
 .container-add {
-  top: 5em;
-  width: 100%;
-  /* height: 50rem; */
-  min-height: 70vh;
+  min-height: 80vh !important;
 }
