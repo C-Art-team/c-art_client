@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { BsFillMoonStarsFill } from "react-icons/bs";
-import { themeAction } from "../../actions/action";
+import { themeAction } from "../../actions/actionTheme";
 import { GiWallet } from "react-icons/gi"
 
 export default function MainNavbar() {
