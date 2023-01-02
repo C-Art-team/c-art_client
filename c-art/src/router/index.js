@@ -4,6 +4,7 @@ import Layout from "../pages/Layout"
 import LoginForm from "../pages/Login/Login"
 import Register from "../pages/Register/Register"
 import ArtForm from "../components/ArtForm/artForm"
+import DetailPage from "../pages/DetailPage/detailPage"
 
 const router = createBrowserRouter([
     {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/art/:id",
-                element : <h1>Ini dari halaman edit</h1>
+                element : <DetailPage/>
             }
         ]
     },

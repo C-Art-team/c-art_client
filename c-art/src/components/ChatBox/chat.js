@@ -4,7 +4,7 @@ import "./style.css";
 
 export default function ChatBox() {
   const socket = io("http://localhost:4000");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([1,2,3]);
   const [chat, setChat] = useState("");
   const handleChatInput = (e) => {
     setChat(e.target.value);
@@ -20,7 +20,7 @@ export default function ChatBox() {
 
   useEffect(() => {
     socket.on("chat success", (messages) => {
-      setMessages([...messages])
+      setMessages([...messages]);
       window.scrollTo(0, document.body.scrollHeight);
     });
   }, []);
@@ -29,7 +29,14 @@ export default function ChatBox() {
     <section className="chat-box container w-1/4 min-h-screen bg-red-200">
       <ul id="messages">
         {messages.map((el, i) => {
-          return <li key={el.id} style={{textAlign : el.senderId !== 1 ? "left" : 'right'}}>{el.text}</li>;
+          // return <li key={el.id} style={{textAlign : el.senderId !== 1 ? "left" : 'right'}}>{el.text}</li>;
+          return (
+            <div className="chat chat-start" key={i} style={{textAlign : el.senderId !== 1 ? "left" : 'right'}}>
+              <div className="chat-bubble chat-bubble-primary">
+                {el}
+              </div>
+            </div>
+          );
         })}
       </ul>
       <form
