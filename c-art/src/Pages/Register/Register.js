@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { handleRegister, toggleModal } from "../../actions/userAction";
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "./C-art-logo.png";
-
+import Modal from "../../components/Modal/Modal";
 function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -197,6 +199,7 @@ function Register() {
           </div>
         </div>
       ) : null}
+      {modal ? <Modal setModal={setModal} /> : ""}
     </section>
   );
 }

@@ -21,7 +21,7 @@ export default function Sidebar() {
     <div className="flex" >
       <div
         data-theme={theme}
-        className="flex flex-col h-full p-3 shadow w-36 justify-between drawer-conten bg-base-300"
+        className="flex flex-col min-h-screen p-3 shadow w-36 justify-between drawer-conten bg-base-300"
       >
         <div className="space-y-3">
           <div className="flex items-center justify-center">
@@ -46,12 +46,12 @@ export default function Sidebar() {
                 </button>
               </li>
               <li className="rounded-sm py-3">
-                <button
-                  
+                <Link
+                  to="/groups"
                   className="flex justify-center p-2 space-x-3 rounded-md hover:bg-green-600 w-full"
                 >
                   <MdGroups size={25} />
-                </button>
+                </Link>
               </li>
               <li className="rounded-sm"></li>
             </ul>

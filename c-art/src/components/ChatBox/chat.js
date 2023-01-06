@@ -7,31 +7,58 @@ export default function ChatBox() {
   const logged = useSelector((state) => state.userReducer.loged)
   const socket = io("http://localhost:4000");
   const [messages, setMessages] = useState([]);
-  const [chat, setChat] = useState("");
+  const [chat, setChat] = useState("")
+  const [dataChat,setDataChat] = useState({
+    text : "",
+    tag : ""
+  })
+
+
   const handleChatInput = (e) => {
-    setChat(e.target.value);
+    setChat(e.target.value)
   };
 
   const sendChat = () => {
     console.log(chat);
+    setDataChat({
+      text : chat,
+      tag : ""
+    })
     if (chat) {
-      socket.emit("chat", chat);
+      socket.emit("comment", dataChat);
     }
-    setChat("");
+
+    setChat({
+      text: "",
+      senderId: "",
+      receiverId: "",
+      tag: "",
+    });
   };
 
   useEffect(() => {
     socket.on("chat success", (messages) => {
-      setMessages([...messages])
-      window.scrollTo(0, document.body.scrollHeight);
+      setMessages([...messages]);
+      // window.scrollTo(0, document.getElementById("messages").scrollHeight);
     });
   }, []);
 
   return (
-    <section className="chat-box container w-1/4 min-h-screen bg-red-200">
+    <section className="chat-box container w-1/4 bg-grey-400 py-6 px-2">
       <ul id="messages">
         {messages.map((el, i) => {
-          return <li key={el.id} style={{textAlign : el.senderId !== 1 ? "left" : 'right'}}>{el.text}</li>;
+          return (
+            <div
+              className={
+                el.senderId !== 1 ? "chat chat-start" : "chat chat-end"
+              }
+              key={i}
+            >
+              <div className="chat-bubble bg-white-500 text-md font-bold">
+                {el.text}
+              </div>
+            </div>
+          );
         })}
       </ul>
       <form
@@ -47,7 +74,12 @@ export default function ChatBox() {
           value={chat}
           onChange={handleChatInput}
         />
-        <button type="submit">Send</button>
+        <button
+          type="submit"
+          className="bg-gradient-to-r from-lime-400 to-green-500"
+        >
+          Send
+        </button>
       </form>
     </section>
   );

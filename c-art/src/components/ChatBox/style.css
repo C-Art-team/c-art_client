@@ -7,19 +7,20 @@ body {
 .chat-box {
   position: fixed;
   right: 0;
-  height: 10rem !important;
+  height: 5rem !important;
 }
 
 #form {
-  background: rgba(0, 0, 0, 0.15);
+  background: #a3e635;
   padding: 0.25rem;
   position: fixed;
-  bottom: 2rem;
+  bottom: 4rem;
   right: 0;
   display: flex;
   height: 3rem;
   box-sizing: border-box;
-  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  backdrop-filter: blur(20px);
 }
 
 #input {
