@@ -29,7 +29,7 @@ function Dashboard() {
 
                 </div>
             </div>
-            <div class="grid grid-cols-4 gap-1 px-16">
+            <div className="grid grid-cols-4 gap-1 px-16">
                 <Card />
                 <Card />
                 <Card />

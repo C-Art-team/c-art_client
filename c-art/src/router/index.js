@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom"
-import Dashboard from "../Pages/Dashboard/Dashboard"
-import Layout from "../Pages/Layout"
-import LoginForm from "../Pages/Login/Login"
-import Register from "../Pages/Register/Register"
+import Dashboard from "../pages/Dashboard/Dashboard"
+import Layout from "../pages/Layout"
+import LoginForm from "../pages/Login/Login"
+import Register from "../pages/Register/Register"
 import ArtForm from "../components/ArtForm/artForm"
-import ThreeDViewer from "../Pages/3DViewer/3DViewer"
+import ThreeDViewer from "../pages/3DViewer/3DViewer"
 
 
 const router = createBrowserRouter([

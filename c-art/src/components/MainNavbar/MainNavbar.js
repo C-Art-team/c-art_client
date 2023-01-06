@@ -8,6 +8,8 @@ import { themeAction } from "../../actions/actionTheme";
 import { GiWallet } from "react-icons/gi"
 
 export default function MainNavbar() {
+  const loged = useSelector((state) => state.userReducer.loged)
+  console.log(loged)
   const [search, setSearch] = useState("");
   const theme = useSelector((state) => {
     return state.themeReducer.theme
@@ -87,7 +89,7 @@ export default function MainNavbar() {
             }}>
             <BsFillMoonStarsFill />
           </button>
-          <span className="ml-auto text-white">username</span>
+          <span className="ml-auto text-white">{localStorage.username}</span>
           <div
             onClick={toProfile}
             className="w-10 h-10 ml-5 rounded-full bg-lime-200"

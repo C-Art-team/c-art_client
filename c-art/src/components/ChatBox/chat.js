@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import "./style.css";
 
 export default function ChatBox() {
+  const logged = useSelector((state) => state.userReducer.loged)
   const socket = io("http://localhost:4000");
   const [messages, setMessages] = useState([]);
   const [chat, setChat] = useState("");

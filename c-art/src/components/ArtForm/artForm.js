@@ -1,42 +1,20 @@
 import { useEffect, useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
+import { newArt } from "../../actions/artAction";
 import "./style.css";
 
 export default function ArtForm() {
-  const cloudName = "dilzm9jdf";
-  const uploadPreset = "fdag7ums";
-  const categories = useSelector((state) => state.categoryReducer.categories)
-  const [loading,setLoading] = useState(true)
-  const dispatch = useDispatch()
-
-  var myWidget = window.cloudinary.createUploadWidget(
-    {
-      cloudName,
-      uploadPreset,
-    },
-    (error, result) => {
-      if (!error && result && result.event === "success") {
-        console.log("Done! Here is the image info: ", result.info);
-        let obj = {
-          ...artInput,
-          source: result.info.secure_url,
-        };
-        setArtInput(obj);
-      }
-    }
-  );
-
-  const openUpload = () => {
-    myWidget.open();
-  };
+  const categories = useSelector((state) => state.categoryReducer.categories);
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   const [artInput, setArtInput] = useState({
     name: "",
     description: "",
-    source: "",
     price: "",
-    category: "",
+    files : [],
+    CategoryId: "",
   });
 
   const handleChangeInput = (e) => {
@@ -50,32 +28,39 @@ export default function ArtForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(artInput);
+    dispatch(newArt(artInput))
     setArtInput({
       name: "",
       description: "",
-      source: "",
       price: 0,
-      category: "",
+      files : [],
+      categoryId: "",
     });
 
-    document.getElementById("uploadedimage").remove();
   };
+
+  const handleFilesInput = (e) => {
+    let obj = {
+      ...artInput,
+      files : [...artInput.files,e.target.value]
+    }
+    setArtInput(obj)
+  }
 
   const tabForm = (e) => {
     console.log(e.target.value);
     setArtInput({
       ...artInput,
-      category: e.target.value,
+      CategoryId: e.target.value,
     });
   };
 
   useEffect(() => {
     dispatch(fetchAllCategory()).then(() => {
-      setLoading(false)
-    })
+      setLoading(false);
+    });
     // eslint-disable-next-line
-  },[])
+  }, []);
 
   // const categories = ["3d", "2d", "music", "sfx", "gif"];
   return (
@@ -84,22 +69,27 @@ export default function ArtForm() {
         className="min-w-full h-20 flex justify-center items-center pt-4 tab-form"
         style={{ backgroundColor: "#191B1F" }}
       >
-        { !loading ? categories.map(el => {
-          return (
-            <button
-              className="p-0 w-20 h-14 rounded-3xl text-black mx-7"
-              style={{ backgroundColor: "#85CF81" }}
-              onClick={tabForm}
-              value={el.name}
-              key={el.id}
-            >
-              {el.name}
-            </button>
-          );
-        }) : null}
+        {!loading
+          ? categories.map((el) => {
+              return (
+                <button
+                  className="p-0 w-20 h-14 rounded-3xl text-black mx-7"
+                  style={{ backgroundColor: "#85CF81" }}
+                  onClick={tabForm}
+                  value={el.id}
+                  key={el.id}
+                >
+                  {el.name}
+                </button>
+              );
+            })
+          : null}
       </div>
       <div className="flex cotainer-add">
-        <div className="w-1/2 py-3 px-4 container-add flex flex-col items-center" style={{ backgroundColor: "#191B1F" }}>
+        <div
+          className="w-1/2 py-3 px-4 container-add flex flex-col items-center"
+          style={{ backgroundColor: "#191B1F" }}
+        >
           <img
             id="uploadedimage"
             className="rounded-md min-h-full text-white"
@@ -113,14 +103,8 @@ export default function ArtForm() {
           style={{ backgroundColor: "#191B1F", color: "#EDEDED" }}
         >
           <div className="flex items-center justify-center">
-            <button
-              onClick={openUpload}
-              id="upload_widget"
-              className="w-20 h-8 mb-5 text-black rounded-2xl text-center items-center"
-              style={{ backgroundColor: "#85CF81" }}
-              type="button"
-            >upload
-            </button>
+            <label htmlFor="files">Select files</label>
+            <input id="files" name="files" type="file" multiple onChange={handleFilesInput}/>
           </div>
           <div className="flex items-center justify-center mb-5">
             <label htmlFor="name">Art name : </label>
