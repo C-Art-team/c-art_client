@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import logo from "./C-art-logo.png";
-
+import Modal from '../../components/Modal/Modal';
 function Register() {
+    const [modal, setModal] = useState(false)
     return (
+        <>
         <section className="min-h-screen flex items-stretch text-white">
             <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
                 <div className="absolute bg-black opacity-60 inset-0 z-0">
@@ -53,7 +55,10 @@ function Register() {
                     <p className="text-gray-100">
                         or use email to create account
                     </p>
-                    <form className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+                    <form className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto" onSubmit={(e) => {
+                        e.preventDefault()
+                        setModal(true)
+                        }}>
                         <div className="pb-2 pt-4">
                             <input type="text" name="email" id="email" placeholder="Username" className="block w-full p-4 text-lg rounded-xl bg-black" />
                         </div>
@@ -76,6 +81,8 @@ function Register() {
                 </div>
             </div>
         </section>
+        {modal ? <Modal setModal={setModal} /> : ""}
+        </>
     )
 }
 

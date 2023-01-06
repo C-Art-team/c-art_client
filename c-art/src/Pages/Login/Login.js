@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import logo from "./C-art-logo.png";
-import Modal from '../../components/Modal/Modal';
 const LoginForm = () => {
-    const [modal, setModal] = useState(false)
     return (
         <>
             <section className="min-h-screen flex items-stretch text-white">
@@ -47,10 +45,7 @@ const LoginForm = () => {
                         <p className="text-gray-100">
                             or use email your account
                         </p>
-                        <form action="" className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto" onSubmit={(e) => {
-                            e.preventDefault()
-                            setModal(true)
-                        }}>
+                        <form action="" className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
                             <div className="pb-2 pt-4">
                                 <input type="email" name="email" id="email" placeholder="Email" className="block w-full p-4 text-lg rounded-xl bg-black" />
                             </div>
@@ -69,7 +64,6 @@ const LoginForm = () => {
                     </div>
                 </div>
             </section>
-            {modal ? <Modal setModal={setModal} /> : ""}
         </>
     )
 }
