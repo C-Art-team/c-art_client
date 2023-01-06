@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import axios from "axios";
-// import ChatBox from "../../components/ChatBox/chat";
+import ChatBox from "../../components/ChatBox/chat";
 import "./style.css";
 
 export default function DetailPage() {
@@ -54,7 +54,7 @@ export default function DetailPage() {
         </span>
         <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
       </div>
-      {/* {showChatBox ? <ChatBox /> : null} */}
+      {showChatBox ? <ChatBox /> : null}
       <button
         onClick={() => {
           setShowChatBox(!showChatBox);

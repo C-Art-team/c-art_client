@@ -5,24 +5,25 @@ import "./style.css";
 export default function ChatBox() {
   const socket = io("http://localhost:4000");
   const [messages, setMessages] = useState([]);
-  const [chat, setChat] = useState({
-    text: "",
-    senderId: "",
-    receiverId: "",
-    tag: "",
-  });
+  const [chat, setChat] = useState("")
+  const [dataChat,setDataChat] = useState({
+    text : "",
+    tag : ""
+  })
+
 
   const handleChatInput = (e) => {
-    setChat({
-      ...chat,
-      text : e.target.value
-    });
+    setChat(e.target.value)
   };
 
   const sendChat = () => {
     console.log(chat);
+    setDataChat({
+      text : chat,
+      tag : ""
+    })
     if (chat) {
-      socket.emit("chat", chat);
+      socket.emit("comment", dataChat);
     }
 
     setChat({
