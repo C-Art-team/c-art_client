@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../../components/Card/Card";
+import { motion } from 'framer-motion';
 import Carousel from "../../components/Carousel/Carousel";
 
 function Dashboard() {
@@ -9,8 +10,14 @@ function Dashboard() {
         <Carousel />
       </div>
       <div className="flex py-5 justify-between items-center">
-        <h1>ARTWORKS</h1>
-        <div className="flex gap-3">
+        <motion.h1
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ type: "spring", duration: 2 }}>ARTWORKS</motion.h1>
+        <motion.div className="flex gap-3"
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ type: "spring", duration: 2 }}>
           <div >
             <div
               className="badge badge-accent px-5 py-5 text-black font-semibold"
@@ -51,9 +58,12 @@ function Dashboard() {
               accent
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-      <div class="grid grid-cols-4 gap-1">
+      <motion.div class="grid grid-cols-4 gap-1"
+        initial={{ y: 10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", duration: 2 }}>
         <Card />
         <Card />
         <Card />
@@ -64,7 +74,7 @@ function Dashboard() {
         <Card />
         <Card />
         <Card />
-      </div>
+      </motion.div>
     </div>
   );
 }

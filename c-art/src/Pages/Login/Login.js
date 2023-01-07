@@ -1,6 +1,9 @@
-import React from "react";
+import * as THREE from "three"
+import { Canvas } from "@react-three/fiber"
+import Model from "../../components/3DModel/Model"
+import Orbit from "../../components/3DModel/Orbit"
 import logo from "./C-art-logo.png";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { handleLogin } from "../../actions/userAction";
@@ -42,10 +45,24 @@ const LoginForm = () => {
       <section className="min-h-screen flex items-stretch text-white">
         <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
           <div className="absolute bg-black opacity-60 inset-0 z-0">
-            <img
-              className="h-screen w-full"
-              src="https://m.media-amazon.com/images/M/MV5BODcwNWE3OTMtMDc3MS00NDFjLWE1OTAtNDU3NjgxODMxY2UyXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg"
-            />
+            <div style={{ width: "90vw", height: "85vh" }} >
+              <Canvas style={{ background: "transparent" }} camera={{ position: [-2, 1, 8] }} >
+                <Suspense>
+                  <Model scale={[0.1, 0.1, 0.1]} position={[-5, -10, -3]} path="/3Dfiles/GIRL.fbx" />
+                </Suspense>
+                <ambientLight intensity={0.5} />
+
+                <pointLight position={[-18, 5, 0]} intensity={2} castShadow />
+                <pointLight position={[9, 9, 9]} intensity={2} castShadow />
+                <pointLight position={[15, 15, 15]} intensity={2} castShadow />
+                <pointLight position={[-9, -9, -9]} intensity={2} castShadow />
+
+                <Orbit />
+                {/* ////axesHelper is used for help positioning the object/camera */}
+
+
+              </Canvas>
+            </div>
           </div>
           <div className="w-full px-24 z-10">
             <h1 className="text-5xl font-bold text-left tracking-wide">

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate,Outlet, useParams } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
+import { useNavigate, Outlet, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 
 export default function Groups() {
   const preference = localStorage.preference.split(", ")
-  console.log(preference,"8797979797987987")
-  const {tag} = useParams() 
+  console.log(preference, "8797979797987987")
+  const { tag } = useParams()
   console.log(tag)
-  const [loading,setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate();
   // const categories = useSelector((state) => state.categoryReducer.categories)
   // const dispatch = useDispatch()
@@ -27,7 +27,7 @@ export default function Groups() {
   // },[])
   return (
     <div className="flex flex-row flex-wrap">
-      {!tag ?  preference.map((el,i) => {
+      {!tag ? preference.map((el, i) => {
         return (
           <div className="flex flex-row justify-between px-8 pt-8" key={i}>
             <div
@@ -58,7 +58,7 @@ export default function Groups() {
             </div>
           </div>
         );
-      }) : <Outlet/>}
+      }) : <Outlet />}
     </div>
   );
 }

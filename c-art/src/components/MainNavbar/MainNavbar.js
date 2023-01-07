@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./style.css";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { themeAction } from "../../actions/actionTheme";
@@ -21,11 +21,6 @@ export default function MainNavbar() {
   const handleSearchChange = (e) => {
     console.log(e.target.value);
     setSearch(e.target.value);
-  };
-
-  const toProfile = () => {
-    console.log("ke profile");
-    // navigate("/profile")
   };
 
   const toCart = () => {
@@ -99,13 +94,14 @@ export default function MainNavbar() {
           </button>
           <span className="ml-auto text-white">{localStorage.username}</span>
           <div
-            onClick={toProfile}
             className="w-10 h-10 ml-5 rounded-full bg-lime-200"
           >
-            <img
-              className="mask mask-circle"
-              src="https://www.garmin.co.id/minisite/instinct/instinct-onepiece/images/onepiece-kv-luffy.png"
-            />
+            <Link to="/profile">
+              <img
+                className="mask mask-circle"
+                src="https://www.garmin.co.id/minisite/instinct/instinct-onepiece/images/onepiece-kv-luffy.png"
+              />
+            </Link>
           </div>
           <button onClick={toCart} className="px-10">
             <GiWallet size={30} />

@@ -2,8 +2,8 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import Layout from "../Pages/Layout";
 import LoginForm from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
-import { createBrowserRouter} from "react-router-dom";
-import ForumChat from "../pages/GroupChat/groupchat";
+import { createBrowserRouter } from "react-router-dom";
+import ForumChat from "../Pages/GroupChat/groupchat";
 import ArtForm from "../components/ArtForm/artForm";
 import ThreeDViewer from "../Pages/3DViewer/3DViewer";
 import Groups from "../Pages/Groups/Groups";
@@ -34,16 +34,16 @@ const router = createBrowserRouter([
       {
         path: "/groups",
         element: <Groups />,
-        children : [
+        children: [
           {
-            path : ':tag',
-            element : <ForumChat/>
+            path: ':tag',
+            element: <ForumChat />
           }
         ]
       },
       {
         path: "/profile",
-        element: <ProfilePage/>
+        element: <ProfilePage />
       }
     ],
   },
