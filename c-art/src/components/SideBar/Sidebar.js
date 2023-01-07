@@ -1,16 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import logo from "./C-art-logo.png";
-import { AiFillHome } from "react-icons/ai";
-import { FaLuggageCart } from "react-icons/fa";
-import { MdGroups } from "react-icons/md";
-import { RiLogoutBoxFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { AiFillHome } from "react-icons/ai"
+import { FaLuggageCart } from "react-icons/fa"
+import { MdGroups } from "react-icons/md"
+import { RiLogoutBoxFill } from "react-icons/ri"
+import { Link,useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const theme = useSelector((state) => {
-    return state.themeReducer.theme;
-  });
+    return state.themeReducer.theme
+  })
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate('/')
+  }
   return (
     <div className="flex">
       <div
@@ -34,7 +40,7 @@ export default function Sidebar() {
               </li>
               <li className="rounded-sm py-3">
                 <button
-                  href="#"
+                  
                   className="flex justify-center p-2 space-x-3 rounded-md hover:bg-green-600 w-full"
                 >
                   <FaLuggageCart size={25} />
@@ -52,10 +58,7 @@ export default function Sidebar() {
             </ul>
           </div>
         </div>
-        <button
-          href="#"
-          className="flex justify-center p-2 space-x-3 rounded-md hover:bg-red-700 w-full"
-        >
+        <button onClick={handleLogout} className="flex justify-center p-2 space-x-3 rounded-md hover:bg-red-700 w-full">
           <RiLogoutBoxFill size={30} />
         </button>
       </div>
