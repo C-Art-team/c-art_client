@@ -66,3 +66,25 @@ export const handleRegister = (input) => {
     }
   }
 }
+
+export const editProfile = (input,id) => {
+  return async() => {
+    try {
+      const response = await fetch(`http://localhost:4000/users/${id}`,{
+        method : "patch",
+        headers : {
+          "Content-Type" : "application/json"
+        },
+        body : input
+      })
+      if(!response.ok) {
+        throw await response.json()
+      }
+      const data = await response.json()
+      console.log(data)
+      return data
+     } catch (error) {
+      throw error
+    }
+  }
+}

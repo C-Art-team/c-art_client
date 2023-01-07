@@ -1,4 +1,5 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
+import ForumChat from "../pages/GroupChat/groupchat";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Layout from "../pages/Layout";
 import LoginForm from "../pages/Login/Login";
@@ -32,6 +33,12 @@ const router = createBrowserRouter([
       {
         path: "/groups",
         element: <Groups />,
+        children : [
+          {
+            path : ':tag',
+            element : <ForumChat/>
+          }
+        ]
       },
     ],
   },

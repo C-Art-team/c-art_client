@@ -1,19 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { handleRegister, toggleModal } from "../../actions/userAction";
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { handleRegister} from "../../actions/userAction";
 import { Link } from "react-router-dom";
 import logo from "./C-art-logo.png";
 import Modal from "../../components/Modal/Modal";
 function Register() {
-  const navigate = useNavigate();
+  const [modal,setModal] = useState(false)
+  const [id,setId] = useState(0)
   const dispatch = useDispatch();
   const togglePreference = useSelector((state) => state.userReducer.toggle);
   console.log(togglePreference);
-  const categories = useSelector((state) => state.categoryReducer.categories);
 
   const [inputRegister, setInputRegister] = useState({
     username: "",
@@ -33,8 +30,9 @@ function Register() {
     console.log(inputRegister);
     e.preventDefault();
     dispatch(handleRegister(inputRegister))
-      .then(() => {
-        dispatch(toggleModal());
+      .then((data) => {
+        setId(data.id)
+        setModal(true)
       })
       .catch((error) => {
         console.log(error);
@@ -44,12 +42,6 @@ function Register() {
       email: "",
       password: "",
     });
-  };
-
-  const handleModal = (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    navigate("/login");
   };
 
   return (
@@ -185,21 +177,7 @@ function Register() {
           </form>
         </div>
       </div>
-      {togglePreference ? (
-        <div className="modal" aria-modal>
-          <div className="modal-box relative w-1/3 h-1/3">
-            <form onSubmit={handleModal}>
-              {categories?.map((el) => {
-                return <input type="radio" multiple value={el.name} />;
-              })}
-              <button type="submit" className="rounded-2xl w-14">
-                submit
-              </button>
-            </form>
-          </div>
-        </div>
-      ) : null}
-      {modal ? <Modal setModal={setModal} /> : ""}
+      {modal ? <Modal setModal={setModal} id={id}/> : ""}
     </section>
   );
 }

@@ -62,7 +62,6 @@ export default function ArtForm() {
     // eslint-disable-next-line
   }, []);
 
-  // const categories = ["3d", "2d", "music", "sfx", "gif"];
   return (
     <section className="flex flex-col container-add rounded-sm">
       <div

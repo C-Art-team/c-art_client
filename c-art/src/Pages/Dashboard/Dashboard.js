@@ -26,18 +26,6 @@ function Dashboard() {
             >
               accent
             </div>
-            <div className="grid grid-cols-4 gap-1 px-16">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-            </div>
           </div>
           <div className="px-2">
             <div

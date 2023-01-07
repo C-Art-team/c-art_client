@@ -1,4 +1,63 @@
-export default function Modal({ setModal }) {
+import { useEffect ,useState} from "react";
+import {useSelector,useDispatch} from "react-redux"
+import { fetchAllCategory } from "../../actions/actionCategory";
+import {editProfile} from "../../actions/userAction" 
+
+export default function   Modal({ setModal,id }) {
+  const [loading,setLoading] = useState(true)
+  const categories = useSelector((state) => state.categoryReducer.categories)
+  const dispatch = useDispatch()
+  const [modalInput,setModalInput] = useState({
+    address :"",
+    phoneNumber : "",
+    preference : []
+  })
+
+  const handleModalInput = (e) => {
+    let obj = {
+      ...modalInput,
+      [e.target.name] : e.target.value
+    }
+    setModalInput(obj)
+  }
+
+  const submitModal = (e) => {
+    e.preventDefault()
+    console.log(modalInput)
+    dispatch(editProfile(modalInput,id))
+    .then(() => {
+      setModal(false)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      setModal(false)
+    })
+  }
+
+  const handlePreference = (e) => {
+    console.log(e.target.value)
+    setModalInput({
+      ...modalInput,
+      preference : [...modalInput.preference,e.target.value]
+    })
+  }
+
+  useEffect(() => {
+    dispatch(fetchAllCategory())
+    .then(() => {
+      setLoading(false)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+    .finally(() => {
+      setLoading(false)
+    })
+  },[])
+
+
   return (
     <div
       class="relative z-10"
@@ -12,10 +71,7 @@ export default function Modal({ setModal }) {
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setModal(false);
-              }}
+              onSubmit={submitModal}
             >
               <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="pb-2 pt-4">
@@ -23,14 +79,21 @@ export default function Modal({ setModal }) {
                     id="preference"
                     name="preference"
                     className="block w-full p-4 text-lg rounded-xl bg-black"
+                    value={modalInput.preference}
+                    onChange={handlePreference}
+                    multiple
                   >
                     <option value="" selected disabled>
                       Preferences
                     </option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
+                    {
+                      !loading ? categories?.map(el =>{
+                        return (
+                          <option value={el.name} key={el.id}>{el.name}</option>
+                        )
+                      }) : null
+                    }
+
                   </select>
                 </div>
                 <div className="pb-2 pt-4">
@@ -40,6 +103,8 @@ export default function Modal({ setModal }) {
                     name="address"
                     id="address"
                     placeholder="Address"
+                    value={modalInput.address}
+                    onChange={handleModalInput}
                   />
                 </div>
                 <div className="pb-2 pt-4">
@@ -49,6 +114,8 @@ export default function Modal({ setModal }) {
                     name="phoneNumber"
                     id="phoneNumber"
                     placeholder="Phone Number"
+                    value={modalInput.phoneNumber}
+                    onChange={handleModalInput}
                   />
                 </div>
               </div>
