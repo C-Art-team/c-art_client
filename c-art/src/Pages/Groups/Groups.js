@@ -4,34 +4,36 @@ import { useSelector,useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 
 export default function Groups() {
+  const preference = localStorage.preference.split(", ")
+  console.log(preference,"8797979797987987")
   const {tag} = useParams() 
   console.log(tag)
   const [loading,setLoading] = useState(true)
   const navigate = useNavigate();
-  const categories = useSelector((state) => state.categoryReducer.categories)
-  const dispatch = useDispatch()
+  // const categories = useSelector((state) => state.categoryReducer.categories)
+  // const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(fetchAllCategory())
-    .then(() =>{
-      setLoading(false)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-    .finally(() => {
-      setLoading(false)
-    })
-  },[])
+  // useEffect(() => {
+  //   dispatch(fetchAllCategory())
+  //   .then(() =>{
+  //     setLoading(false)
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //   })
+  //   .finally(() => {
+  //     setLoading(false)
+  //   })
+  // },[])
   return (
     <div className="flex flex-row flex-wrap">
-      {!tag & !loading ? categories.map((el,i) => {
+      {!tag ?  preference.map((el,i) => {
         return (
           <div className="flex flex-row justify-between px-8 pt-8" key={i}>
             <div
               className="card w-80 shadow-xl"
               style={{ backgroundColor: "#1F242D" }}
-              onClick={() => navigate(`/groups/${el.name}`)}
+              onClick={() => navigate(`/groups/${el}`)}
             >
               <figure className="px-6 pt-6">
                 <img

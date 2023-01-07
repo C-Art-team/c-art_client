@@ -24,8 +24,8 @@ export const newArt = (input) => {
       console.log(input, "dari thunk add new art");
       const response = await fetch(baseUrl, {
         method: "post",
-        headers: {
-          "Content-Type": "multipart/form-data",
+        headers : {
+          access_token : localStorage.access_token
         },
         body: form,
       });

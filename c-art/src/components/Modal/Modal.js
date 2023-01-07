@@ -1,62 +1,67 @@
-import { useEffect ,useState} from "react";
-import {useSelector,useDispatch} from "react-redux"
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
-import {editProfile} from "../../actions/userAction" 
+import { editProfile } from "../../actions/userAction";
 
-export default function   Modal({ setModal,id }) {
-  const [loading,setLoading] = useState(true)
-  const categories = useSelector((state) => state.categoryReducer.categories)
-  const dispatch = useDispatch()
-  const [modalInput,setModalInput] = useState({
-    address :"",
-    phoneNumber : "",
-    preference : []
-  })
+export default function Modal({ setModal, id ,username}) {
+  const [loading, setLoading] = useState(true);
+  const categories = useSelector((state) => state.categoryReducer.categories);
+  const dispatch = useDispatch();
+  const [modalInput, setModalInput] = useState({
+    username,
+    address: "",
+    phoneNumber: "",
+    preference: [],
+  });
 
   const handleModalInput = (e) => {
     let obj = {
       ...modalInput,
-      [e.target.name] : e.target.value
-    }
-    setModalInput(obj)
-  }
+      [e.target.name]: e.target.value,
+    };
+    setModalInput(obj);
+  };
 
   const submitModal = (e) => {
-    e.preventDefault()
-    console.log(modalInput)
-    dispatch(editProfile(modalInput,id))
-    .then(() => {
-      setModal(false)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      setModal(false)
-    })
-  }
+    e.preventDefault();
+    console.log(modalInput);
+    dispatch(editProfile(modalInput, id))
+      .then(() => {
+        setModal(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setModal(false);
+        setModalInput({
+          address: "",
+          phoneNumber: "",
+          preference: [],
+        });
+      });
+  };
 
   const handlePreference = (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     setModalInput({
       ...modalInput,
-      preference : [...modalInput.preference,e.target.value]
-    })
-  }
+      preference: [...modalInput.preference, e.target.value],
+    });
+  };
 
   useEffect(() => {
     dispatch(fetchAllCategory())
-    .then(() => {
-      setLoading(false)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-    .finally(() => {
-      setLoading(false)
-    })
-  },[])
-
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div
@@ -70,9 +75,7 @@ export default function   Modal({ setModal,id }) {
       <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-            <form
-              onSubmit={submitModal}
-            >
+            <form onSubmit={submitModal}>
               <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="pb-2 pt-4">
                   <select
@@ -86,14 +89,15 @@ export default function   Modal({ setModal,id }) {
                     <option value="" selected disabled>
                       Preferences
                     </option>
-                    {
-                      !loading ? categories?.map(el =>{
-                        return (
-                          <option value={el.name} key={el.id}>{el.name}</option>
-                        )
-                      }) : null
-                    }
-
+                    {!loading
+                      ? categories?.map((el) => {
+                          return (
+                            <option value={el.name} key={el.id}>
+                              {el.name}
+                            </option>
+                          );
+                        })
+                      : null}
                   </select>
                 </div>
                 <div className="pb-2 pt-4">

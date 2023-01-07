@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import logo from "./C-art-logo.png";
 import Modal from "../../components/Modal/Modal";
 function Register() {
+  const [username,setUsername] = useState("")
   const [modal,setModal] = useState(false)
   const [id,setId] = useState(0)
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function Register() {
     e.preventDefault();
     dispatch(handleRegister(inputRegister))
       .then((data) => {
+        setUsername(data.username)
         setId(data.id)
         setModal(true)
       })
@@ -177,7 +179,7 @@ function Register() {
           </form>
         </div>
       </div>
-      {modal ? <Modal setModal={setModal} id={id}/> : ""}
+      {modal ? <Modal setModal={setModal} id={id} username={username}/> : ""}
     </section>
   );
 }

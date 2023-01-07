@@ -29,6 +29,7 @@ const LoginForm = () => {
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("email", data.email);
         localStorage.setItem("username", data.username);
+        localStorage.setItem("preference", data.preference);
         navigate("/");
       })
       .catch((error) => {
