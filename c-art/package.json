@@ -13,6 +13,7 @@
     "axios": "^1.2.2",
     "daisyui": "^2.46.0",
     "firebase": "^9.15.0",
+    "form-data": "^4.0.0",
     "framer-motion": "^8.0.2",
     "postcss": "^8.4.20",
     "react": "^18.2.0",

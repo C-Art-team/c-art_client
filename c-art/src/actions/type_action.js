@@ -1,5 +1,6 @@
 export const CHANGE_THEME = 'change/theme'
 export const GET_ALL_CATEGORIES = 'category/all'
+export const ONE_USER = 'user/one'
 export const USER_LOGIN = 'user/login'
 export const USER_REGISTER = 'user/register'
 export const TOGGLE_MODAL ='user/toggle'

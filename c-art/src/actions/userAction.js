@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_REGISTER, TOGGLE_MODAL } from "./type_action";
+import { USER_LOGIN, USER_REGISTER, ONE_USER} from "./type_action";
 import axios from "axios";
 
 export const userLogin = (payload) => {
@@ -15,11 +15,12 @@ export const userRegister = (payload) => {
   };
 };
 
-export const toggleModal = () => {
+export const oneUser = (payload) => {
   return {
-    type: TOGGLE_MODAL,
-  };
-};
+    type : ONE_USER,
+    payload
+  }
+}
 
 export const handleLogin = (input) => {
   return async (dispatch) => {
@@ -67,6 +68,23 @@ export const handleRegister = (input) => {
     }
   };
 };
+
+export const viewProfile = () => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get('http://localhost:4000/users/profile',{
+        headers : {
+          access_token : localStorage.access_token
+        }
+      })
+      console.log(data)
+      dispatch(oneUser(data))
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
+}
 
 export const editProfile = (input, id) => {
   return async () => {

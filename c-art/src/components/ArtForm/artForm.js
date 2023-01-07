@@ -34,7 +34,7 @@ export default function ArtForm() {
       description: "",
       price: 0,
       files : [],
-      categoryId: "",
+      CategoryId: "",
     });
 
   };
@@ -69,14 +69,14 @@ export default function ArtForm() {
         style={{ backgroundColor: "#191B1F" }}
       >
         {!loading
-          ? categories.map((el) => {
+          ? categories.map((el,i) => {
               return (
                 <button
                   className="p-0 w-20 h-14 rounded-3xl text-black mx-7"
                   style={{ backgroundColor: "#85CF81" }}
                   onClick={tabForm}
                   value={el.id}
-                  key={el.id}
+                  key={i}
                 >
                   {el.name}
                 </button>

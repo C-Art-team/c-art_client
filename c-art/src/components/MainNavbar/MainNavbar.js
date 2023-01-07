@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { BsFillMoonStarsFill } from "react-icons/bs";
@@ -24,8 +23,8 @@ export default function MainNavbar() {
   };
 
   const toProfile = () => {
-    console.log("ke profile");
-    // navigate("/profile")
+    console.log("ke profile")
+    navigate("/profile")
   };
 
   const toCart = () => {
