@@ -1,13 +1,14 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import Layout from "../Pages/Layout";
+import LoginForm from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
+import { createBrowserRouter} from "react-router-dom";
 import ForumChat from "../pages/GroupChat/groupchat";
-import Dashboard from "../pages/Dashboard/Dashboard";
-import Layout from "../pages/Layout";
-import LoginForm from "../pages/Login/Login";
-import Register from "../pages/Register/Register";
 import ArtForm from "../components/ArtForm/artForm";
-import ThreeDViewer from "../pages/3DViewer/3DViewer";
-import Groups from "../pages/Groups/Groups";
-import DetailPage from "../pages/DetailPage/detailPage"
+import ThreeDViewer from "../Pages/3DViewer/3DViewer";
+import Groups from "../Pages/Groups/Groups";
+import DetailPage from "../Pages/DetailPage/detailPage"
+import ProfilePage from "../Pages/ProfilePage/profilePage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
           }
         ]
       },
+      {
+        path: "/profile",
+        element: <ProfilePage/>
+      }
     ],
   },
   {
