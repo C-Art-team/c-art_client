@@ -6,7 +6,7 @@ export default function Groups() {
       <div className="flex flex-row justify-between px-8 pt-8">
         <div
           className="card w-80 shadow-xl"
-          style={{ backgroundColor: "#1F242D" }}
+          style={{ backgroundColor: "#191B1F" }}
         >
           <figure className="px-6 pt-6">
             <img
@@ -27,19 +27,11 @@ export default function Groups() {
                 <h1 className="">Today, 20:57</h1>
               </div>
             </div>
-            {/* <div className="card-actions">
-            <button
-            className="rounded-xl w-20 h-7 font-semibold text-black flex justify-center items-center"
-            style={{ backgroundColor: "#85CF81", color: "black" }}
-            >
-            Enter
-            </button>
-          </div> */}
           </div>
         </div>
         <div
           className="card w-80 shadow-xl"
-          style={{ backgroundColor: "#1F242D" }}
+          style={{ backgroundColor: "#191B1F" }}
         >
           <figure className="px-6 pt-6">
             <img
@@ -71,7 +63,7 @@ export default function Groups() {
         </div>
         <div
           className="card w-80 shadow-xl"
-          style={{ backgroundColor: "#1F242D" }}
+          style={{ backgroundColor: "#191B1F" }}
         >
           <figure className="px-6 pt-6">
             <img
@@ -105,7 +97,7 @@ export default function Groups() {
       <div className="flex flex-row justify-between px-8 pt-8">
         <div
           className="card w-80 shadow-xl"
-          style={{ backgroundColor: "#1F242D" }}
+          style={{ backgroundColor: "#191B1F" }}
         >
           <figure className="px-6 pt-6">
             <img
@@ -137,7 +129,7 @@ export default function Groups() {
         </div>
         <div
           className="card w-80 shadow-xl"
-          style={{ backgroundColor: "#1F242D" }}
+          style={{ backgroundColor: "#191B1F" }}
         >
           <figure className="px-6 pt-6">
             <img
@@ -169,7 +161,7 @@ export default function Groups() {
         </div>
         <div
           className="card w-80 shadow-xl"
-          style={{ backgroundColor: "#1F242D" }}
+          style={{ backgroundColor: "#191B1F" }}
         >
           <figure className="px-6 pt-6">
             <img

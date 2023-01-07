@@ -55,11 +55,13 @@ export default function MainNavbar() {
     <div
       className="navbar sticky top-0 bg-base-300 h-14 items-center flex flex-row justify-between px-10"
       data-theme={theme}
+      style={{ backgroundColor: "#121218" }}
     >
       <form onSubmit={handleSearch} className="search-container">
         <input
           type="search"
-          className="rounded-xl h-8 indent-10 bg-base-100 my-search"
+          className="rounded-xl h-8 indent-10 my-search"
+          style={{ backgroundColor: "#191B1F" }}
           value={search}
           onChange={handleSearchChange}
           placeholder="search"
@@ -70,14 +72,14 @@ export default function MainNavbar() {
           <button
             onClick={toRegister}
             className="rounded-xl w-20 h-7 font-semibold text-black flex justify-center items-center"
-            style={{backgroundColor: "#85CF81"}}
+            style={{ backgroundColor: "#85CF81" }}
           >
             Join
           </button>
           <button
             onClick={toLogin}
             className="rounded-xl w-20 h-7 font-semibold text-black flex justify-center items-center"
-            style={{backgroundColor: "#85CF81"}}
+            style={{ backgroundColor: "#85CF81" }}
           >
             Login
           </button>
