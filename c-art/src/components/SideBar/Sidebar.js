@@ -15,7 +15,7 @@ export default function Sidebar() {
     <div className="flex" >
       <div
         data-theme={theme}
-        className="flex flex-col min-h-screen p-3 shadow w-36 justify-between drawer-conten bg-base-300"
+        className="flex flex-col h-screen sticky top-0 p-3 shadow w-36 justify-between drawer-conten bg-base-300"
       >
         <div className="space-y-3">
           <div className="flex items-center justify-center">

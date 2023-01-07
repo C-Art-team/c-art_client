@@ -53,7 +53,7 @@ export default function MainNavbar() {
 
   return (
     <div
-      className="navbar bg-base-300 h-14 items-center flex flex-row justify-between px-10"
+      className="navbar sticky top-0 bg-base-300 h-14 items-center flex flex-row justify-between px-10"
       data-theme={theme}
     >
       <form onSubmit={handleSearch} className="search-container">
