@@ -14,18 +14,18 @@ export default function DetailPage() {
     Previews: [
       {
         sourceUrl:
-          "https://res.cloudinary.com/dilzm9jdf/image/upload/v1672211086/p6y8kpjn6w3u7wkn3fxs.jpg",
+          "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fscreencapture-hackerrank-challenges-occupations-problem-2023-01-05-15_00_031858c66ffc7.png",
       },
       {
         sourceUrl:
-          "https://res.cloudinary.com/dilzm9jdf/image/upload/v1672211086/p6y8kpjn6w3u7wkn3fxs.jpg",
+          "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fscreencapture-hackerrank-challenges-occupations-problem-2023-01-05-15_00_031858c66ffc7.png",
       },
       {
         sourceUrl:
-          "https://res.cloudinary.com/dilzm9jdf/image/upload/v1672211086/p6y8kpjn6w3u7wkn3fxs.jpg",
+          "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fscreencapture-hackerrank-challenges-occupations-problem-2023-01-05-15_00_031858c66ffc7.png",
       },
     ],
-    Category: { name: "3D Model" },
+    Category: { name: "Image Assets" },
     price: 400000,
     authorName: "User 1",
     status: "active",
@@ -63,7 +63,6 @@ export default function DetailPage() {
         <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
         <ChatBox />
       </div>
-      
     </section>
   );
 }
