@@ -1,40 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import axios from "axios";
 import ChatBox from "../../components/ChatBox/chat";
+import { useParams } from "react-router-dom";
+import { useSelector,useDispatch } from "react-redux";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import "./style.css";
+import { fetchOneArt } from "../../actions/artAction";
 
 export default function DetailPage() {
-  const [showChatBox, setShowChatBox] = useState(false);
-  const detailArt = {
-    name: "Art 01",
-    source:
-      "https://res.cloudinary.com/dilzm9jdf/image/upload/v1672211086/p6y8kpjn6w3u7wkn3fxs.jpg",
-    description:
-      "first art in this web adalsdlaskjdlsadjlasdjaslkdjas sdjasdjalskdjas  asdjalkdsjal alsdjaldj asdjaldjal djladjadjla asldjlaksjd ladajd ladjladjl aksj  asdja",
-    Previews: [
-      {
-        sourceUrl:
-          "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fscreencapture-hackerrank-challenges-occupations-problem-2023-01-05-15_00_031858c66ffc7.png",
-      },
-      {
-        sourceUrl:
-          "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fscreencapture-hackerrank-challenges-occupations-problem-2023-01-05-15_00_031858c66ffc7.png",
-      },
-      {
-        sourceUrl:
-          "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fscreencapture-hackerrank-challenges-occupations-problem-2023-01-05-15_00_031858c66ffc7.png",
-      },
-    ],
-    Category: { name: "Image Assets" },
-    price: 400000,
-    authorName: "User 1",
-    status: "active",
-  };
+  const [loading,setLoading] = useState(true)
+  const {id} = useParams()
+  const detailArt = useSelector((state) => state.artReducer.art)
+  const dispatch =  useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchOneArt(id))
+      .then((data) => {
+        console.log(data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },[])
 
   return (
     <section className="container flex items-stretch">
       <div className="w-1/2 container-preview flex flex-col p-4 justfy-center items-center gap-y-5">
-        {detailArt.Previews.map((el, i) => {
+        { !loading ? detailArt.Previews.map((el, i) => {
           switch (detailArt.Category.name) {
             case "Image Assets":
               return (
@@ -52,7 +45,7 @@ export default function DetailPage() {
             default:
               break;
           }
-        })}
+        }) : <LoadingSpinner/>}
       </div>
       <div className="flex flex-col w-1/2 container-preview p-4 items-center">
         <span className="text-4xl text-center">{detailArt.name}</span>

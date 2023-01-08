@@ -9,7 +9,7 @@ export default function ThreeDViewer() {
         <div style={{ width: "90vw", height: "85vh" }} >
             <Canvas style={{ background: "transparent" }} camera={{ position: [10, 10, 15] }} >
                 <Suspense>
-                    <Model scale={[0.01,0.01,0.01]} position={[1,1,1]} path="/3Dfiles/Koenigsegg.fbx" />
+                    <Model scale={[0.01,0.01,0.01]} position={[1,1,1]} path="https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2FIphone%20seceond%20version%20finished1858cd125bc.fbx"/>
                 </Suspense>
                 <ambientLight intensity={0.5} />
 

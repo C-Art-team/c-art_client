@@ -1,4 +1,4 @@
-import { ART_ADD } from "./type_action";
+import { ART_ADD,GET_ALL_ART, GET_ONE_ART } from "./type_action";
 import FormData from "form-data";
 import axios from "axios";
 const baseUrl = "http://localhost:4000/arts";
@@ -9,6 +9,50 @@ export const addNewArt = (payload) => {
     payload,
   };
 };
+
+export const getAllArt = (payload) => {
+  return {
+    type : GET_ALL_ART,
+    payload
+  }
+}
+
+export const getOneArt = (payload) => {
+  return {
+    type : GET_ONE_ART,
+    payload
+  }
+} 
+
+export const fetchOneArt = (id) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get(baseUrl + `/${id}`)
+      console.log(data)
+      dispatch(getOneArt(data))
+      return data
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+}
+
+export const fetchAllArt = (filter,search) => {
+  return async (dispatch) => {
+    try {
+      const {data} =  await axios.get(baseUrl,{
+        params : {filter,search}
+      })
+      console.log(data)
+      dispatch(getAllArt(data))
+      return data
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+} 
 
 export const newArt = (input) => {
   return async (dispatch) => {

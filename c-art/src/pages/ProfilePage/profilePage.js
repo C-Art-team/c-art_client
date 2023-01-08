@@ -3,11 +3,19 @@ import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import {useSelector,useDispatch} from "react-redux"
 import  {viewProfile} from "../../actions/userAction"
+import "./style.css"
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function ProfilePage() {
   const [loading,setLoading] = useState(true)
   const profile = useSelector((state) => state.userReducer.oneUser)
   const dispatch = useDispatch()
+
+  const [editProfile,setEditProfile] = useState({
+    username : "",
+    address : "",
+    phone : ""
+  })
 
   useEffect(() => {
     dispatch(viewProfile())
@@ -19,6 +27,11 @@ export default function ProfilePage() {
       console.log(err)
     })
   },[])
+
+
+  const changeToInput = (e) => {
+    
+  }
 
 
   return (
@@ -35,15 +48,15 @@ export default function ProfilePage() {
               alt="Bordered avatar"
             />
             <div className="flex flex-col justify-end">
-              <h1 className="text2xl" style={{ color: "#F9F9FB" }}>
+              <h1 className="text2xl" name="username" style={{ color: "#F9F9FB" }}>
                 {profile?.username}
               </h1>
-              <h1 className="text-md" style={{ color: "#CFD1D0" }}>
+              <h1 className="text-md" name="address" style={{ color: "#CFD1D0" }} >
                 {profile?.address}
               </h1>
             </div>
           </div>
-        </div> : null}
+        </div> : <LoadingSpinner className="loading-profile"/>}
         <div style={{ color: "#CFD1D0" }}>
           <h1 className="text-2xl">History</h1>
           <div className="flex flex-col gap-2 py-2">
