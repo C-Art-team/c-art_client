@@ -11,7 +11,7 @@ function Register() {
   const [id,setId] = useState(0)
   const dispatch = useDispatch();
   const togglePreference = useSelector((state) => state.userReducer.toggle);
-  console.log(togglePreference);
+  // console.log(togglePreference);
 
   const [inputRegister, setInputRegister] = useState({
     username: "",
@@ -45,7 +45,7 @@ function Register() {
       password: "",
     });
   };
-
+  console.log( inputRegister );
   return (
     <section className="min-h-screen flex items-stretch text-white">
       <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">

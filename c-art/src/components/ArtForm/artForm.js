@@ -42,7 +42,7 @@ export default function ArtForm() {
   const handleFilesInput = (e) => {
     let obj = {
       ...artInput,
-      files : [...artInput.files,e.target.value]
+      files : [...artInput.files,e.target.files]
     }
     setArtInput(obj)
   }
@@ -61,7 +61,7 @@ export default function ArtForm() {
     });
     // eslint-disable-next-line
   }, []);
-
+  console.log(artInput.files);
   return (
     <section className="flex flex-col container-add rounded-sm">
       <div

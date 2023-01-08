@@ -15,39 +15,50 @@ export const newArt = (input) => {
     try {
       const form = new FormData();
 
-      function blobCreationFromURL(inputURI) {
-        var binaryVal;
+      // function blobCreationFromURL(inputURI) {
+      //   var binaryVal;
 
-        // mime extension extraction
-        var inputMIME = inputURI.split(",")[0].split(":")[1].split(";")[0];
-        console.log(inputMIME)
-        // Extract remaining part of URL and convert it to binary value
-        if (inputURI.split(",")[0].indexOf("base64") >= 0)
-          binaryVal = atob(inputURI.split(",")[1]);
-        // Decoding of base64 encoded string
-        else binaryVal = unescape(inputURI.split(",")[1]);
+      //   // mime extension extraction
+      //   var inputMIME = inputURI.split(",")[0].split(":")[1].split(";")[0];
+      //   console.log(inputMIME)
+      //   // Extract remaining part of URL and convert it to binary value
+      //   if (inputURI.split(",")[0].indexOf("base64") >= 0)
+      //     binaryVal = atob(inputURI.split(",")[1]);
+      //   // Decoding of base64 encoded string
+      //   else binaryVal = unescape(inputURI.split(",")[1]);
 
-        // Store the bytes of the string to a typed array
-        var blobArray = [];
-        for (var index = 0; index < binaryVal.length; index++) {
-          blobArray.push(binaryVal.charCodeAt(index));
-        }
+      //   // Store the bytes of the string to a typed array
+      //   var blobArray = [];
+      //   for (var index = 0; index < binaryVal.length; index++) {
+      //     blobArray.push(binaryVal.charCodeAt(index));
+      //   }
 
-        return new Blob([blobArray], {
-          type: inputMIME,
-        });
-      }
+      //   return new Blob([blobArray], {
+      //     type: inputMIME,
+      //   });
+      // }
 
-      const toFiles = input.files.map((el) => {
-        const blobObject = blobCreationFromURL(el)
-        return blobObject
-      })
+      // const toFiles = input.files.map((el) => {
+      //   const blobObject = blobCreationFromURL(el)
+      //   return blobObject
+      // })
 
       // console.log(toFiles)
-      toFiles.forEach((el) => {
-        form.append('uploadedFile',el,el.originalname)
-      })
+      console.log(input.files[0][0]);
+      console.log(input.files[1][0]);
 
+      let array = []
+
+      for(let i = 0; i < input.files.length; i++){
+       array.push(input.files[i][0]) 
+      }
+      // console.log(array);
+      array.forEach((el) => {
+        // console.log(el);
+        form.append('uploadedFile',el)
+      })
+      console.log(array);
+      
       form.append("name", input.name);
       form.append("price", input.price);
       form.append("CategoryId", input.CategoryId);
@@ -61,9 +72,9 @@ export const newArt = (input) => {
         },
       });
 
-      console.log(data);
-      dispatch(addNewArt(data));
-      return data;
+      // console.log(data);
+      // dispatch(addNewArt(data));
+      // return data;
     } catch (error) {
       throw error;
     }
