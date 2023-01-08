@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { handleLogin } from "../../actions/userAction";
+import FacebookLoginButton from "../../components/SocialMediaButton/FacebookLoginButton";
+import GoogleLoginButton from "../../components/SocialMediaButton/GoogleLoginButton";
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -103,12 +105,8 @@ const LoginForm = () => {
             </div>
             <h1 className="my-6"></h1>
             <div className="py-6 space-x-2">
-              <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">
-                f
-              </span>
-              <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">
-                G+
-              </span>
+              <FacebookLoginButton />
+              <GoogleLoginButton />
               <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">
                 in
               </span>
