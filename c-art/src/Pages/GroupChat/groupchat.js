@@ -50,15 +50,15 @@ export default function ForumChat() {
     <>
       <h1 className="text-white text-md"> {tag} FORUM </h1>
       <section className="chat-box container w-2/3 h-full bg-grey-400 py-6 px-2">
-        <ul id="messages-forum">
+        <ul id="messages-forum" className="px-4">
           {!loading
             ? messages.map((el, i) => {
                 return (
                   <div
                     className={
                       el.sender !== localStorage.username
-                        ? "chat chat-start"
-                        : "chat chat-end"
+                        ? "chat chat-start max-w-1/2"
+                        : "chat chat-end max-w-1/2"
                     }
                     key={i}
                   >

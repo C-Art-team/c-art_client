@@ -7,7 +7,7 @@ import { Suspense } from "react"
 export default function ThreeDViewer() {
     return (
         <div style={{ width: "90vw", height: "85vh" }} >
-            <Canvas style={{ background: "transparent" }} camera={{ position: [10, 10, 15]}} >
+            <Canvas style={{ background: "transparent" }} camera={{ position: [2,2,2]}} >
                 <Suspense>
                     <Model scale={[0.1,0.1,0.1]} position={[1,1,1]} />
                 </Suspense>

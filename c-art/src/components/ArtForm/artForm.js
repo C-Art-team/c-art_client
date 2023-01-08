@@ -40,6 +40,7 @@ export default function ArtForm() {
   };
 
   const handleFilesInput = (e) => {
+    console.log(e.target.files)
     let obj = {
       ...artInput,
       files : [...artInput.files,e.target.files]

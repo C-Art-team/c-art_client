@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useSearchParams } from "react-router-dom";
 import "./style.css";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { themeAction } from "../../actions/actionTheme";
 import { GiWallet } from "react-icons/gi";
+import { fetchAllArt } from "../../actions/artAction";
 
 export default function MainNavbar() {
-  const loged = useSelector((state) => state.userReducer.loged)
-  console.log(loged)
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useSearchParams()
   const theme = useSelector((state) => {
     return state.themeReducer.theme;
   });
@@ -19,12 +18,12 @@ export default function MainNavbar() {
 
   const handleSearchChange = (e) => {
     console.log(e.target.value);
-    setSearch(e.target.value);
+    setSearch({name : e.target.value});
   };
 
   const toProfile = () => {
-    console.log("ke profile")
-    navigate("/profile")
+    console.log("ke profile");
+    navigate("/profile");
   };
 
   const toCart = () => {
@@ -43,14 +42,17 @@ export default function MainNavbar() {
   };
 
   const handleSearch = (e) => {
-    console.log(search);
     e.preventDefault();
-    setSearch("");
+    dispatch(fetchAllArt("", search.get('name')));
   };
 
   function changeTheme(theme) {
     dispatch(themeAction(theme));
   }
+
+  useEffect(() => {
+    dispatch(fetchAllArt("",search.get('name')))
+  },[search])
 
   return (
     <div
@@ -63,7 +65,7 @@ export default function MainNavbar() {
           type="search"
           className="rounded-xl h-8 indent-10 my-search"
           style={{ backgroundColor: "#191B1F" }}
-          value={search}
+          value={search.get('name')}
           onChange={handleSearchChange}
           placeholder="search"
         />

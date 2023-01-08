@@ -1,5 +1,5 @@
-import { ART_ADD } from "./type_action";
-import FormData from 'form-data'
+import { ART_ADD,GET_ALL_ART, GET_ONE_ART } from "./type_action";
+import FormData from "form-data";
 import axios from "axios";
 const baseUrl = "http://localhost:4000/arts";
 
@@ -10,55 +10,70 @@ export const addNewArt = (payload) => {
   };
 };
 
+export const getAllArt = (payload) => {
+  return {
+    type : GET_ALL_ART,
+    payload
+  }
+}
+
+export const getOneArt = (payload) => {
+  return {
+    type : GET_ONE_ART,
+    payload
+  }
+} 
+
+export const fetchOneArt = (id) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get(baseUrl + `/${id}`)
+      console.log(data)
+      dispatch(getOneArt(data))
+      return data
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+}
+
+export const fetchAllArt = (filter,search) => {
+  return async (dispatch) => {
+    try {
+      const {data} =  await axios.get(baseUrl,{
+        params : {filter,search}
+      })
+      console.log(data)
+      dispatch(getAllArt(data))
+      return data
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
+} 
+
 export const newArt = (input) => {
   return async (dispatch) => {
     try {
+      let filesToUpload;
       const form = new FormData();
+      console.log(input.files);
 
-      // function blobCreationFromURL(inputURI) {
-      //   var binaryVal;
-
-      //   // mime extension extraction
-      //   var inputMIME = inputURI.split(",")[0].split(":")[1].split(";")[0];
-      //   console.log(inputMIME)
-      //   // Extract remaining part of URL and convert it to binary value
-      //   if (inputURI.split(",")[0].indexOf("base64") >= 0)
-      //     binaryVal = atob(inputURI.split(",")[1]);
-      //   // Decoding of base64 encoded string
-      //   else binaryVal = unescape(inputURI.split(",")[1]);
-
-      //   // Store the bytes of the string to a typed array
-      //   var blobArray = [];
-      //   for (var index = 0; index < binaryVal.length; index++) {
-      //     blobArray.push(binaryVal.charCodeAt(index));
-      //   }
-
-      //   return new Blob([blobArray], {
-      //     type: inputMIME,
-      //   });
-      // }
-
-      // const toFiles = input.files.map((el) => {
-      //   const blobObject = blobCreationFromURL(el)
-      //   return blobObject
-      // })
-
-      // console.log(toFiles)
-      console.log(input.files[0][0]);
-      console.log(input.files[1][0]);
-
-      let array = []
-
-      for(let i = 0; i < input.files.length; i++){
-       array.push(input.files[i][0]) 
+      if (input.files[0].length > 1){
+        filesToUpload = input.files[0].map((el) => {
+          return el
+        });
+      } else {
+        filesToUpload = input.files.map((el) => {
+          return el[0];
+        });
       }
-      // console.log(array);
-      array.forEach((el) => {
-        // console.log(el);
-        form.append('uploadedFile',el)
-      })
-      console.log(array);
-      
+
+      filesToUpload.forEach((el) => {
+        form.append("uploadedFile", el,el.name);
+      });
       form.append("name", input.name);
       form.append("price", input.price);
       form.append("CategoryId", input.CategoryId);
@@ -66,15 +81,15 @@ export const newArt = (input) => {
 
       console.log(form.getAll("uploadedFile"), "form data)())(");
       console.log(input, "dari thunk add new art");
-      const {data} = await axios.post(baseUrl,form, {
+      const { data } = await axios.post(baseUrl, form, {
         headers: {
-          access_token : localStorage.access_token
+          access_token: localStorage.access_token,
         },
       });
 
-      // console.log(data);
-      // dispatch(addNewArt(data));
-      // return data;
+      console.log(data);
+      dispatch(addNewArt(data));
+      return data;
     } catch (error) {
       throw error;
     }
