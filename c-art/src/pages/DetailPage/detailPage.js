@@ -1,54 +1,59 @@
 import { useEffect, useState } from "react";
 // import axios from "axios";
 import ChatBox from "../../components/ChatBox/chat";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import "./style.css";
 import { fetchOneArt } from "../../actions/artAction";
 import { addOneOrder } from "../../actions/orderAction";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export default function DetailPage() {
-  const [loading, setLoading] = useState(true)
-  const { id } = useParams()
-  const detailArt = useSelector((state) => state.artReducer.art)
-  const dispatch = useDispatch()
-  const MySwal = withReactContent(Swal)
+  const navigate = useNavigate() 
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const detailArt = useSelector((state) => state.artReducer.art);
+  const dispatch = useDispatch();
+  const MySwal = withReactContent(Swal);
 
   const [orderInput, setOrderInput] = useState({
-    amount: ''
-  })
+    amount: "",
+  });
+
+  const toPreview = (id) => {
+    navigate(`/art/${id}/3d`)
+  }
 
   const handleChange = (e) => {
     setOrderInput({
       ...orderInput,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const setArtId = (id) => {
     setOrderInput({
       ...orderInput,
-      artId: id
-    })
-  }
+      artId: id,
+    });
+  };
 
   const createOrder = (e) => {
-    e.preventDefault()
-    MySwal.fire(
-      `Are you sure you want to order ${detailArt.name}?`
-    )
-      .then((res) => {
+    e.preventDefault();
+    MySwal.fire(`Are you sure you want to order ${detailArt.name}?`).then(
+      (res) => {
         if (res.isConfirmed) {
-          dispatch(addOneOrder(orderInput))
+          dispatch(addOneOrder(orderInput));
         }
-      })
-  }
+      }
+    );
+  };
 
   useEffect(() => {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0);
     dispatch(fetchOneArt(id))
       .then((data) => {
         console.log(data);
@@ -66,11 +71,21 @@ export default function DetailPage() {
           detailArt.Previews.map((el, i) => {
             switch (detailArt.Category.name) {
               case "Image Asset":
-              case "3D Model":
               case "Visual Effect":
               case "Video footage":
+              case "Script":
                 return (
                   <img
+                    className="artboard h-1/3 w-2/3 rounded-lg my-1"
+                    src={el.sourceUrl}
+                    key={i}
+                    alt="preview"
+                  />
+                );
+              case "3D Model":
+                return (
+                  <img
+                  onClick={() => toPreview(detailArt.id)}
                     className="artboard h-1/3 w-2/3 rounded-lg my-1"
                     src={el.sourceUrl}
                     key={i}
@@ -97,10 +112,20 @@ export default function DetailPage() {
         <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
 
         <form onSubmit={createOrder}>
-          <input type="number" name="amount" value={orderInput.amount} onChange={handleChange}></input>
-          <button onClick={() => {
-            setArtId(detailArt.id)
-          }} type="submit">Order</button>
+          <input
+            type="number"
+            name="amount"
+            value={orderInput.amount}
+            onChange={handleChange}
+          ></input>
+          <button
+            onClick={() => {
+              setArtId(detailArt.id);
+            }}
+            type="submit"
+          >
+            Order
+          </button>
         </form>
 
         <ChatBox />

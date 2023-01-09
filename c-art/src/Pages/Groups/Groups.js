@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate,Outlet, useParams } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
-import { fetchAllCategory } from "../../actions/actionCategory";
 
 export default function Groups() {
   const preference = localStorage.preference.split(", ")
-  console.log(preference,"8797979797987987")
   const {tag} = useParams() 
   console.log(tag)
   const [loading,setLoading] = useState(true)
@@ -52,7 +49,7 @@ export default function Groups() {
                     <h1 className="text-xs">LAST ACTIVITY</h1>
                     <h1 className="">Today, 20:57</h1>
                   </div>
-                  <h1 className="min-w-content h-10 rounded-2xl text-center p-1">{el.name}</h1>
+                  <h1 className="min-w-content h-10 rounded-2xl text-center p-1">{el}</h1>
                 </div>
               </div>
             </div>

@@ -38,7 +38,7 @@ export default function ThreeDViewer() {
             <Model
               scale={[0.1, 0.1, 0.1]}
               position={[1, 1, 1]}
-              //   asset={oneArt.source}
+                asset={oneArt.source}
             />
           </Suspense>
 

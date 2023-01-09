@@ -5,7 +5,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense,useState } from "react";
 
 export default function Model(props) {
   // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fgeneric_vr_glasses1858f32727b.glb"
@@ -14,7 +14,7 @@ export default function Model(props) {
   // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fhelicopter_v21859068152a.glb"
   // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fford_mustang_1968185906e2305.glb"
   // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2F11805_airplane_v2_L2185908bfcd8.obj"
-  const [asset, setAsset] = useState("https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2FIphone%20seceond%20version%20finished1858cd125bc.fbx");
+  const [asset, setAsset] = useState(props.asset);
   const format = asset.slice(asset.length - 3);
 
   let model = useLoader(
@@ -24,9 +24,6 @@ export default function Model(props) {
 
   model = format === "glb" || format === "gltf" ? model.scene : model;
 
-//   useEffect(() => {
-//     setAsset(props.asset)
-//   },[])
 
   console.log(format);
   console.log(model);
