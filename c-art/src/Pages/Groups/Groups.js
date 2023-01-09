@@ -26,7 +26,7 @@ export default function Groups() {
   //   })
   // },[])
   return (
-    <div className="flex flex-row flex-wrap">
+    <div className="flex flex-row flex-wrap max-h-min">
       {!tag ?  preference.map((el,i) => {
         return (
           <div className="flex flex-row justify-between px-8 pt-8" key={i}>

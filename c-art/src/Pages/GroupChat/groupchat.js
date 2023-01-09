@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -46,10 +46,16 @@ export default function ForumChat() {
     });
   }, []);
 
+  useEffect(() => {
+    const scroll = document.getElementById('messages-forum')
+    scroll.scroll({behavior:'smooth'})
+    scroll.scrollTo(0,scroll.scrollHeight)
+  }, [messages]);
+
   return (
     <>
       <h1 className="text-white text-md"> {tag} FORUM </h1>
-      <section className="chat-box container w-2/3 h-full bg-grey-400 py-6 px-2">
+      <section className="chat-box container w-2/3 h-screen bg-grey-400 px-2">
         <ul id="messages-forum" className="px-4">
           {!loading
             ? messages.map((el, i) => {
@@ -78,6 +84,7 @@ export default function ForumChat() {
                 );
               })
             : null}
+          {/* <li id="toBottom" className="d-none" ref={lastChats}></li> */}
         </ul>
         <form
           className={`text-${theme === "dark" ? "white" : "black"}`}

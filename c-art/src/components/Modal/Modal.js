@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
+import { useNavigate } from "react-router-dom";
 import { editProfile } from "../../actions/userAction";
 
 export default function Modal({ setModal, id ,username}) {
   const [loading, setLoading] = useState(true);
   const categories = useSelector((state) => state.categoryReducer.categories);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [modalInput, setModalInput] = useState({
     username,
     address: "",
@@ -28,6 +30,7 @@ export default function Modal({ setModal, id ,username}) {
     dispatch(editProfile(modalInput, id))
       .then(() => {
         setModal(false);
+        navigate("/login")
       })
       .catch((err) => {
         console.log(err);

@@ -105,7 +105,7 @@ export default function MainNavbar() {
           >
             <img
               className="mask mask-circle"
-              src="https://www.garmin.co.id/minisite/instinct/instinct-onepiece/images/onepiece-kv-luffy.png"
+              src="https://placeimg.com/192/192/people"
             />
           </div>
           <button onClick={toCart} className="px-10">

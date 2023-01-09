@@ -43,7 +43,7 @@ export default function ArtForm() {
     console.log(e.target.files)
     let obj = {
       ...artInput,
-      files : [...artInput.files,e.target.files]
+      files : [...artInput.files,...e.target.files]
     }
     setArtInput(obj)
   }
@@ -52,7 +52,7 @@ export default function ArtForm() {
     console.log(e.target.value);
     setArtInput({
       ...artInput,
-      CategoryId: e.target.value,
+      CategoryId: +e.target.value,
     });
   };
 

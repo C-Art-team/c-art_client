@@ -50,7 +50,7 @@ body {
 
 #messages-forum {
   height: 30rem !important;
-  overflow-y: auto;
+  overflow-y: scroll;
   position: relative;
   list-style-type: none;
   margin: 0;

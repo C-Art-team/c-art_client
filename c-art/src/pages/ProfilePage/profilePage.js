@@ -44,7 +44,7 @@ export default function ProfilePage() {
           <div className="flex gap-6">
             <img
               className="w-32 h-32 p-1 rounded-full ring-2 ring-gray-300"
-              src="/docs/images/people/profile-picture-5.jpg"
+              src="https://placeimg.com/192/192/people"
               alt="Bordered avatar"
             />
             <div className="flex flex-col justify-end">
