@@ -6,12 +6,46 @@ import { useSelector, useDispatch } from "react-redux";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import "./style.css";
 import { fetchOneArt } from "../../actions/artAction";
+import { addOneOrder } from "../../actions/orderAction";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function DetailPage() {
-  const [loading, setLoading] = useState(true);
-  const { id } = useParams();
-  const detailArt = useSelector((state) => state.artReducer.art);
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true)
+  const { id } = useParams()
+  const detailArt = useSelector((state) => state.artReducer.art)
+  const dispatch = useDispatch()
+  const MySwal = withReactContent(Swal)
+
+  const [orderInput, setOrderInput] = useState({
+    amount: ''
+  })
+
+  const handleChange = (e) => {
+    setOrderInput({
+      ...orderInput,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const setArtId = (id) => {
+    setOrderInput({
+      ...orderInput,
+      artId: id
+    })
+  }
+
+  const createOrder = (e) => {
+    e.preventDefault()
+    MySwal.fire(
+      `Are you sure you want to order ${detailArt.name}?`
+    )
+      .then((res) => {
+        if (res.isConfirmed) {
+          dispatch(addOneOrder(orderInput))
+        }
+      })
+  }
 
   useEffect(() => {
     window.scrollTo(0,0)
@@ -61,6 +95,14 @@ export default function DetailPage() {
         </span>
         <span className="text-4xl text-center">{detailArt.price}</span>
         <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
+
+        <form onSubmit={createOrder}>
+          <input type="number" name="amount" value={orderInput.amount} onChange={handleChange}></input>
+          <button onClick={() => {
+            setArtId(detailArt.id)
+          }} type="submit">Order</button>
+        </form>
+
         <ChatBox />
       </div>
     </section>
