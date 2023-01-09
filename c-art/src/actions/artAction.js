@@ -68,7 +68,7 @@ export const newArt = (input) => {
         });
       } else {
         filesToUpload = input.files.map((el) => {
-          return el[0];
+          return el
         });
       }
 

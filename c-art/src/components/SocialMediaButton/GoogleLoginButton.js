@@ -3,11 +3,18 @@ import { useDispatch } from "react-redux";
 // import { useEffect } from "react";
 import { handleGoogleLogin } from "../../actions/userAction";
 import { Login } from "@etouraille/react-google-login";
+import { useState } from "react";
+import Modal from "../../components/Modal/Modal";
 import "./style.css";
 
 export default function GoogleLoginButton() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [modal, setModal] = useState(false);
+  const [user, setUser] = useState({
+    id: "",
+    username: "",
+  });
   // const google = window.google;
   const client_id =
     "37319788046-ulj21qf9h47kru6g358mntt85h61jl95.apps.googleusercontent.com";
@@ -19,7 +26,15 @@ export default function GoogleLoginButton() {
         localStorage.setItem("email", data.email);
         localStorage.setItem("username", data.username);
         localStorage.setItem("preference", data.preference);
-        navigate("/");
+        if (!data.preference) {
+          setUser({
+            id: data.id,
+            username: data.username,
+          });
+          setModal(true);
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -60,6 +75,11 @@ export default function GoogleLoginButton() {
         onSuccess={handleCredentialResponse}
         onFailure={handleResponseError}
       ></Login>
+      {modal ? (
+        <Modal setModal={setModal} id={user.id} username={user.username} />
+      ) : (
+        ""
+      )}
     </>
   );
 }
