@@ -59,10 +59,11 @@ export const newArt = (input) => {
     try {
       let filesToUpload;
       const form = new FormData();
+      console.log(input)
       console.log(input.files);
 
-      if (input.files[0].length > 1){
-        filesToUpload = input.files[0].map((el) => {
+      if (input.files.length > 1){
+        filesToUpload = input.files.map((el) => {
           return el
         });
       } else {
@@ -71,7 +72,10 @@ export const newArt = (input) => {
         });
       }
 
+      console.log(filesToUpload)
+
       filesToUpload.forEach((el) => {
+        console.log(el,"dari append files")
         form.append("uploadedFile", el,el.name);
       });
       form.append("name", input.name);
