@@ -15,6 +15,8 @@ export default function ThreeDViewer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
+
     dispatch(fetchOneArt(id))
       .then((data) => {
         setLoading(false);
@@ -32,12 +34,11 @@ export default function ThreeDViewer() {
       {!loading ? (
         <Canvas
           style={{ background: "transparent" }}
-          camera={{ position: [2, 2, 2] }}
+          camera={{ position: [3, 3, 3] }}
         >
           <Suspense>
             <Model
-              scale={[0.1, 0.1, 0.1]}
-              position={[1, 1, 1]}
+              position={[0, 0, 0]}
                 asset={oneArt.source}
             />
           </Suspense>
