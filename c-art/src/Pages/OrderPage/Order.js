@@ -1,10 +1,21 @@
 import TableRow from "../../components/Tables/TableOrder/TableRow";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAllOrders } from "../../actions/orderAction";
 
 export default function OrderPage() {
-    useEffect(() => {
 
-    })
+    const [loading, setLoading] = useState(true);
+    const orders = useSelector((state) => state.orderReducer.orders)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchAllOrders())
+            .then((data) => {
+                setLoading(false)
+            })
+            .catch((err) => console.log(err))
+    }, [])
 
     return (
         <div className="p-10">
@@ -15,14 +26,19 @@ export default function OrderPage() {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th>Order Id</th>
+                            <th>Order ID</th>
                             <th>Amount</th>
                             <th>Order Date</th>
-                            <th>Art Ordered</th>
+                            <th>Order Status</th>
+                            <th>Name of Art Ordered</th>
+                            <th>Price of Art Ordered</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <TableRow />
+                        {orders.map(el => {
+                            return <TableRow orders={el} />
+                        })}
                     </tbody>
                 </table>
             </div>

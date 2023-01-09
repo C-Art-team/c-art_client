@@ -28,7 +28,7 @@ export default function MainNavbar() {
 
   const toCart = () => {
     console.log("to cart");
-    // navigate('/cart')
+    navigate('/cart')
   };
 
   const toRegister = () => {
