@@ -1,15 +1,15 @@
-import Dashboard from "../Pages/Dashboard/Dashboard";
-import Layout from "../Pages/Layout";
-import LoginForm from "../Pages/Login/Login";
-import Register from "../Pages/Register/Register";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import Layout from "../pages/Layout";
+import LoginForm from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 import { createBrowserRouter} from "react-router-dom";
-import ForumChat from "../Pages/GroupChat/groupchat";
+import ForumChat from "../pages/GroupChat/groupchat";
 import ArtForm from "../components/ArtForm/artForm";
-import ThreeDViewer from "../Pages/3DViewer/3DViewer";
-import Groups from "../Pages/Groups/Groups";
-import DetailPage from "../Pages/DetailPage/detailPage"
-import ProfilePage from "../Pages/ProfilePage/profilePage";
-import OrderPage from "../Pages/OrderPage/Order";
+import ThreeDViewer from "../pages/3DViewer/3DViewer";
+import Groups from "../pages/Groups/Groups";
+import DetailPage from "../pages/DetailPage/detailPage"
+import ProfilePage from "../pages/ProfilePage/profilePage";
+import OrderPage from "../pages/OrderPage/Order";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +22,13 @@ const router = createBrowserRouter([
       {
         path: "/add-art",
         element: <ArtForm />,
+        loader: () => {
+          if (!localStorage.access_token) {
+            return redirect("/login");
+          } else {
+            return null;
+          }
+        },
       },
       {
         path: "/art/:id",
@@ -35,29 +42,64 @@ const router = createBrowserRouter([
       {
         path: "/groups",
         element: <Groups />,
-        children : [
-          {
-            path : ':tag',
-            element : <ForumChat/>
+        loader: () => {
+          if (!localStorage.access_token) {
+            return redirect("/login");
+          } else {
+            return null;
           }
-        ]
+        },
+        children: [
+          {
+            path: ":tag",
+            element: <ForumChat />,
+          },
+        ],
       },
       {
         path: "/profile",
-        element: <ProfilePage/>
+        loader: () => {
+          if (!localStorage.access_token) {
+            return redirect("/login");
+          } else {
+            return null;
+          }
+        },
+        element: <ProfilePage />,
       },
       {
-        path: '/cart',
-        element: <OrderPage />
-      }
+        path: "/cart",
+        loader: () => {
+          if (!localStorage.access_token) {
+            return redirect("/login");
+          } else {
+            return null;
+          }
+        },
+        element: <OrderPage />,
+      },
     ],
   },
   {
     path: "/login",
+    loader: () => {
+      if (localStorage.access_token) {
+        return redirect("/");
+      } else {
+        return null;
+      }
+    },
     element: <LoginForm />,
   },
   {
     path: "/register",
+    loader: () => {
+      if (localStorage.access_token) {
+        return redirect("/");
+      } else {
+        return null;
+      }
+    },
     element: <Register />,
   },
 ]);

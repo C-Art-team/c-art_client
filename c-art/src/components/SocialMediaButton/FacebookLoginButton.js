@@ -2,10 +2,17 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { handleFacebookLogin } from "../../actions/userAction";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import Modal from "../../components/Modal/Modal";
+import { useState } from "react";
 
 export default function FacebookLoginButton() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [modal, setModal] = useState(false);
+  const [user, setUser] = useState({
+    id: "",
+    username: "",
+  });
 
   const responseFacebook = (res) => {
     dispatch(handleFacebookLogin(res))
@@ -14,7 +21,15 @@ export default function FacebookLoginButton() {
         localStorage.setItem("email", data.email);
         localStorage.setItem("username", data.username);
         localStorage.setItem("preference", data.preference);
-        navigate("/");
+        if (!data.preference) {
+          setUser({
+            id: data.id,
+            username: data.username,
+          });
+          setModal(true);
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -22,20 +37,27 @@ export default function FacebookLoginButton() {
   };
 
   return (
-    <FacebookLogin
-      appId="1381227489081903"
-      fields="name,email,picture"
-      callback={responseFacebook}
-      render={(renderProps) => (
-        <a href="#">
-          <span
-            onClick={renderProps.onClick}
-            className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white"
-          >
-            f
-          </span>
-        </a>
+    <>
+      <FacebookLogin
+        appId="1381227489081903"
+        fields="name,email,picture"
+        callback={responseFacebook}
+        render={(renderProps) => (
+          <a href="#">
+            <span
+              onClick={renderProps.onClick}
+              className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white"
+            >
+              f
+            </span>
+          </a>
+        )}
+      />
+      {modal ? (
+        <Modal setModal={setModal} id={user.id} username={user.username} />
+      ) : (
+        ""
       )}
-    />
+    </>
   );
 }
