@@ -85,6 +85,7 @@ export const payOrder = (id) => {
                     onSuccess: function (result) {
                         /* You may add your own implementation here */
                         dispatch(update(id))
+                        dispatch(fetchAllOrders())
                     }
                 })
 
