@@ -1,28 +1,61 @@
-import * as THREE from "three"
-import { Canvas } from "@react-three/fiber"
-import Model from "../../components/3DModel/Model"
-import Orbit from "../../components/3DModel/Orbit"
-import { Suspense } from "react"
+// import * as THREE from "three";
+import { useParams } from "react-router-dom";
+import { Canvas } from "@react-three/fiber";
+import Model from "../../components/3DModel/Model";
+import Orbit from "../../components/3DModel/Orbit";
+import { Suspense, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchOneArt } from "../../actions/artAction";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function ThreeDViewer() {
-    return (
-        <div style={{ width: "90vw", height: "85vh" }} >
-            <Canvas style={{ background: "transparent" }} camera={{ position: [2,2,2]}} >
-                <Suspense>
-                    <Model scale={[0.1,0.1,0.1]} position={[1,1,1]} />
-                </Suspense>
-                <ambientLight intensity={0.5} />
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const oneArt = useSelector((state) => state.artReducer.art);
+  const dispatch = useDispatch();
 
-                <pointLight position={[-18,5,0]} intensity={2}  castShadow />
-                <pointLight position={[9,9,9]} intensity={2}  castShadow />
-                <pointLight position={[15,15,15]} intensity={2}  castShadow />
-                <pointLight position={[-9,-9,-9]} intensity={2}  castShadow />
-                
-                <Orbit />
-                {/* ////axesHelper is used for help positioning the object/camera */}
-                <axesHelper args={[3]} />
+  useEffect(() => {
+    dispatch(fetchOneArt(id))
+      .then((data) => {
+        setLoading(false);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+  return (
+    <div style={{ width: "90vw", height: "85vh" }}>
+      {!loading ? (
+        <Canvas
+          style={{ background: "transparent" }}
+          camera={{ position: [2, 2, 2] }}
+        >
+          <Suspense>
+            <Model
+              scale={[0.1, 0.1, 0.1]}
+              position={[1, 1, 1]}
+              //   asset={oneArt.source}
+            />
+          </Suspense>
 
-            </Canvas>
-        </div>
-    )
-} 
+          <ambientLight intensity={0.5} />
+
+          <pointLight position={[-18, 5, 0]} intensity={2} castShadow />
+          <pointLight position={[9, 9, 9]} intensity={2} castShadow />
+          <pointLight position={[15, 15, 15]} intensity={2} castShadow />
+          <pointLight position={[-9, -9, -9]} intensity={2} castShadow />
+
+          <Orbit />
+          {/* ////axesHelper is used for help positioning the object/camera */}
+          <axesHelper args={[3]} />
+        </Canvas>
+      ) : (
+        <LoadingSpinner />
+      )}
+    </div>
+  );
+}
