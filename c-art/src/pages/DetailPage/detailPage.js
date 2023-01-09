@@ -79,7 +79,7 @@ export default function DetailPage() {
                 );
               case "Sound Effect":
               case "Music":
-                return <audio src={el.sourceUrl} key={i} controls />;
+                return <audio src={el.sourceUrl} key={i} controls/>;
               default:
                 break;
             }
