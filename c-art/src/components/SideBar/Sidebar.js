@@ -1,22 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import logo from "./C-art-logo.png";
-import { AiFillHome } from "react-icons/ai"
-import { FaLuggageCart } from "react-icons/fa"
-import { MdGroups } from "react-icons/md"
-import { RiLogoutBoxFill } from "react-icons/ri"
-import { Link,useNavigate } from "react-router-dom";
+import { AiFillHome } from "react-icons/ai";
+import { FaLuggageCart } from "react-icons/fa";
+import { MdGroups } from "react-icons/md";
+import { RiLogoutBoxFill } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const theme = useSelector((state) => {
-    return state.themeReducer.theme
-  })
-  const navigate = useNavigate()
+    return state.themeReducer.theme;
+  });
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.clear()
-    navigate('/')
-  }
+    localStorage.clear();
+    navigate("/");
+  };
   return (
     <div className="flex">
       <div
@@ -38,29 +38,31 @@ export default function Sidebar() {
                   <AiFillHome size={25} />
                 </Link>
               </li>
-              <li className="rounded-sm py-3">
-                <button
-                  
-                  className="flex justify-center p-2 space-x-3 rounded-md hover:bg-green-600 w-full"
-                >
-                  <FaLuggageCart size={25} />
-                </button>
-              </li>
-              <li className="rounded-sm py-3">
-                <Link
-                  to="/groups"
-                  className="flex justify-center p-2 space-x-3 rounded-md hover:bg-green-600 w-full"
-                >
-                  <MdGroups size={25} />
-                </Link>
-              </li>
-              <li className="rounded-sm"></li>
+              {localStorage.access_token ? (
+                <>
+                  <li className="rounded-sm py-3">
+                    <Link
+                      to="/groups"
+                      className="flex justify-center p-2 space-x-3 rounded-md hover:bg-green-600 w-full"
+                    >
+                      <MdGroups size={25} />
+                    </Link>
+                  </li>
+                </>
+              ) : null}
             </ul>
           </div>
         </div>
-        <button onClick={handleLogout} className="flex justify-center p-2 space-x-3 rounded-md hover:bg-red-700 w-full">
-          <RiLogoutBoxFill size={30} />
-        </button>
+        {localStorage.access_token ? (
+          <div>
+            <button
+              onClick={handleLogout}
+              className="flex justify-center p-2 space-x-3 rounded-md hover:bg-red-700 w-full"
+            >
+              <RiLogoutBoxFill size={30} />
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

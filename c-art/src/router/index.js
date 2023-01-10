@@ -22,6 +22,13 @@ const router = createBrowserRouter([
       {
         path: "/add-art",
         element: <ArtForm />,
+        loader: () => {
+          if (!localStorage.access_token) {
+            return redirect("/login");
+          } else {
+            return null;
+          }
+        },
       },
       {
         path: "/art/:id",
@@ -35,6 +42,13 @@ const router = createBrowserRouter([
       {
         path: "/groups",
         element: <Groups />,
+        loader: () => {
+          if (!localStorage.access_token) {
+            return redirect("/login");
+          } else {
+            return null;
+          }
+        },
         children: [
           {
             path: ":tag",
@@ -44,20 +58,48 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
+        loader: () => {
+          if (!localStorage.access_token) {
+            return redirect("/login");
+          } else {
+            return null;
+          }
+        },
         element: <ProfilePage />,
       },
       {
         path: "/cart",
+        loader: () => {
+          if (!localStorage.access_token) {
+            return redirect("/login");
+          } else {
+            return null;
+          }
+        },
         element: <OrderPage />,
       },
     ],
   },
   {
     path: "/login",
+    loader: () => {
+      if (localStorage.access_token) {
+        return redirect("/");
+      } else {
+        return null;
+      }
+    },
     element: <LoginForm />,
   },
   {
     path: "/register",
+    loader: () => {
+      if (localStorage.access_token) {
+        return redirect("/");
+      } else {
+        return null;
+      }
+    },
     element: <Register />,
     children: [
       {

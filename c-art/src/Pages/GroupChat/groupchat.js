@@ -29,7 +29,6 @@ export default function ForumChat() {
   };
 
   useEffect(() => {
-    console.log(tag, "8&*&*&*&*&");
     socket.emit("join room", tag);
   }, []);
 
@@ -53,9 +52,9 @@ export default function ForumChat() {
   }, [messages]);
 
   return (
-    <>
-      <h1 className="text-white text-md"> {tag} FORUM </h1>
-      <section className="chat-box container w-2/3 h-screen bg-grey-400 px-2">
+    <div className="flex flex-col items-center w-full py-4 gap-2">
+      <h1 className="text-white text-xl"> {tag} FORUM </h1>
+      <section className="chat-box w-2/3 bg-grey-400 px-2">
         <ul id="messages-forum" className="px-4">
           {!loading
             ? messages.map((el, i) => {
@@ -108,6 +107,6 @@ export default function ForumChat() {
           </button>
         </form>
       </section>
-    </>
+    </div>
   );
 }
