@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import ImageCategory from "../ImageCategory/ImageCategory";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { motion } from "framer-motion";
 
 function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
   // console.log(art.source)
@@ -24,7 +25,12 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
           onClick={() => toNavigation(id)}
         >
           <div className=" px-2 py-2">
-            <div className="flex flex-wrap text-center overflow-hidden">
+            <motion.div className="flex flex-wrap text-center overflow-hidden"
+              layout
+              initial={{ y: 5, opacity: 0 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}>
               <div className=" w-full">
                 <div className="flex flex-col h-96 w-full items-center bg-base-300 bg-opacity-30 px-4 py-10 rounded-lg transition duration-500 hover:scale-110">
                   {loading ? <svg
@@ -48,7 +54,7 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
                   <p className="leading-relaxed text-white">{name}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </>
@@ -65,7 +71,11 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
           onClick={() => toNavigation(idArt)}
         >
           <div className="w-full">
-            <div className=" text-center overflow-hidden ">
+            <motion.div className=" text-center overflow-hidden "
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ y: 50 }}
+              transition={{ type: "spring" }}>
               <div className=" w-full">
                 <div className="flex flex-col h-96 w-full items-center bg-base-300 bg-opacity-30 px-4 py-10 rounded-lg transition duration-500 hover:scale-110">
                   {loading ? <svg
@@ -89,7 +99,7 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
                   <p className="leading-relaxed">{nameArt}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section >
       </>
