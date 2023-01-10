@@ -32,31 +32,7 @@ function Carousel() {
             className="rounded-2xl h-full px-3"
             src="https://placeimg.com/400/300/arch"
           />
-          <img
-            draggable="false"
-            className="rounded-2xl h-full px-3"
-            src="https://placeimg.com/400/300/arch"
-          />
-          <img
-            draggable="false"
-            className="rounded-2xl h-full px-3"
-            src="https://placeimg.com/400/300/arch"
-          />
-          <img
-            draggable="false"
-            className="rounded-2xl h-full px-3"
-            src="https://placeimg.com/400/300/arch"
-          />
-          <img
-            draggable="false"
-            className="rounded-2xl h-full px-3"
-            src="https://placeimg.com/400/300/arch"
-          />
-          <img
-            draggable="false"
-            className="rounded-2xl h-full px-3"
-            src="https://placeimg.com/400/300/arch"
-          />
+
         </motion.div>
       </motion.div>
     </>

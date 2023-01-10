@@ -20,17 +20,17 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
     };
     return (
       <>
-        <motion.section
-          layout
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+        <section
           className="text-gray-700 body-font"
           onClick={() => toNavigation(id)}
         >
           <div className=" px-2 py-2">
-            <div className="flex flex-wrap text-center overflow-hidden">
+            <motion.div className="flex flex-wrap text-center overflow-hidden"
+              layout
+              initial={{ y: 5, opacity: 0 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}>
               <div className=" w-full">
                 <div className="flex flex-col h-96 w-full items-center bg-base-300 bg-opacity-30 px-4 py-10 rounded-lg transition duration-500 hover:scale-110">
                   {loading ? <svg
@@ -54,9 +54,9 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
                   <p className="leading-relaxed text-white">{name}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </motion.section>
+        </section>
       </>
     )
   } else {
@@ -66,17 +66,16 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
     };
     return (
       <>
-        <motion.section
-          layout
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+        <section
           className=" text-gray-700 body-font"
           onClick={() => toNavigation(idArt)}
         >
           <div className="w-full">
-            <div className=" text-center overflow-hidden ">
+            <motion.div className=" text-center overflow-hidden "
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ y: 50 }}
+              transition={{ type: "spring" }}>
               <div className=" w-full">
                 <div className="flex flex-col h-96 w-full items-center bg-base-300 bg-opacity-30 px-4 py-10 rounded-lg transition duration-500 hover:scale-110">
                   {loading ? <svg
@@ -100,9 +99,9 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
                   <p className="leading-relaxed">{nameArt}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </motion.section >
+        </section >
       </>
     )
   }

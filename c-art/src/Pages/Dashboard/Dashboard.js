@@ -4,7 +4,8 @@ import Carousel from "../../components/Carousel/Carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 import { fetchAllArt } from "../../actions/artAction";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+
 
 function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -57,12 +58,23 @@ function Dashboard() {
 
   return (
     <div className="px-8">
-      <div className="flex justify-center">
+      <motion.div className="flex justify-center"
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 100, opacity: 0 }}
+        transition={{ type: "spring" }}>
         <Carousel />
-      </div>
+      </motion.div>
       <div className="flex py-5 justify-between items-center">
-        <h1>ARTWORKS</h1>
-        <div className="flex gap-3">
+        <motion.h1
+          initial={{ opacity: 0, }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >ARTWORKS</motion.h1>
+        <motion.div className="flex gap-3"
+          initial={{ opacity: 0, }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}>
           {!loading
             ? categories.map((el) => {
               return (
@@ -82,7 +94,7 @@ function Dashboard() {
               );
             })
             : <progress className="progress w-56">Loading</progress>}
-        </div>
+        </motion.div>
       </div>
       <div className="grid grid-cols-4">
         {arts.map((el) => {
