@@ -69,6 +69,27 @@ export const handleRegister = (input) => {
   };
 };
 
+export const handleVerify = (token) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:4000/users/register/verify/${token}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw await response.json();
+      }
+      const data = await response.json();
+      dispatch(userRegister(data));
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
 export const handleFacebookLogin = (fbRes) => {
   return async (dispatch) => {
     try {
