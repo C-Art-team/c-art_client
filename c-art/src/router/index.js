@@ -2,7 +2,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import Layout from "../pages/Layout";
 import LoginForm from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import { createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter,redirect} from "react-router-dom";
 import ForumChat from "../pages/GroupChat/groupchat";
 import ArtForm from "../components/ArtForm/artForm";
 import ThreeDViewer from "../pages/3DViewer/3DViewer";

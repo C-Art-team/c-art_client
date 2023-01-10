@@ -29,7 +29,6 @@ export default function ForumChat() {
   };
 
   useEffect(() => {
-    console.log(tag, "8&*&*&*&*&");
     socket.emit("join room", tag);
   }, []);
 
