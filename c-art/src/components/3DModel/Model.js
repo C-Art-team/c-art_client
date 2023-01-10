@@ -1,27 +1,21 @@
 import * as THREE from "three";
-import { useLoader, useThree } from "@react-three/fiber";
+import { useLoader} from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect,useState } from "react";
 
 
 export default function Model(props) {
     // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fgeneric_vr_glasses1858f32727b.glb"
-    // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fuploads_files_2792345_Koenigsegg18590252cc5.fbx"
-    // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2FFormula%201%20mesh18590471f94.obj"
-    // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fhelicopter_v21859068152a.glb"
-    // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2Fford_mustang_1968185906e2305.glb"
-    // "https://storage.googleapis.com/storage-c-art.appspot.com/c-art%2F11805_airplane_v2_L2185908bfcd8.obj"
 
-    const [asset, setAsset] = useState(props.asset);
     const [total, setTotal] = useState(1)
-    const format = asset.slice(asset.length - 3);
+    const format = props.asset.slice(props.asset.length - 3);
     let size = new THREE.Vector3()
     const box = new THREE.Box3()
     let model = useLoader(
         format === "obj" ? OBJLoader : format === "fbx" ? FBXLoader : GLTFLoader,
-        asset
+        props.asset
     );
 
     model = format === "glb" || format === "ltf" ? model.scene : model;

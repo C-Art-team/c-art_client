@@ -31,7 +31,7 @@ export const fetchAllOrders = () => {
 export const addOneOrder = (payload) => {
     return async () => {
         try {
-            await axios({
+            const {data} = await axios({
                 method: 'post',
                 url: `${BASE_URL}/orders`,
                 data: payload,
@@ -39,9 +39,10 @@ export const addOneOrder = (payload) => {
                     access_token: localStorage.getItem("access_token")
                 },
             })
-
             fetch(fetchAllOrders)
+            return data
         } catch (error) {
+            console.log(error,'dari thunk add order')
             throw (error)
         }
 

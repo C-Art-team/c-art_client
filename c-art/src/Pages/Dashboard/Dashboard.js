@@ -13,7 +13,6 @@ function Dashboard() {
   const dispatch = useDispatch();
 
   const filterArt = (e) => {
-    // setLoading(true);
     dispatch(fetchAllArt(e.target.value))
       .then((data) => {
         console.log(data);
@@ -86,12 +85,13 @@ function Dashboard() {
       </div>
       <div className="grid grid-cols-4">
         {arts.map((el) => {
-          const { id, name, Previews, CategoryId } = el;
+          const { id, name, Previews, price, CategoryId } = el;
           return (
             <Card
               key={id}
               id={id}
               name={name}
+              price={price}
               Previews={Previews}
               loading={loading}
               CategoryId={CategoryId}

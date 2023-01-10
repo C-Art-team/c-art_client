@@ -104,7 +104,7 @@ export default function ArtForm() {
         >
           <div className="flex items-center justify-center">
             <label htmlFor="files">Select files</label>
-            <input id="files" name="files" type="file" multiple onChange={handleFilesInput} value={artInput.files}/>
+            <input id="files" name="files" type="file" multiple onChange={handleFilesInput} />
           </div>
           <div className="flex items-center justify-center mb-5">
             <label htmlFor="name">Art name : </label>
