@@ -70,7 +70,9 @@ export const newArt = (input) => {
       console.log(input)
       console.log(input.files);
 
-      if (input.files.length > 1) {
+    
+
+      if (input.files.length > 1){
         filesToUpload = input.files.map((el) => {
           return el
         });
@@ -80,7 +82,11 @@ export const newArt = (input) => {
         });
       }
 
-      console.log(filesToUpload)
+      if(filesToUpload.length <= 1) {
+        throw new Error("Please input at least 1 preview")
+      }
+
+        console.log(filesToUpload)
 
       filesToUpload.forEach((el) => {
         console.log(el, "dari append files")
