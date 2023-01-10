@@ -40,8 +40,8 @@ export default function TableRow({ orders }) {
                 <td>{orders.Art.price}</td>
                 <td>
                     <button onClick={() => handlePay(orders.id)}>pay order</button>
-                    <button style={{display : orders.status === "Paid" ? 'none' : 'block'}} onClick={() => handleDelete(orders.id)}>cancel order</button>
-                    <a href={orders.Art.source} download style={{display :orders.status === "Paid" ? 'block' : 'none'}}>download</a>
+                    <button style={{ display: orders.status === "Paid" ? 'none' : 'block' }} onClick={() => handleDelete(orders.id)} className="text-red-400">cancel order</button>
+                    <a href={orders.Art.source} download style={{ display: orders.status === "Paid" ? 'block' : 'none' }} className="text-blue-400">download</a>
                 </td>
             </tr>
         </>

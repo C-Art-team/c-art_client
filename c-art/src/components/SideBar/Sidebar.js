@@ -53,17 +53,17 @@ export default function Sidebar() {
             </ul>
           </div>
         </div>
+        {localStorage.access_token ? (
+          <div>
+            <button
+              onClick={handleLogout}
+              className="flex justify-center p-2 space-x-3 rounded-md hover:bg-red-700 w-full"
+            >
+              <RiLogoutBoxFill size={30} />
+            </button>
+          </div>
+        ) : null}
       </div>
-      {localStorage.access_token ? (
-        <div>
-          <button
-            onClick={handleLogout}
-            className="flex justify-center p-2 space-x-3 rounded-md hover:bg-red-700 w-full"
-          >
-            <RiLogoutBoxFill size={30} />
-          </button>
-        </div>
-      ) : null}
     </div>
   );
 }

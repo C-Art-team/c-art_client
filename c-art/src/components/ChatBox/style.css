@@ -46,7 +46,7 @@ body {
 }
 
 #messages {
-  height: 10rem !important;
+  height: 19rem !important;
   overflow-y: auto;
   position: relative;
   list-style-type: none;
