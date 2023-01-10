@@ -9,6 +9,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const categories = useSelector((state) => state.categoryReducer.categories);
   const arts = useSelector((state) => state.artReducer.arts);
+  // console.log(arts)
   const dispatch = useDispatch();
 
   const filterArt = (e) => {
@@ -82,9 +83,9 @@ function Dashboard() {
             : <progress className="progress w-56">Loading</progress>}
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-1">
+      <div className="grid grid-cols-4">
         {arts.map((el) => {
-          const { id, name, Previews,price } = el;
+          const { id, name, Previews,price,CategoryId } = el;
           return (
             <Card
               key={id}
@@ -93,6 +94,7 @@ function Dashboard() {
               price={price}
               Previews={Previews}
               loading={loading}
+              CategoryId={CategoryId}
               page="dashboard"
             />
           );
