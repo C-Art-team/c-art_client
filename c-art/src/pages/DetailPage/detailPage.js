@@ -83,7 +83,7 @@ export default function DetailPage() {
             switch (detailArt.Category.name) {
               case "Image Asset":
               case "Visual Effect":
-              case "Video footage":
+              case "Video Footage":
               case "Script":
                 return (
                   <img

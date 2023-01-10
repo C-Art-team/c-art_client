@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-function Card({ art, loading, page, id, name, Previews }) {
+function Card({ art, loading, page, id, name, Previews ,price}) {
   // console.log(art.source)
 
   const navigate = useNavigate();
@@ -37,9 +37,9 @@ function Card({ art, loading, page, id, name, Previews }) {
                   }
                   {loading ? <LoadingSpinner /> : null}
                   <h2 className="title-font font-medium text-3xl text-gray-900">
-                    2.7K
+                    {price}
                   </h2>
-                  <p className="leading-relaxed">{name}</p>
+                  <p className="leading-relaxed text-white">{name}</p>
                 </div>
               </div>
             </div>

@@ -1,50 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
-import { useSelector, useDispatch } from "react-redux"
-import { viewProfile } from "../../actions/userAction"
-import "./style.css"
+import { useSelector, useDispatch } from "react-redux";
+import { viewProfile } from "../../actions/userAction";
+import "./style.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { fetchArtByAuthorID } from "../../actions/artAction"
-
+import { fetchArtByAuthorID } from "../../actions/artAction";
 
 export default function ProfilePage() {
-  const [loading, setLoading] = useState(true)
-  const profile = useSelector((state) => state.userReducer.oneUser)
-  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true);
+  const profile = useSelector((state) => state.userReducer.oneUser);
+  const dispatch = useDispatch();
 
   const [editProfile, setEditProfile] = useState({
     username: "",
     address: "",
-    phone: ""
-  })
+    phone: "",
+  });
 
   const myArt = useSelector((state) => {
     // console.log(state)
-    return state.artReducer.myArt
-  })
+    return state.artReducer.myArt;
+  });
 
   useEffect(() => {
     dispatch(viewProfile())
-      .then((data) => {
-        // console.log(data)
-        setLoading(false)
+      .then(() => {
+        dispatch(
+          fetchArtByAuthorID({
+            ...profile,
+            access_token: localStorage.getItem("access_token"),
+          })
+        ).then(() => {
+          setLoading(false);
+        });
+        setLoading(false);
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
+  }, []);
 
-    dispatch(fetchArtByAuthorID({ ...profile, access_token: localStorage.getItem("access_token") }))
-      .then(() => {
-        setLoading(false)
-      })
-  }, [])
+  useEffect(() => {}, []);
 
   // console.log(profile)
   // const changeToInput = (e) => {
 
   // }
-
 
   return (
     <div
@@ -52,23 +54,35 @@ export default function ProfilePage() {
       style={{ backgroundColor: "#121218", color: "#CFD1D0" }}
     >
       <div className="flex justify-between">
-        {!loading ? <div>
-          <div className="flex gap-6">
-            <img
-              className="w-32 h-32 p-1 rounded-full ring-2 ring-gray-300"
-              src="https://placeimg.com/192/192/people"
-              alt="Bordered avatar"
-            />
-            <div className="flex flex-col justify-end">
-              <h1 className="text2xl" name="username" style={{ color: "#F9F9FB" }}>
-                {profile?.username}
-              </h1>
-              <h1 className="text-md" name="address" style={{ color: "#CFD1D0" }} >
-                {profile?.address}
-              </h1>
+        {!loading ? (
+          <div>
+            <div className="flex gap-6">
+              <img
+                className="w-32 h-32 p-1 rounded-full ring-2 ring-gray-300"
+                src="https://placeimg.com/192/192/people"
+                alt="Bordered avatar"
+              />
+              <div className="flex flex-col justify-end">
+                <h1
+                  className="text2xl"
+                  name="username"
+                  style={{ color: "#F9F9FB" }}
+                >
+                  {profile?.username}
+                </h1>
+                <h1
+                  className="text-md"
+                  name="address"
+                  style={{ color: "#CFD1D0" }}
+                >
+                  {profile?.address}
+                </h1>
+              </div>
             </div>
           </div>
-        </div> : <LoadingSpinner className="loading-profile" />}
+        ) : (
+          <LoadingSpinner className="loading-profile" />
+        )}
         <div style={{ color: "#CFD1D0" }}>
           <h1 className="text-2xl">History</h1>
           <div className="flex flex-col gap-2 py-2">
@@ -122,13 +136,24 @@ export default function ProfilePage() {
             + New product
           </Link>
         </div>
-        <div className="grid grid-cols-4 gap-1 border-2 border-gray-500 rounded-lg bg-white-100 shadow-xl">
-          {myArt.map((el, index) => {
-            return (
-              <Card art={el} key={index + 1} loading={loading} page="profile" />
-            )
-          })}
-        </div>
+        {myArt.length ? (
+          <div className="grid grid-cols-4 gap-1 border-2 border-gray-500 rounded-lg bg-white-100 shadow-xl">
+            {myArt.map((el, index) => {
+              return (
+                <Card
+                  art={el}
+                  key={index + 1}
+                  loading={loading}
+                  page="profile"
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <h1 className="text-3xl text-white w-full">
+            You haven't uploaded any art yet.
+          </h1>
+        )}
       </div>
     </div>
   );
