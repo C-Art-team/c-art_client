@@ -10,6 +10,7 @@ import Groups from "../Pages/Groups/Groups";
 import DetailPage from "../Pages/DetailPage/detailPage";
 import ProfilePage from "../Pages/ProfilePage/profilePage";
 import OrderPage from "../Pages/OrderPage/Order";
+import { redirect } from "react-router-dom";
 
 const router = createBrowserRouter([
   {

@@ -64,23 +64,23 @@ function Dashboard() {
         <div className="flex gap-3">
           {!loading
             ? categories.map((el) => {
-                return (
-                  <div key={el.id}>
-                    <button
-                      onClick={filterArt}
-                      className="badge badge-accent px-5 py-5 text-black font-semibold"
-                      style={{
-                        backgroundColor: "#85CF81",
-                        borderColor: "#85CF81",
-                      }}
-                      value={el.id}
-                    >
-                      {el.name}
-                    </button>
-                  </div>
-                );
-              })
-            : null}
+              return (
+                <div key={el.id}>
+                  <button
+                    onClick={filterArt}
+                    className="badge badge-accent px-5 py-5 text-black font-semibold"
+                    style={{
+                      backgroundColor: "#85CF81",
+                      borderColor: "#85CF81",
+                    }}
+                    value={el.id}
+                  >
+                    {el.name}
+                  </button>
+                </div>
+              );
+            })
+            : <progress className="progress w-56">Loading</progress>}
         </div>
       </div>
       <div className="grid grid-cols-4 gap-1">
@@ -93,6 +93,7 @@ function Dashboard() {
               name={name}
               Previews={Previews}
               loading={loading}
+              page="dashboard"
             />
           );
         })}
