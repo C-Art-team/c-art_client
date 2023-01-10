@@ -77,6 +77,12 @@ export default function DetailPage() {
       });
   }, []);
 
+  function formatRupiah(money) {
+    return new Intl.NumberFormat('id-ID',
+      { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 } // diletakkan dalam object
+    ).format(money);
+  }
+
   return (
     <section className="container flex items-stretch">
       <div className="w-1/2 container-preview flex flex-col p-4 justfy-center items-center gap-y-5">
@@ -135,7 +141,7 @@ export default function DetailPage() {
         <span className="text-lg text-center">
           created by : {detailArt.authorName}
         </span>
-        <span className="text-2xl text-center py-5">Price: {detailArt.price}</span>
+        <span className="text-2xl text-center py-5">Price: {formatRupiah(detailArt.price)}</span>
         <p className="w-4/8 text-justify">{detailArt.description}</p>
         {/* <form onSubmit={createOrder}>
           <label htmlFor="amount" className="text-white mr-4">

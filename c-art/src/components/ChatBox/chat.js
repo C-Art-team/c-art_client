@@ -45,6 +45,8 @@ export default function ChatBox() {
     });
   }, []);
 
+
+
   return (
     <div className=" py-11 w-full">
       <section className="chat-box bg-black bg-opacity-80 rounded-xl px-2">
@@ -84,7 +86,7 @@ export default function ChatBox() {
               />
               <button
                 type="submit"
-                className="bg-gradient-to-r from-lime-400 to-green-500"
+                className="bg-gradient-to-r from-green-100 to-green-500"
               >
                 Post
               </button>

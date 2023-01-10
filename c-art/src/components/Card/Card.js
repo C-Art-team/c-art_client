@@ -6,6 +6,11 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
   // console.log(art.source)
+  function formatRupiah(money) {
+    return new Intl.NumberFormat('id-ID',
+      { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 } // diletakkan dalam object
+    ).format(money);
+  }
 
   const navigate = useNavigate();
   if (page === 'dashboard') {
@@ -38,7 +43,7 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
                   }
                   {loading ? <LoadingSpinner /> : null}
                   <h2 className="title-font font-medium text-3xl py-3 text-white">
-                    {price}
+                    {formatRupiah(price)}
                   </h2>
                   <p className="leading-relaxed text-white">{name}</p>
                 </div>
