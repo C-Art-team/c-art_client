@@ -4,6 +4,7 @@ import Carousel from "../../components/Carousel/Carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 import { fetchAllArt } from "../../actions/artAction";
+import { AnimatePresence } from "framer-motion";
 
 function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -85,18 +86,20 @@ function Dashboard() {
       </div>
       <div className="grid grid-cols-4">
         {arts.map((el) => {
-          const { id, name, Previews,price,CategoryId } = el;
+          const { id, name, Previews, price, CategoryId } = el;
           return (
-            <Card
-              key={id}
-              id={id}
-              name={name}
-              price={price}
-              Previews={Previews}
-              loading={loading}
-              CategoryId={CategoryId}
-              page="dashboard"
-            />
+            <AnimatePresence>
+              <Card
+                key={id}
+                id={id}
+                name={name}
+                price={price}
+                Previews={Previews}
+                loading={loading}
+                CategoryId={CategoryId}
+                page="dashboard"
+              />
+            </AnimatePresence>
           );
         })}
       </div>

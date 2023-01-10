@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import ImageCategory from "../ImageCategory/ImageCategory";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { motion } from "framer-motion";
 
 function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
   // console.log(art.source)
@@ -19,7 +20,12 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
     };
     return (
       <>
-        <section
+        <motion.section
+          layout
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
           className="text-gray-700 body-font"
           onClick={() => toNavigation(id)}
         >
@@ -50,7 +56,7 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
       </>
     )
   } else {
@@ -60,7 +66,12 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
     };
     return (
       <>
-        <section
+        <motion.section
+          layout
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
           className=" text-gray-700 body-font"
           onClick={() => toNavigation(idArt)}
         >
@@ -91,7 +102,7 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
               </div>
             </div>
           </div>
-        </section >
+        </motion.section >
       </>
     )
   }
