@@ -3,7 +3,6 @@ import withReactContent from 'sweetalert2-react-content'
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
 import { deleteOneOrder, payOrder } from '../../../actions/orderAction';
-import { fetchOneArt } from '../../../actions/artAction';
 
 export default function TableRow({ orders }) {
     const MySwal = withReactContent(Swal)

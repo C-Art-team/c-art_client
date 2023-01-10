@@ -85,7 +85,7 @@ function Dashboard() {
       </div>
       <div className="grid grid-cols-4">
         {arts.map((el) => {
-          const { id, name, Previews, price, CategoryId } = el;
+          const { id, name, Previews,price,CategoryId } = el;
           return (
             <Card
               key={id}

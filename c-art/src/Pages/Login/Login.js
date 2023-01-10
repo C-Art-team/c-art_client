@@ -53,7 +53,7 @@ const LoginForm = () => {
             <h1 className="text-5xl font-bold text-left tracking-wide">
               Keep it special
             </h1>
-            <p className="text-3xl my-4">
+            <p className="text-3xl my-4 w-1/3 ">
               Capture your personal memory in unique way, anywhere.
             </p>
           </div>
