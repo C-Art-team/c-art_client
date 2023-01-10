@@ -83,10 +83,11 @@ export default function DetailPage() {
             switch (detailArt.Category.name) {
               case "Image Asset":
               case "Visual Effect":
-              case "Video footage":
+              case "Video Footage":
               case "Script":
                 return (
                   <img
+                    id="preview"
                     className="artboard h-1/3 w-2/3 rounded-lg my-1"
                     src={el.sourceUrl}
                     key={i}
@@ -96,6 +97,7 @@ export default function DetailPage() {
               case "3D Model":
                 return (
                   <img
+                    id="preview"
                     onClick={() => toPreview(detailArt.id)}
                     className="artboard h-1/3 w-2/3 rounded-lg my-1"
                     src={el.sourceUrl}
@@ -123,7 +125,9 @@ export default function DetailPage() {
         <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
 
         <form onSubmit={createOrder}>
-          <label htmlFor="amount" className="text-white mr-4">Amount</label>
+          <label htmlFor="amount" className="text-white mr-4">
+            Amount
+          </label>
           <input
             id="amount"
             type="number"

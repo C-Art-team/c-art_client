@@ -5,3 +5,7 @@
 .container-preview {
   height: 100vh !important;
 }
+
+#preview :hover {
+  cursor: pointer;
+}

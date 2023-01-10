@@ -129,8 +129,8 @@ export default function ArtForm() {
           className="flex flex-col pt-4 gap-3"
           style={{ color: "#EDEDED" }}
         >
-          <div className="flex gap-3">
-            <label htmlFor="name">Art name :</label>
+          <div className="flex items-center justify-center mb-5">
+            <label htmlFor="name">Art name : </label>
             <input
               name="name"
               className="rounded-xl indent-4 text-white"
