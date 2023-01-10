@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { handleRegister} from "../../actions/userAction";
-import { Link } from "react-router-dom";
+import { handleRegister, handleVerify } from "../../actions/userAction";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "./C-art-logo.png";
 import Modal from "../../components/Modal/Modal";
 function Register() {
-  const [username,setUsername] = useState("")
-  const [modal,setModal] = useState(false)
-  const [id,setId] = useState(0)
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [modal, setModal] = useState(false);
+  const [id, setId] = useState(0);
   const dispatch = useDispatch();
   const togglePreference = useSelector((state) => state.userReducer.toggle);
+  const { token } = useParams();
   // console.log(togglePreference);
 
   const [inputRegister, setInputRegister] = useState({
@@ -32,9 +34,7 @@ function Register() {
     e.preventDefault();
     dispatch(handleRegister(inputRegister))
       .then((data) => {
-        setUsername(data.username)
-        setId(data.id)
-        setModal(true)
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);
@@ -45,7 +45,21 @@ function Register() {
       password: "",
     });
   };
-  console.log( inputRegister );
+  console.log(inputRegister);
+  useEffect(() => {
+    if (token) {
+      dispatch(handleVerify(token))
+        .then((data) => {
+          setUsername(data.username);
+          setId(data.id);
+          setModal(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          navigate("/register");
+        });
+    }
+  }, []);
   return (
     <section className="min-h-screen flex items-stretch text-white">
       <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
@@ -179,7 +193,7 @@ function Register() {
           </form>
         </div>
       </div>
-      {modal ? <Modal setModal={setModal} id={id} username={username}/> : ""}
+      {modal ? <Modal setModal={setModal} id={id} username={username} /> : ""}
     </section>
   );
 }
