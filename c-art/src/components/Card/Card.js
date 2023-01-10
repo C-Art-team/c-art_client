@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ImageCategory from "../ImageCategory/ImageCategory";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-function Card({ art, loading, page, id, name, Previews, CategoryId }) {
+function Card({ art, loading, page, id, name, Previews ,price,CategoryId}) {
   // console.log(art.source)
 
   const navigate = useNavigate();
@@ -38,9 +38,9 @@ function Card({ art, loading, page, id, name, Previews, CategoryId }) {
                   }
                   {loading ? <LoadingSpinner /> : null}
                   <h2 className="title-font font-medium text-3xl text-gray-900">
-                    2.7K
+                    {price}
                   </h2>
-                  <p className="leading-relaxed justify-end">{name}</p>
+                  <p className="leading-relaxed text-white justify-end">{name}</p>
                 </div>
               </div>
             </div>

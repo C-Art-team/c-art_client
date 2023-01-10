@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 export default function DetailPage() {
-  const navigate = useNavigate() 
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const detailArt = useSelector((state) => state.artReducer.art);
@@ -24,8 +24,8 @@ export default function DetailPage() {
   });
 
   const toPreview = (id) => {
-    navigate(`/art/${id}/3d`)
-  }
+    navigate(`/art/${id}/3d`);
+  };
 
   const handleChange = (e) => {
     setOrderInput({
@@ -46,7 +46,18 @@ export default function DetailPage() {
     MySwal.fire(`Are you sure you want to order ${detailArt.name}?`).then(
       (res) => {
         if (res.isConfirmed) {
-          dispatch(addOneOrder(orderInput));
+          dispatch(addOneOrder(orderInput))
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((err) => {
+              console.log(err.response.data.message);
+            })
+            .finally(() => {
+              setOrderInput({
+                amount: "",
+              });
+            });
         }
       }
     );
@@ -72,7 +83,7 @@ export default function DetailPage() {
             switch (detailArt.Category.name) {
               case "Image Asset":
               case "Visual Effect":
-              case "Video footage":
+              case "Video Footage":
               case "Script":
                 return (
                   <img
@@ -85,7 +96,7 @@ export default function DetailPage() {
               case "3D Model":
                 return (
                   <img
-                  onClick={() => toPreview(detailArt.id)}
+                    onClick={() => toPreview(detailArt.id)}
                     className="artboard h-1/3 w-2/3 rounded-lg my-1"
                     src={el.sourceUrl}
                     key={i}
@@ -112,12 +123,15 @@ export default function DetailPage() {
         <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
 
         <form onSubmit={createOrder}>
+          <label htmlFor="amount" className="text-white mr-4">Amount</label>
           <input
+            id="amount"
             type="number"
             name="amount"
             value={orderInput.amount}
             onChange={handleChange}
-          ></input>
+            className="mr-4"
+          />
           <button
             onClick={() => {
               setArtId(detailArt.id);
