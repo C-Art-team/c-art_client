@@ -1,22 +1,41 @@
 import React from 'react'
 import music from "./icon/music.png"
 import effect from "./icon/volume.png"
+// className="object-contain h-48 w-full transition duration-500 hover:scale-110"
+function ImageCategory({ Previews, CategoryId, Page }) {
+    if (Page === "dashboard") {
+        if (CategoryId === 2) {
+            return (
+                <img className="object-contain h-60 w-full transition duration-500 hover:scale-110" src={music} />
+            )
+        }
+        if (CategoryId === 1) {
+            return (
+                <img className="object-contain h-60 w-full transition duration-500 hover:scale-110" src={effect} />
+            )
+        }
+        else {
+            return (
+                <img className='object-fit h-60 w-96 transition duration-500 hover:scale-110' src={Previews[0].sourceUrl} />
+            )
+        }
+    } else {
+        if (CategoryId === 2) {
+            return (
+                <img className="object-contain h-60 w-full transition duration-500 hover:scale-110" src={music} />
+            )
+        }
+        if (CategoryId === 1) {
+            return (
+                <img className="object-contain h-60 w-full transition duration-500 hover:scale-110" src={effect} />
+            )
+        }
+        else {
+            return (
+                <img className='object-fit h-60 w-96 transition duration-500 hover:scale-110' src={Previews[0].sourceUrl} />
+            )
+        }
 
-function ImageCategory({ Previews, CategoryId }) {
-    if (CategoryId === 2) {
-        return (
-            <img src={music} />
-        )
-    }
-    if (CategoryId === 1) {
-        return (
-            <img src={effect} />
-        )
-    }
-    else {
-        return (
-            <img className='object-fit h-60 w-96' src={Previews[0].sourceUrl} />
-        )
     }
 }
 
