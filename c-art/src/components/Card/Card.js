@@ -31,7 +31,8 @@ function Card({ id, name, loading,Previews }) {
                   <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
                 </svg> :
                 <img 
-                  src={Previews[0].sourceUrl}
+                  src=""
+                  // src={Previews[0].sourceUrl}
                 /> 
                 }
                 {loading ? <LoadingSpinner /> : null}
