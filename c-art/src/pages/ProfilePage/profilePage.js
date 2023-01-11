@@ -7,13 +7,14 @@ import { toast } from "react-toastify";
 import "./style.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { fetchArtByAuthorID } from "../../actions/artAction"
-
+import { fetchAllOrders } from "../../actions/orderAction";
+import HistoryTableRow from "../../components/Tables/TableHistory/HistoryTableRow";
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true)
   const profile = useSelector((state) => state.userReducer.oneUser)
+  const orders = useSelector((state) => state.orderReducer.orders);
   const dispatch = useDispatch()
-
   const [editProfile, setEditProfile] = useState({
     username: "",
     address: "",
@@ -36,9 +37,19 @@ export default function ProfilePage() {
           ? toast.error(`${err?.message}`)
           : toast.error("Internal Server Error");
       });
+
+    dispatch(fetchAllOrders())
+      .then((data) => {
+        setLoading(false);
+      })
+      .catch((err) =>
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error")
+      );
   }, []);
 
-  const changeToInput = (e) => {};
+  const changeToInput = (e) => { };
 
   return (
     <div
@@ -83,37 +94,25 @@ export default function ProfilePage() {
               style={{ backgroundColor: "#191B1F" }}
             >
               <div className="py-2 px-3 flex justify-between">
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
+                <h1>Order Date</h1>
+                <h1>Art Name</h1>
+                <h1>Art Category</h1>
               </div>
             </div>
-            <div
-              className=" rounded-full w-80 shadow-lg"
-              style={{ backgroundColor: "#191B1F" }}
-            >
-              <div className="py-2 px-3 flex justify-between">
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
+            {orders.length > 0 ?
+              orders.map(el => {
+                return <HistoryTableRow histories={el} />
+              }) : <div
+                className=" rounded-full w-80 shadow-lg"
+                style={{ backgroundColor: "#191B1F" }}
+              >
+                <div className="py-2 px-3 flex justify-between">
+                  <h1>-</h1>
+                  <h1>-</h1>
+                  <h1>-</h1>
+                </div>
               </div>
-            </div>
-            <div
-              className=" rounded-full w-80 shadow-lg"
-              style={{ backgroundColor: "#191B1F" }}
-            >
-              <div className="py-2 px-3 flex justify-between">
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-              </div>
-            </div>
-            <div
-              className=" rounded-full w-80 shadow-lg"
-              style={{ backgroundColor: "#191B1F" }}
-            >
-              <div className="py-2 px-3 flex justify-between">
-                <h1>asdasd</h1>
-                <h1>asdasd</h1>
-              </div>
-            </div>
+            }
           </div>
         </div>
       </div>
