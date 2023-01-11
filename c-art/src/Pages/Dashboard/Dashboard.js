@@ -4,6 +4,7 @@ import Carousel from "../../components/Carousel/Carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 import { fetchAllArt } from "../../actions/artAction";
+import { toast } from "react-toastify";
 import { AnimatePresence, motion } from "framer-motion";
 
 
@@ -27,7 +28,10 @@ function Dashboard() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error");
       });
   };
 
@@ -37,7 +41,10 @@ function Dashboard() {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error");
       })
       .finally(() => {
         setLoading(false);
@@ -52,7 +59,10 @@ function Dashboard() {
         }, 5000);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
+        error.message
+          ? toast.error(`${error?.message}`)
+          : toast.error("Internal Server Error");
       });
   }, []);
 

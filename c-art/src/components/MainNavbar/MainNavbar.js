@@ -56,7 +56,7 @@ export default function MainNavbar() {
 
   return (
     <div
-      className="navbar sticky top-0 bg-base-300 h-14 items-center flex flex-row justify-between px-10"
+      className="navbar sticky top-0 bg-base-300 h-14 items-center flex flex-row justify-between px-10 z-10"
       data-theme={theme}
       style={{ backgroundColor: "#121218" }}
     >

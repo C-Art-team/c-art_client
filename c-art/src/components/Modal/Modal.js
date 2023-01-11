@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 import { useNavigate } from "react-router-dom";
 import { editProfile } from "../../actions/userAction";
+import { toast } from "react-toastify";
 
 export default function Modal({ setModal, id, username }) {
   const [loading, setLoading] = useState(true);
   const categories = useSelector((state) => state.categoryReducer.categories);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [modalInput, setModalInput] = useState({
     username,
     address: "",
@@ -30,10 +31,12 @@ export default function Modal({ setModal, id, username }) {
     dispatch(editProfile(modalInput, id))
       .then(() => {
         setModal(false);
-        navigate("/login")
+        navigate("/login");
       })
       .catch((err) => {
-        console.log(err);
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error");
       })
       .finally(() => {
         setModal(false);
@@ -59,7 +62,9 @@ export default function Modal({ setModal, id, username }) {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        error.message
+          ? toast.error(`${error?.message}`)
+          : toast.error("Internal Server Error");
       })
       .finally(() => {
         setLoading(false);
@@ -68,7 +73,7 @@ export default function Modal({ setModal, id, username }) {
 
   return (
     <div
-      class="fixed z-10"
+      class="fixed z-20"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"

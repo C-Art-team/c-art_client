@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-// import axios from "axios";
 import ChatBox from "../../components/ChatBox/chat";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import "./style.css"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import "./style.css";
 import { fetchOneArt } from "../../actions/artAction";
 import { addOneOrder } from "../../actions/orderAction";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import music from "../../components/ImageCategory/icon/music.png"
-import sundEffect from "../../components/ImageCategory/icon/volume.png"
 
 export default function DetailPage() {
   const navigate = useNavigate();
@@ -29,13 +28,6 @@ export default function DetailPage() {
     navigate(`/art/${id}/3d`);
   };
 
-  const handleChange = (e) => {
-    setOrderInput({
-      ...orderInput,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const setArtId = (id) => {
     setOrderInput({
       ...orderInput,
@@ -49,11 +41,15 @@ export default function DetailPage() {
       (res) => {
         if (res.isConfirmed) {
           dispatch(addOneOrder(orderInput))
-            .then((data) => {
-              console.log(data);
+            .then(() => {
+              // console.log(data);
+              toast.success(`Successfully added ${detailArt.name} to your order list`)
             })
             .catch((err) => {
-              console.log(err.response.data.message);
+              // console.log(err.response.data.message);
+              err.message
+                ? toast.error(`${err?.response.data.message}`)
+                : toast.error("Internal Server Error");
             })
             .finally(() => {
               setOrderInput({
@@ -73,7 +69,9 @@ export default function DetailPage() {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error");
       });
   }, []);
 
@@ -125,7 +123,6 @@ export default function DetailPage() {
                         src={music} />
                     </div>
                     <audio src={el.sourceUrl} key={i} controls />
-
                   </>
                 );
               default:
@@ -136,24 +133,17 @@ export default function DetailPage() {
           <LoadingSpinner />
         )}
       </div>
-      <div className="flex flex-col w-1/2 container-preview p-4 items-center bg-black bg-opacity-50 rounded-xl">
+      <div className="flex flex-col w-1/2 container-preview-2 p-4 items-center bg-black bg-opacity-50 rounded-xl">
         <span className="text-4xl text-center">{detailArt.name}</span>
         <span className="text-lg text-center">
           created by : {detailArt.authorName}
         </span>
-        <span className="text-2xl text-center py-5">Price: {formatRupiah(detailArt.price)}</span>
-        <p className="w-4/8 text-justify">{detailArt.description}</p>
+        <span className="text-4xl text-center">Price : {formatRupiah(detailArt.price)}</span>
+        <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
+
         <form onSubmit={createOrder}>
-          {/* <input
-            id="amount"
-            type="number"
-            name="amount"
-            value={orderInput.amount}
-            onChange={handleChange}
-            className="mr-4"
-          /> */}
           <button
-            className=" bg-green-500 bg-opacity-75 text-white rounded-lg"
+            className="bg-green-400 text-black rounded-2xl w-20 h-7"
             onClick={() => {
               setArtId(detailArt.id);
             }}
