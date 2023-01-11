@@ -8,6 +8,7 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import "./style.css";
 import { fetchOneArt } from "../../actions/artAction";
 import { addOneOrder } from "../../actions/orderAction";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import music from "../../components/ImageCategory/icon/music.png"
@@ -50,10 +51,14 @@ export default function DetailPage() {
         if (res.isConfirmed) {
           dispatch(addOneOrder(orderInput))
             .then((data) => {
-              console.log(data);
+              // console.log(data);
+              toast.success(`Successfully added ${detailArt.name} to your order list`)
             })
             .catch((err) => {
-              console.log(err.response.data.message);
+              // console.log(err.response.data.message);
+              err.message
+                ? toast.error(`${err?.message}`)
+                : toast.error("Internal Server Error");
             })
             .finally(() => {
               setOrderInput({
@@ -73,7 +78,9 @@ export default function DetailPage() {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error");
       });
   }, []);
 
@@ -141,9 +148,10 @@ export default function DetailPage() {
         <span className="text-lg text-center">
           created by : {detailArt.authorName}
         </span>
-        <span className="text-2xl text-center py-5">Price: {formatRupiah(detailArt.price)}</span>
-        <p className="w-4/8 text-justify">{detailArt.description}</p>
-        {/* <form onSubmit={createOrder}>
+        <span className="text-4xl text-center">{detailArt.price}</span>
+        <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
+
+        <form onSubmit={createOrder}>
           <label htmlFor="amount" className="text-white mr-4">
             Amount
           </label>
@@ -163,7 +171,7 @@ export default function DetailPage() {
           >
             Order
           </button>
-        </form> */}
+        </form>
         <ChatBox />
       </div>
     </section>
