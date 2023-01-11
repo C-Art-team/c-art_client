@@ -7,9 +7,15 @@ import { handleLogin } from "../../actions/userAction";
 import { toast } from "react-toastify";
 import FacebookLoginButton from "../../components/SocialMediaButton/FacebookLoginButton";
 import GoogleLoginButton from "../../components/SocialMediaButton/GoogleLoginButton";
+import Modal from "../../components/Modal/Modal";
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [modal, setModal] = useState(false);
+  const [user, setUser] = useState({
+    id: "",
+    username: ""
+  });
 
   const [inputLogin, setInputLogin] = useState({
     email: "",
@@ -45,6 +51,7 @@ const LoginForm = () => {
 
   return (
     <>
+      {modal ? <Modal setModal={setModal} id={user.id} username={user.username} /> : ""}
       <section className="min-h-screen flex items-stretch text-white">
         <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
           <div className="absolute bg-black opacity-60 inset-0 z-0">
@@ -109,8 +116,8 @@ const LoginForm = () => {
             </div>
             <h1 className="my-6"></h1>
             <div className="py-6 space-x-2">
-              <FacebookLoginButton />
-              <GoogleLoginButton />
+              <FacebookLoginButton setModal={setModal} setUser={setUser} />
+              <GoogleLoginButton setModal={setModal} setUser={setUser} />
               <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">
                 in
               </span>

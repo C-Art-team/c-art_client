@@ -4,8 +4,17 @@ import { fetchAllCategory } from "../../actions/actionCategory";
 import { useNavigate } from "react-router-dom";
 import { editProfile } from "../../actions/userAction";
 import { toast } from "react-toastify";
+import { viewProfile } from "../../actions/userAction";
 
-export default function Modal({ setModal, id, username }) {
+export default function Modal({
+  setModal,
+  id,
+  username,
+  address,
+  phoneNumber,
+  preference,
+  type,
+}) {
   const [loading, setLoading] = useState(true);
   const categories = useSelector((state) => state.categoryReducer.categories);
   const dispatch = useDispatch();
@@ -31,7 +40,28 @@ export default function Modal({ setModal, id, username }) {
     dispatch(editProfile(modalInput, id))
       .then(() => {
         setModal(false);
-        navigate("/login");
+        if (type === "edit") {
+          dispatch(viewProfile());
+          toast.info("Successfully edited your profile");
+          localStorage.setItem("username", modalInput.username);
+          const uniqPreference = [...new Set(modalInput.preference)];
+          localStorage.setItem("preference", uniqPreference.join(", "));
+          navigate("/profile");
+        } else {
+          if (localStorage.access_token) {
+            if (!localStorage.preference) {
+              const uniqPreference = [...new Set(modalInput.preference)];
+              localStorage.setItem("preference", uniqPreference.join(", "));
+            }
+            toast.success(`Welcome, ${localStorage.username}`);
+            navigate("/");
+          } else {
+            toast.success(
+              `Congratulation, your account successfully registered :)`
+            );
+            navigate("/login");
+          }
+        }
       })
       .catch((err) => {
         err.message
@@ -59,6 +89,14 @@ export default function Modal({ setModal, id, username }) {
   useEffect(() => {
     dispatch(fetchAllCategory())
       .then(() => {
+        if (type === "edit") {
+          setModalInput({
+            ...modalInput,
+            address,
+            phoneNumber,
+            preference,
+          });
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -73,23 +111,23 @@ export default function Modal({ setModal, id, username }) {
 
   return (
     <div
-      class="fixed z-10"
+      className="fixed z-40"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
       id="login-modal"
     >
-      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-      <div class="fixed inset-0 z-10 overflow-y-auto">
-        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+      <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <div className="fixed inset-0 z-10 overflow-y-auto">
+        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <form onSubmit={submitModal}>
-              <div class="static bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div className="static bg-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="pb-2 pt-4">
                   <select
                     id="preference"
                     name="preference"
-                    className="block w-full p-4 text-lg rounded-xl bg-black"
+                    className="block w-full p-4 text-lg rounded-xl bg-gray text-white"
                     value={modalInput.preference}
                     onChange={handlePreference}
                     multiple
@@ -99,18 +137,33 @@ export default function Modal({ setModal, id, username }) {
                     </option>
                     {!loading
                       ? categories?.map((el) => {
-                        return (
-                          <option value={el.name} key={el.id}>
-                            {el.name}
-                          </option>
-                        );
-                      })
+                          return (
+                            <option value={el.name} key={el.id}>
+                              {el.name}
+                            </option>
+                          );
+                        })
                       : null}
                   </select>
                 </div>
+                {type === "edit" ? (
+                  <div className="pb-2 pt-4">
+                    <input
+                      className="block w-full p-4 text-lg rounded-xl bg-gray text-white"
+                      type="text"
+                      name="username"
+                      id="username"
+                      placeholder="Username"
+                      value={modalInput.username}
+                      onChange={handleModalInput}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
                 <div className="pb-2 pt-4">
                   <input
-                    className="block w-full p-4 text-lg rounded-xl bg-black"
+                    className="block w-full p-4 text-lg rounded-xl bg-gray text-white"
                     type="text"
                     name="address"
                     id="address"
@@ -121,7 +174,7 @@ export default function Modal({ setModal, id, username }) {
                 </div>
                 <div className="pb-2 pt-4">
                   <input
-                    className="block w-full p-4 text-lg rounded-xl bg-black"
+                    className="block w-full p-4 text-lg rounded-xl bg-gray text-white"
                     type="text"
                     name="phoneNumber"
                     id="phoneNumber"
@@ -131,10 +184,10 @@ export default function Modal({ setModal, id, username }) {
                   />
                 </div>
               </div>
-              <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+              <div className="bg-black px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
                   type="submit"
-                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Submit
                 </button>
