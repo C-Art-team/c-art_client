@@ -134,10 +134,12 @@ export default function DetailPage() {
         )}
       </div>
       <div className="flex flex-col w-1/2 container-preview-2 p-4 items-center bg-black bg-opacity-50 rounded-xl">
-        <span className="text-4xl text-center">{detailArt.name}</span>
-        <span className="text-lg text-center">
-          created by : {detailArt.authorName}
-        </span>
+        <div className="flex flex-col bg-green-600 w-full rounded-lg bg-opacity-75">
+          <span className="text-4xl text-center">{detailArt.name}</span>
+          <span className="text-lg text-center">
+            created by : {detailArt.authorName}
+          </span>
+        </div>
         <div className="flex flex-col justify-end items-center py-10">
           <div className="w-2/3">
             <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
