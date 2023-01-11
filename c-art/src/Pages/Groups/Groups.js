@@ -19,6 +19,7 @@ export default function Groups() {
   // }, [previousTag]);
 
   return (
+
     <div className="flex flex-col gap-2 px-10 ">
       {preference.map((el, i) => {
         return (

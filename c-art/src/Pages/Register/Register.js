@@ -8,6 +8,7 @@ import logo from "./C-art-logo.png";
 import Modal from "../../components/Modal/Modal";
 import FacebookLoginButton from "../../components/SocialMediaButton/FacebookLoginButton";
 import GoogleLoginButton from "../../components/SocialMediaButton/GoogleLoginButton";
+import siziBackgrounf from "../Login/sisu_bg.png"
 function Register() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -72,11 +73,11 @@ function Register() {
     <>
       {modal ? <Modal setModal={setModal} id={id} username={username} /> : ""}
       <section className="min-h-screen flex items-stretch text-white">
-        <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
+        <div className="lg:flex w-1/2 hidden bg-no-repeat bg-cover relative items-center">
           <div className="absolute bg-black opacity-60 inset-0 z-0">
             <img
               className="h-screen w-full"
-              src="https://m.media-amazon.com/images/M/MV5BODcwNWE3OTMtMDc3MS00NDFjLWE1OTAtNDU3NjgxODMxY2UyXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg"
+              src={siziBackgrounf}
             />
           </div>
           <div className="w-full px-24 z-10">
@@ -123,7 +124,8 @@ function Register() {
             </span>
           </div>
         </div>
-        <div className="lg:w-1/2 w-full flex flex-col items-center justify-center text-center md:px-16 px-0 z-0 bg-gray-800">
+        <div className="lg:w-1/2 w-full flex flex-col items-center justify-center text-center md:px-16 px-0 z-0 "
+          style={{ backgroundColor: "#121218" }}>
           <div className="flex justify-center">
             <img src={logo} height={100} width={100} />
             <h1 className=" text-8xl">-</h1>
