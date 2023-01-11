@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { handleGoogleLogin } from "../../actions/userAction";
 import { Login } from "@etouraille/react-google-login";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import Modal from "../../components/Modal/Modal";
 import "./style.css";
 
@@ -17,7 +18,7 @@ export default function GoogleLoginButton() {
   });
   // const google = window.google;
   const client_id =
-    "37319788046-ulj21qf9h47kru6g358mntt85h61jl95.apps.googleusercontent.com";
+    "270560411673-97uoopptn8nrfs7tft501r24a53fhlfh.apps.googleusercontent.com";
 
   function handleCredentialResponse(response) {
     dispatch(handleGoogleLogin(response.credential))
@@ -33,14 +34,18 @@ export default function GoogleLoginButton() {
           });
           setModal(true);
         } else {
+          toast.success(`Welcome, ${data.username}`);
           navigate("/");
         }
       })
       .catch((error) => {
-        console.log(error);
+        error.message
+          ? toast.warn(`${error?.message}`)
+          : toast.error("Internal Server Error");
       });
   }
   function handleResponseError(response) {
+    toast.error("Internal Server Error");
     console.log(response);
   }
 

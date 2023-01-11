@@ -85,8 +85,7 @@ export const payOrder = (id) => {
                 window.snap.pay(data.token, {
                     onSuccess: function (result) {
                         /* You may add your own implementation here */
-                        dispatch(update(id))
-                        dispatch(fetchAllOrders())
+                        dispatch(update(id)).then(() => dispatch(fetchAllOrders()))
                     }
                 })
 
