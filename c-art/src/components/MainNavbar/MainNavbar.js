@@ -1,6 +1,6 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate,useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./style.css";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { themeAction } from "../../actions/actionTheme";
@@ -18,7 +18,7 @@ export default function MainNavbar() {
 
   const handleSearchChange = (e) => {
     console.log(e.target.value);
-    setSearch({name : e.target.value});
+    setSearch({ name: e.target.value });
   };
 
   const toProfile = () => {
@@ -51,8 +51,8 @@ export default function MainNavbar() {
   }
 
   useEffect(() => {
-    dispatch(fetchAllArt("",search.get('name')))
-  },[search])
+    dispatch(fetchAllArt("", search.get('name')))
+  }, [search])
 
   return (
     <div

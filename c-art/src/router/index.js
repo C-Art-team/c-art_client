@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/groups",
-        element: <Groups />,
+        element: <LayoutChat />,
         loader: () => {
           if (!localStorage.access_token) {
             return redirect("/login");

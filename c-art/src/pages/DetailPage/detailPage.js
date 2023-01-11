@@ -143,13 +143,13 @@ export default function DetailPage() {
 
         <form onSubmit={createOrder}>
           <button
-          className="bg-green-400 text-black rounded-2xl w-20 h-7"
+            className="bg-green-400 text-black rounded-2xl w-20 h-7"
             onClick={() => {
               setArtId(detailArt.id);
             }}
             type="submit"
           >
-            Order
+            Order now
           </button>
         </form>
         <ChatBox />
