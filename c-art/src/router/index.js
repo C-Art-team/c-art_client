@@ -10,6 +10,7 @@ import Groups from "../Pages/Groups/Groups";
 import DetailPage from "../Pages/DetailPage/detailPage";
 import ProfilePage from "../Pages/ProfilePage/profilePage";
 import OrderPage from "../Pages/OrderPage/Order";
+import LayoutChat from "../Pages/LayoutChat/LayoutChat";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/groups",
-        element: <Groups />,
+        element: <LayoutChat />,
         loader: () => {
           if (!localStorage.access_token) {
             return redirect("/login");
