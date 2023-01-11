@@ -116,14 +116,14 @@ export const newArt = (input) => {
 };
 
 export const fetchArtByAuthorID = (forAuthen) => {
-  console.log('dari fetch by authoe')
   return async (dispatch) => {
     try {
+      console.log(forAuthen,'dari fetch by authoe')
       const { data } = await axios({
         url: baseUrl + '/myarts',
-        headers: forAuthen
+        headers: {access_token : forAuthen}
       })
-      // console.log(data)
+      console.log(data)
       dispatch(getArtById(data))
     } catch (error) {
       // console.log(error)

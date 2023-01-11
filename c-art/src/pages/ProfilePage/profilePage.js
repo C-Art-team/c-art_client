@@ -7,24 +7,31 @@ import { toast } from "react-toastify";
 import "./style.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { fetchArtByAuthorID } from "../../actions/artAction";
-import Modal from "../../components/Modal/Modal";
+import { fetchAllOrders } from "../../actions/orderAction";
+import HistoryTableRow from "../../components/Tables/TableHistory/HistoryTableRow";
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
-  const [modal, setModal] = useState(false);
   const profile = useSelector((state) => state.userReducer.oneUser);
+  const orders = useSelector((state) => state.orderReducer.orders);
+  const lastThreeOrders = orders.slice(0, 3);
   const dispatch = useDispatch();
-
-  const [editProfile, setEditProfile] = useState({
-    username: "",
-    address: "",
-    phone: "",
-  });
 
   const myArt = useSelector((state) => {
     // console.log(state)
     return state.artReducer.myArt;
   });
+
+  useEffect(() => {
+    dispatch(fetchArtByAuthorID(localStorage.access_token))
+      .then((data) => {
+        console.log(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     dispatch(viewProfile())
@@ -37,6 +44,16 @@ export default function ProfilePage() {
           ? toast.error(`${err?.message}`)
           : toast.error("Internal Server Error");
       });
+
+    dispatch(fetchAllOrders())
+      .then((data) => {
+        setLoading(false);
+      })
+      .catch((err) =>
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error")
+      );
   }, []);
 
   const changeToInput = (e) => {};
@@ -70,22 +87,6 @@ export default function ProfilePage() {
                   alt="Bordered avatar"
                 />
                 <div className="flex flex-col justify-end">
-                  <button onClick={() => setModal(true)}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-6 h-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                      />
-                    </svg>
-                  </button>
                   <h1
                     className="text2xl"
                     name="username"
@@ -114,37 +115,27 @@ export default function ProfilePage() {
                 style={{ backgroundColor: "#191B1F" }}
               >
                 <div className="py-2 px-3 flex justify-between">
-                  <h1>asdasd</h1>
-                  <h1>asdasd</h1>
+                  <h1>Order Date</h1>
+                  <h1>Art Name</h1>
+                  <h1>Category</h1>
                 </div>
               </div>
-              <div
-                className=" rounded-full w-80 shadow-lg"
-                style={{ backgroundColor: "#191B1F" }}
-              >
-                <div className="py-2 px-3 flex justify-between">
-                  <h1>asdasd</h1>
-                  <h1>asdasd</h1>
+              {!loading && orders.length > 0 ? (
+                lastThreeOrders.map((el) => {
+                  return <HistoryTableRow histories={el} />;
+                })
+              ) : (
+                <div
+                  className=" rounded-full w-80 shadow-lg"
+                  style={{ backgroundColor: "#191B1F" }}
+                >
+                  <div className="py-2 px-3 flex justify-between">
+                    <h1>-</h1>
+                    <h1>-</h1>
+                    <h1>-</h1>
+                  </div>
                 </div>
-              </div>
-              <div
-                className=" rounded-full w-80 shadow-lg"
-                style={{ backgroundColor: "#191B1F" }}
-              >
-                <div className="py-2 px-3 flex justify-between">
-                  <h1>asdasd</h1>
-                  <h1>asdasd</h1>
-                </div>
-              </div>
-              <div
-                className=" rounded-full w-80 shadow-lg"
-                style={{ backgroundColor: "#191B1F" }}
-              >
-                <div className="py-2 px-3 flex justify-between">
-                  <h1>asdasd</h1>
-                  <h1>asdasd</h1>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -160,16 +151,20 @@ export default function ProfilePage() {
             </Link>
           </div>
           <div className="grid grid-cols-4 gap-1 rounded-lg bg-base-300 bg-opacity-50 shadow-xl">
-            {myArt.map((el, index) => {
-              return (
-                <Card
-                  art={el}
-                  key={index + 1}
-                  loading={loading}
-                  page="profile"
-                />
-              );
-            })}
+            {!loading && myArt.length ? (
+              myArt.map((el, index) => {
+                return (
+                  <Card
+                    art={el}
+                    key={index + 1}
+                    loading={loading}
+                    page="profile"
+                  />
+                );
+              })
+            ) : (
+              <h1 className="text-2xl">You dont have any uploaded art yet</h1>
+            )}
           </div>
         </div>
       </div>

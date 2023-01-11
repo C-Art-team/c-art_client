@@ -1,30 +1,10 @@
-import React, { useEffect, useState } from "react";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAllCategory } from "../../actions/actionCategory";
 
 export default function Groups() {
   const preference = localStorage.preference.split(", ");
-  console.log(preference, "8797979797987987");
   const { tag } = useParams();
   console.log(tag);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  // const categories = useSelector((state) => state.categoryReducer.categories)
-  // const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   dispatch(fetchAllCategory())
-  //   .then(() =>{
-  //     setLoading(false)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error)
-  //   })
-  //   .finally(() => {
-  //     setLoading(false)
-  //   })
-  // },[])
   return (
     <div className="flex flex-wrap gap-4 px-8">
       {!tag ? (
@@ -44,7 +24,7 @@ export default function Groups() {
                   />
                 </figure>
                 <div className="px-6 pt-4">
-                  <div className="flex gap-4">
+                  <div className="flex justify-between">
                     <div className="">
                       <h1 className="text-xs">CHATS</h1>
                       <h1 className="">120</h1>
