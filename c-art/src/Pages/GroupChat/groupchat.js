@@ -30,7 +30,7 @@ export default function ForumChat() {
 
   useEffect(() => {
     socket.emit("join room", tag);
-  }, []);
+  }, [tag]);
 
   useEffect(() => {
     socket.on("group chat sucess", (messages) => {
