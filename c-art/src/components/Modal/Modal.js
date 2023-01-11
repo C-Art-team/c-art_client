@@ -73,7 +73,7 @@ export default function Modal({ setModal, id, username }) {
 
   return (
     <div
-      class="relative z-10"
+      class="fixed z-10"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -84,7 +84,7 @@ export default function Modal({ setModal, id, username }) {
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <form onSubmit={submitModal}>
-              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="static bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="pb-2 pt-4">
                   <select
                     id="preference"
@@ -99,12 +99,12 @@ export default function Modal({ setModal, id, username }) {
                     </option>
                     {!loading
                       ? categories?.map((el) => {
-                          return (
-                            <option value={el.name} key={el.id}>
-                              {el.name}
-                            </option>
-                          );
-                        })
+                        return (
+                          <option value={el.name} key={el.id}>
+                            {el.name}
+                          </option>
+                        );
+                      })
                       : null}
                   </select>
                 </div>

@@ -5,15 +5,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 import { fetchAllArt } from "../../actions/artAction";
 import { toast } from "react-toastify";
+import { AnimatePresence, motion } from "framer-motion";
+
 
 function Dashboard() {
   const [loading, setLoading] = useState(true);
   const categories = useSelector((state) => state.categoryReducer.categories);
   const arts = useSelector((state) => state.artReducer.arts);
+  // console.log(arts)
   const dispatch = useDispatch();
 
   const filterArt = (e) => {
-    // setLoading(true);
     dispatch(fetchAllArt(e.target.value))
       .then((data) => {
         console.log(data);
@@ -66,44 +68,60 @@ function Dashboard() {
 
   return (
     <div className="px-8">
-      <div className="flex justify-center">
+      <motion.div className="flex justify-center"
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 100, opacity: 0 }}
+        transition={{ type: "spring" }}>
         <Carousel />
-      </div>
+      </motion.div>
       <div className="flex py-5 justify-between items-center">
-        <h1>ARTWORKS</h1>
-        <div className="flex gap-3">
+        <motion.h1
+          initial={{ opacity: 0, }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >ARTWORKS</motion.h1>
+        <motion.div className="flex gap-3"
+          initial={{ opacity: 0, }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}>
           {!loading
             ? categories.map((el) => {
-                return (
-                  <div key={el.id}>
-                    <button
-                      onClick={filterArt}
-                      className="badge badge-accent px-5 py-5 text-black font-semibold"
-                      style={{
-                        backgroundColor: "#85CF81",
-                        borderColor: "#85CF81",
-                      }}
-                      value={el.id}
-                    >
-                      {el.name}
-                    </button>
-                  </div>
-                );
-              })
-            : null}
-        </div>
+              return (
+                <div key={el.id}>
+                  <button
+                    onClick={filterArt}
+                    className="badge badge-accent px-5 py-5 text-black font-semibold"
+                    style={{
+                      backgroundColor: "#85CF81",
+                      borderColor: "#85CF81",
+                    }}
+                    value={el.id}
+                  >
+                    {el.name}
+                  </button>
+                </div>
+              );
+            })
+            : <progress className="progress w-56">Loading</progress>}
+        </motion.div>
       </div>
-      <div className="grid grid-cols-4 gap-1">
+      <div className="grid grid-cols-4">
         {arts.map((el) => {
-          const { id, name, Previews } = el;
+          const { id, name, Previews, price, CategoryId } = el;
           return (
-            <Card
-              key={id}
-              id={id}
-              name={name}
-              Previews={Previews}
-              loading={loading}
-            />
+            <AnimatePresence>
+              <Card
+                key={id}
+                id={id}
+                name={name}
+                price={price}
+                Previews={Previews}
+                loading={loading}
+                CategoryId={CategoryId}
+                page="dashboard"
+              />
+            </AnimatePresence>
           );
         })}
       </div>

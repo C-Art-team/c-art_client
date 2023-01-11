@@ -6,17 +6,24 @@ import { viewProfile } from "../../actions/userAction";
 import { toast } from "react-toastify";
 import "./style.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { fetchArtByAuthorID } from "../../actions/artAction"
+
 
 export default function ProfilePage() {
-  const [loading, setLoading] = useState(true);
-  const profile = useSelector((state) => state.userReducer.oneUser);
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true)
+  const profile = useSelector((state) => state.userReducer.oneUser)
+  const dispatch = useDispatch()
 
   const [editProfile, setEditProfile] = useState({
     username: "",
     address: "",
-    phone: "",
-  });
+    phone: ""
+  })
+
+  const myArt = useSelector((state) => {
+    // console.log(state)
+    return state.artReducer.myArt
+  })
 
   useEffect(() => {
     dispatch(viewProfile())
@@ -121,8 +128,12 @@ export default function ProfilePage() {
             + New product
           </Link>
         </div>
-        <div className="border-2 border-gray-500 rounded-lg bg-white-100 shadow-xl">
-          <Card />
+        <div className="grid grid-cols-4 gap-1 rounded-lg bg-base-300 bg-opacity-50 shadow-xl">
+          {myArt.map((el, index) => {
+            return (
+              <Card art={el} key={index + 1} loading={loading} page="profile" />
+            )
+          })}
         </div>
       </div>
     </div>

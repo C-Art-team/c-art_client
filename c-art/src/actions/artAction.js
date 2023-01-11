@@ -1,4 +1,4 @@
-import { ART_ADD,GET_ALL_ART, GET_ONE_ART } from "./type_action";
+import { ART_ADD, GET_ALL_ART, GET_ART_BY_AUTHOR_ID, GET_ONE_ART } from "./type_action";
 import FormData from "form-data";
 import axios from "axios";
 const baseUrl = "http://localhost:4000/arts";
@@ -12,22 +12,31 @@ export const addNewArt = (payload) => {
 
 export const getAllArt = (payload) => {
   return {
-    type : GET_ALL_ART,
+    type: GET_ALL_ART,
     payload
   }
 }
 
 export const getOneArt = (payload) => {
   return {
-    type : GET_ONE_ART,
+    type: GET_ONE_ART,
     payload
   }
-} 
+}
+
+const getArtById = (payload) => {
+  // console.log(payload)
+  return {
+    type: GET_ART_BY_AUTHOR_ID,
+    payload
+  }
+}
 
 export const fetchOneArt = (id) => {
+  console.log(id)
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(baseUrl + `/${id}`)
+      const { data } = await axios.get(baseUrl + `/${id}`)
       console.log(data)
       dispatch(getOneArt(data))
       return data
@@ -38,11 +47,11 @@ export const fetchOneArt = (id) => {
   }
 }
 
-export const fetchAllArt = (filter,search) => {
+export const fetchAllArt = (filter, search) => {
   return async (dispatch) => {
     try {
-      const {data} =  await axios.get(baseUrl,{
-        params : {filter,search}
+      const { data } = await axios.get(baseUrl, {
+        params: { filter, search }
       })
       console.log(data)
       dispatch(getAllArt(data))
@@ -52,7 +61,7 @@ export const fetchAllArt = (filter,search) => {
       throw error
     }
   }
-} 
+}
 
 export const newArt = (input) => {
   return async (dispatch) => {
@@ -62,7 +71,9 @@ export const newArt = (input) => {
       console.log(input)
       console.log(input.files);
 
-      if (input.files.length > 1){
+
+
+      if (input.files.length > 1) {
         filesToUpload = input.files.map((el) => {
           return el
         });
@@ -72,26 +83,30 @@ export const newArt = (input) => {
         });
       }
 
+      if (filesToUpload.length <= 1) {
+        throw new Error("Please input at least 1 preview")
+      }
+
       console.log(filesToUpload)
 
       filesToUpload.forEach((el) => {
-        console.log(el,"dari append files")
-        form.append("uploadedFile", el,el.name);
+        console.log(el, "dari append files")
+        form.append("uploadedFile", el, el.name);
       });
       form.append("name", input.name);
       form.append("price", input.price);
       form.append("CategoryId", input.CategoryId);
       form.append("description", input.description);
 
-      console.log(form.getAll("uploadedFile"), "form data)())(");
-      console.log(input, "dari thunk add new art");
+      // console.log(form.getAll("uploadedFile"), "form data)())(");
+      // console.log(input, "dari thunk add new art");
       const { data } = await axios.post(baseUrl, form, {
         headers: {
           access_token: localStorage.access_token,
         },
       });
 
-      console.log(data);
+      // console.log(data);
       dispatch(addNewArt(data));
       return data;
     } catch (error) {
@@ -99,3 +114,20 @@ export const newArt = (input) => {
     }
   };
 };
+
+export const fetchArtByAuthorID = (forAuthen) => {
+  console.log('dari fetch by authoe')
+  return async (dispatch) => {
+    try {
+      const { data } = await axios({
+        url: baseUrl + '/myarts',
+        headers: forAuthen
+      })
+      // console.log(data)
+      dispatch(getArtById(data))
+    } catch (error) {
+      // console.log(error)
+      throw error
+    }
+  }
+}

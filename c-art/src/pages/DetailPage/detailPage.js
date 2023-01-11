@@ -11,6 +11,8 @@ import { addOneOrder } from "../../actions/orderAction";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import music from "../../components/ImageCategory/icon/music.png"
+import sundEffect from "../../components/ImageCategory/icon/volume.png"
 
 export default function DetailPage() {
   const navigate = useNavigate();
@@ -82,6 +84,12 @@ export default function DetailPage() {
       });
   }, []);
 
+  function formatRupiah(money) {
+    return new Intl.NumberFormat('id-ID',
+      { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 } // diletakkan dalam object
+    ).format(money);
+  }
+
   return (
     <section className="container flex items-stretch">
       <div className="w-1/2 container-preview flex flex-col p-4 justfy-center items-center gap-y-5">
@@ -90,10 +98,12 @@ export default function DetailPage() {
             switch (detailArt.Category.name) {
               case "Image Asset":
               case "Visual Effect":
-              case "Video footage":
+              case "Video Footage":
               case "Script":
                 return (
                   <img
+                    id="preview"
+                    draggable="false"
                     className="artboard h-1/3 w-2/3 rounded-lg my-1"
                     src={el.sourceUrl}
                     key={i}
@@ -103,6 +113,8 @@ export default function DetailPage() {
               case "3D Model":
                 return (
                   <img
+                    id="preview"
+                    draggable="false"
                     onClick={() => toPreview(detailArt.id)}
                     className="artboard h-1/3 w-2/3 rounded-lg my-1"
                     src={el.sourceUrl}
@@ -112,7 +124,17 @@ export default function DetailPage() {
                 );
               case "Sound Effect":
               case "Music":
-                return <audio src={el.sourceUrl} key={i} controls />;
+                return (
+                  <>
+                    <div className=" w-1/3 h-1/3">
+                      <img
+                        draggable="false"
+                        src={music} />
+                    </div>
+                    <audio src={el.sourceUrl} key={i} controls />
+
+                  </>
+                );
               default:
                 break;
             }
@@ -121,7 +143,7 @@ export default function DetailPage() {
           <LoadingSpinner />
         )}
       </div>
-      <div className="flex flex-col w-1/2 container-preview p-4 items-center">
+      <div className="flex flex-col w-1/2 container-preview p-4 items-center bg-black bg-opacity-50 rounded-xl">
         <span className="text-4xl text-center">{detailArt.name}</span>
         <span className="text-lg text-center">
           created by : {detailArt.authorName}
@@ -150,7 +172,6 @@ export default function DetailPage() {
             Order
           </button>
         </form>
-
         <ChatBox />
       </div>
     </section>

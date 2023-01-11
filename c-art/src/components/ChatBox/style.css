@@ -11,7 +11,7 @@ body {
 }
 
 #form {
-  background: #a3e635;
+  background: #3D5656;
   padding: 0.25rem;
   /* position: fixed; */
   bottom: 4rem;
@@ -46,7 +46,7 @@ body {
 }
 
 #messages {
-  height: 10rem !important;
+  height: 19rem !important;
   overflow-y: auto;
   position: relative;
   list-style-type: none;

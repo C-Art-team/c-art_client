@@ -31,7 +31,7 @@ export default function ChatBox() {
       setMessages([...messages]);
     });
     const containerScroll = document.getElementById("messages")
-      containerScroll.scrollTo('auto', containerScroll.scrollHeight);
+    containerScroll.scrollTo('auto', containerScroll.scrollHeight);
     // window.scrollTo(0, document.getElementById("messages").scrollHeight);
   }, []);
 
@@ -45,45 +45,57 @@ export default function ChatBox() {
     });
   }, []);
 
+
+
   return (
-    <section className="chat-box container w-full h-1/8 bg-grey-400 py-6 px-2">
-      <ul id="messages">
-        {messages.map((el, i) => {
-          return (
-            <div className={"chat chat-start"} key={i}>
-              <div className="chat-image avatar">
-                <div className="w-10 rounded-full">
-                  <img src="https://placeimg.com/192/192/people" />
-                </div>
-              </div>
-              <div className="chat-bubble bg-white-500 text-md font-bold">
-                {el.text}
-              </div>
-            </div>
-          );
-        })}
-      </ul>
-      <form
-        className="w-full"
-        id="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          sendChat();
-        }}
-      >
-        <input
-          id="input"
-          autoComplete="off"
-          value={chat}
-          onChange={handleChatInput}
-        />
-        <button
-          type="submit"
-          className="bg-gradient-to-r from-lime-400 to-green-500"
-        >
-          Post
-        </button>
-      </form>
-    </section>
+    <div className=" py-11 w-full">
+      <section className="chat-box bg-black bg-opacity-80 rounded-xl px-2">
+        <h1 className=" text-center text-4xl font-mono">Comment</h1>
+        <div>
+          <div className=" py-10">
+            <ul id="messages" className=" bg-gray-600 bg-opacity-20 rounded-2xl h-full">
+              {messages.map((el, i) => {
+                return (
+                  <div className={"chat chat-start"} key={i} >
+                    <div className="chat-image avatar">
+                      <div className="w-10 rounded-full">
+                        <img src="https://placeimg.com/192/192/people" />
+                      </div>
+                    </div>
+                    <div className="chat-bubble bg-white-500 text-md font-bold">
+                      {el.text}
+                    </div>
+                  </div>
+                );
+              })}
+            </ul>
+          </div>
+          <div>
+            <form
+              className="w-full"
+              id="form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                sendChat();
+              }}
+            >
+              <input
+                id="input"
+                autoComplete="off"
+                value={chat}
+                onChange={handleChatInput}
+              />
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-green-100 to-green-500"
+              >
+                Post
+              </button>
+            </form>
+
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
