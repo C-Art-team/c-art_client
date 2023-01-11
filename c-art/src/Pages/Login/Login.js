@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { handleLogin } from "../../actions/userAction";
+import { toast } from "react-toastify";
 import FacebookLoginButton from "../../components/SocialMediaButton/FacebookLoginButton";
 import GoogleLoginButton from "../../components/SocialMediaButton/GoogleLoginButton";
 const LoginForm = () => {
@@ -24,10 +25,11 @@ const LoginForm = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log(inputLogin);
+    // console.log(inputLogin);
     e.preventDefault();
     dispatch(handleLogin(inputLogin))
       .then((data) => {
+        toast.success(`Welcome, ${data.username}`);
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("email", data.email);
         localStorage.setItem("username", data.username);
@@ -35,7 +37,9 @@ const LoginForm = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        error.message
+          ? toast.warn(`${error?.message}`)
+          : toast.error("Internal Server Error");
       });
   };
 
@@ -53,7 +57,7 @@ const LoginForm = () => {
             <h1 className="text-5xl font-bold text-left tracking-wide">
               Keep it special
             </h1>
-            <p className="text-3xl my-4">
+            <p className="text-3xl my-4 w-1/3 ">
               Capture your personal memory in unique way, anywhere.
             </p>
           </div>

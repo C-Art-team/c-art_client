@@ -6,6 +6,7 @@ import Orbit from "../../components/3DModel/Orbit";
 import { Suspense, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchOneArt } from "../../actions/artAction";
+import { toast } from "react-toastify";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 export default function ThreeDViewer() {
@@ -15,15 +16,15 @@ export default function ThreeDViewer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
-
     dispatch(fetchOneArt(id))
       .then((data) => {
         setLoading(false);
         console.log(data);
       })
       .catch((err) => {
-        console.log(err);
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error");
       })
       .finally(() => {
         setLoading(false);
@@ -37,10 +38,7 @@ export default function ThreeDViewer() {
           camera={{ position: [3, 3, 3] }}
         >
           <Suspense>
-            <Model
-              position={[0, 0, 0]}
-                asset={oneArt.source}
-            />
+            <Model position={[0, 0, 0]} asset={oneArt.source} />
           </Suspense>
 
           <ambientLight intensity={0.5} />

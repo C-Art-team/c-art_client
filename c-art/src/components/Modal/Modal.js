@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 import { useNavigate } from "react-router-dom";
 import { editProfile } from "../../actions/userAction";
+import { toast } from "react-toastify";
 
-export default function Modal({ setModal, id ,username}) {
+export default function Modal({ setModal, id, username }) {
   const [loading, setLoading] = useState(true);
   const categories = useSelector((state) => state.categoryReducer.categories);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [modalInput, setModalInput] = useState({
     username,
     address: "",
@@ -30,10 +31,12 @@ export default function Modal({ setModal, id ,username}) {
     dispatch(editProfile(modalInput, id))
       .then(() => {
         setModal(false);
-        navigate("/login")
+        navigate("/login");
       })
       .catch((err) => {
-        console.log(err);
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error");
       })
       .finally(() => {
         setModal(false);
@@ -59,7 +62,9 @@ export default function Modal({ setModal, id ,username}) {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        error.message
+          ? toast.error(`${error?.message}`)
+          : toast.error("Internal Server Error");
       })
       .finally(() => {
         setLoading(false);
@@ -68,7 +73,7 @@ export default function Modal({ setModal, id ,username}) {
 
   return (
     <div
-      class="relative z-10"
+      class="fixed z-20"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -79,7 +84,7 @@ export default function Modal({ setModal, id ,username}) {
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <form onSubmit={submitModal}>
-              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="static bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="pb-2 pt-4">
                   <select
                     id="preference"
@@ -94,12 +99,12 @@ export default function Modal({ setModal, id ,username}) {
                     </option>
                     {!loading
                       ? categories?.map((el) => {
-                          return (
-                            <option value={el.name} key={el.id}>
-                              {el.name}
-                            </option>
-                          );
-                        })
+                        return (
+                          <option value={el.name} key={el.id}>
+                            {el.name}
+                          </option>
+                        );
+                      })
                       : null}
                   </select>
                 </div>

@@ -3,50 +3,42 @@ import { Link } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { viewProfile } from "../../actions/userAction";
+import { toast } from "react-toastify";
 import "./style.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { fetchArtByAuthorID } from "../../actions/artAction";
+import { fetchArtByAuthorID } from "../../actions/artAction"
+
 
 export default function ProfilePage() {
-  const [loading, setLoading] = useState(true);
-  const profile = useSelector((state) => state.userReducer.oneUser);
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true)
+  const profile = useSelector((state) => state.userReducer.oneUser)
+  const dispatch = useDispatch()
 
   const [editProfile, setEditProfile] = useState({
     username: "",
     address: "",
-    phone: "",
-  });
+    phone: ""
+  })
 
   const myArt = useSelector((state) => {
     // console.log(state)
-    return state.artReducer.myArt;
-  });
+    return state.artReducer.myArt
+  })
 
   useEffect(() => {
     dispatch(viewProfile())
-      .then(() => {
-        dispatch(
-          fetchArtByAuthorID({
-            ...profile,
-            access_token: localStorage.getItem("access_token"),
-          })
-        ).then(() => {
-          setLoading(false);
-        });
+      .then((data) => {
+        console.log(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        err.message
+          ? toast.error(`${err?.message}`)
+          : toast.error("Internal Server Error");
       });
   }, []);
 
-  useEffect(() => {}, []);
-
-  // console.log(profile)
-  // const changeToInput = (e) => {
-
-  // }
+  const changeToInput = (e) => {};
 
   return (
     <div
@@ -136,24 +128,13 @@ export default function ProfilePage() {
             + New product
           </Link>
         </div>
-        {myArt.length ? (
-          <div className="grid grid-cols-4 gap-1 border-2 border-gray-500 rounded-lg bg-white-100 shadow-xl">
-            {myArt.map((el, index) => {
-              return (
-                <Card
-                  art={el}
-                  key={index + 1}
-                  loading={loading}
-                  page="profile"
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <h1 className="text-3xl text-white w-full">
-            You haven't uploaded any art yet.
-          </h1>
-        )}
+        <div className="grid grid-cols-4 gap-1 rounded-lg bg-base-300 bg-opacity-50 shadow-xl">
+          {myArt.map((el, index) => {
+            return (
+              <Card art={el} key={index + 1} loading={loading} page="profile" />
+            )
+          })}
+        </div>
       </div>
     </div>
   );
