@@ -6,6 +6,7 @@ import { FaLuggageCart } from "react-icons/fa";
 import { MdGroups } from "react-icons/md";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Sidebar() {
   const theme = useSelector((state) => {
@@ -15,6 +16,7 @@ export default function Sidebar() {
 
   const handleLogout = () => {
     localStorage.clear();
+    toast.info(`Logout success`);
     navigate("/");
   };
   return (

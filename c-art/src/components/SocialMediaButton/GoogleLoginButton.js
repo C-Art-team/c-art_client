@@ -3,19 +3,12 @@ import { useDispatch } from "react-redux";
 // import { useEffect } from "react";
 import { handleGoogleLogin } from "../../actions/userAction";
 import { Login } from "@etouraille/react-google-login";
-import { useState } from "react";
 import { toast } from "react-toastify";
-import Modal from "../../components/Modal/Modal";
 import "./style.css";
 
-export default function GoogleLoginButton() {
+export default function GoogleLoginButton({ setModal, setUser }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [modal, setModal] = useState(false);
-  const [user, setUser] = useState({
-    id: "",
-    username: "",
-  });
   // const google = window.google;
   const client_id =
     "270560411673-97uoopptn8nrfs7tft501r24a53fhlfh.apps.googleusercontent.com";
@@ -26,14 +19,16 @@ export default function GoogleLoginButton() {
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("email", data.email);
         localStorage.setItem("username", data.username);
-        localStorage.setItem("preference", data.preference);
         if (!data.preference) {
-          setUser({
-            id: data.id,
-            username: data.username,
-          });
+          if (setUser) {
+            setUser({
+              id: data.id,
+              username: data.username,
+            });
+          }
           setModal(true);
         } else {
+          localStorage.setItem("preference", data.preference);
           toast.success(`Welcome, ${data.username}`);
           navigate("/");
         }
@@ -80,11 +75,6 @@ export default function GoogleLoginButton() {
         onSuccess={handleCredentialResponse}
         onFailure={handleResponseError}
       ></Login>
-      {modal ? (
-        <Modal setModal={setModal} id={user.id} username={user.username} />
-      ) : (
-        ""
-      )}
     </>
   );
 }
