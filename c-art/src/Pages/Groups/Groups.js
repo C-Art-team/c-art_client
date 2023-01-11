@@ -3,7 +3,7 @@ import { useNavigate, Outlet, useParams } from "react-router-dom";
 export default function Groups() {
   const preference = localStorage.preference.split(", ");
   const { tag } = useParams();
-  console.log(tag);
+  console.log(tag)
   const navigate = useNavigate();
   return (
 

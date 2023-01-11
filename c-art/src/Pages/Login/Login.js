@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import FacebookLoginButton from "../../components/SocialMediaButton/FacebookLoginButton";
 import GoogleLoginButton from "../../components/SocialMediaButton/GoogleLoginButton";
 import Modal from "../../components/Modal/Modal";
+import sizuBackground from "./sisu_bg.png"
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -53,11 +54,11 @@ const LoginForm = () => {
     <>
       {modal ? <Modal setModal={setModal} id={user.id} username={user.username} /> : ""}
       <section className="min-h-screen flex items-stretch text-white">
-        <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
-          <div className="absolute bg-black opacity-60 inset-0 z-0">
+        <div className="lg:flex w-1/2 hidden bg-black bg-no-repeat bg-cover relative items-center">
+          <div className="absolute bg-black opacity-50 inset-0 z-0">
             <img
               className="h-screen w-full"
-              src="https://m.media-amazon.com/images/M/MV5BODcwNWE3OTMtMDc3MS00NDFjLWE1OTAtNDU3NjgxODMxY2UyXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg"
+              src={sizuBackground}
             />
           </div>
           <div className="w-full px-24 z-10">
@@ -104,8 +105,9 @@ const LoginForm = () => {
             </span>
           </div>
         </div>
-        <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0 bg-gray-800">
-          <div className="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center">
+        <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0 "
+          style={{ backgroundColor: "#121218" }}>
+          <div className="absolute lg:hidden z-10 inset-0 bg-no-repeat bg-cover items-center">
             <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
           </div>
           <div className="w-full py-6 z-20">
@@ -134,14 +136,14 @@ const LoginForm = () => {
                   name="email"
                   id="email"
                   placeholder="Email"
-                  className="block w-full p-4 text-lg rounded-xl bg-black"
+                  className="block w-full p-4 text-lg rounded-xl"
                   value={inputLogin.email}
                   onChange={handleInputLogin}
                 />
               </div>
               <div className="pb-2 pt-4">
                 <input
-                  className="block w-full p-4 text-lg rounded-xl bg-black"
+                  className="block w-full p-4 text-lg rounded-xl"
                   type="password"
                   name="password"
                   id="password"

@@ -37,7 +37,7 @@ export default function ArtForm() {
       .then(() => {
         navigate("/profile");
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => {
         setArtInput({
           name: "",
@@ -83,22 +83,22 @@ export default function ArtForm() {
       <div className="flex flex-col items-center gap-4">
         <div
           className="min-w-full flex justify-center items-center pt-4 tab-form gap-3"
-          // style={{ backgroundColor: "#191B1F" }}
+        // style={{ backgroundColor: "#191B1F" }}
         >
           {!loading
             ? categories.map((el, i) => {
-                return (
-                  <button
-                    className="w-32 rounded-xl text-black"
-                    style={{ backgroundColor: "#85CF81" }}
-                    onClick={tabForm}
-                    value={el.id}
-                    key={i}
-                  >
-                    {el.name}
-                  </button>
-                );
-              })
+              return (
+                <button
+                  className="w-32 rounded-xl text-black"
+                  style={{ backgroundColor: "#85CF81" }}
+                  onClick={tabForm}
+                  value={el.id}
+                  key={i}
+                >
+                  {el.name}
+                </button>
+              );
+            })
             : null}
         </div>
         <div>
@@ -108,7 +108,7 @@ export default function ArtForm() {
       <div className="flex">
         <div
           className="w-1/2 pt-4 px-4 flex gap-2 flex-col items-center"
-          // style={{ backgroundColor: "#191B1F" }}
+        // style={{ backgroundColor: "#191B1F" }}
         >
           {/* <img
             id="uploadedimage"
@@ -131,62 +131,81 @@ export default function ArtForm() {
             })}
           </ul>
         </div>
+
+
         <form
           onSubmit={handleSubmit}
           className="flex flex-col pt-4 gap-3"
           style={{ color: "#EDEDED" }}
         >
-          <div className="flex items-center justify-center mb-5">
-            <label htmlFor="name">Art name : </label>
+          <table className="border-separate border-spacing-8">
+            <tr>
+              <td><label htmlFor="name">Art name</label></td>
+              <td>:</td>
+              <td>
+                <input
+                  name="name"
+                  className="rounded-xl indent-4 text-white"
+                  style={{ width: "229px" }}
+                  value={artInput.name}
+                  onChange={handleChangeInput}
+                  placeholder="your art name"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label>Starting price</label></td>
+              <td>:</td>
+              <td>
+                <input
+                  type="number"
+                  name="price"
+                  className="rounded-xl indent-4 text-white"
+                  value={artInput.price}
+                  onChange={handleChangeInput}
+                  placeholder="your art price"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label htmlFor="files">Select files</label></td>
+              <td>:</td>
+              <td>
+                <input
+                  id="files"
+                  name="files"
+                  type="file"
+                  multiple
+                  onChange={handleFilesInput}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label >
+                Description</label>
+              </td>
+              <td>:</td>
+              <td>
+                <textarea
+                  id="description"
+                  className="rounded-3xl description text-white"
+                  rows={5}
+                  name="description"
+                  value={artInput.description}
+                  onChange={handleChangeInput}
+                ></textarea>
+              </td>
+            </tr>
+          </table>
+
+          <div className=" flex justify-center">
             <input
-              name="name"
-              className="rounded-xl indent-4 text-white"
-              style={{ width: "229px" }}
-              value={artInput.name}
-              onChange={handleChangeInput}
-              placeholder="your art name"
+              className="rounded-2xl w-20 h-8 bg-green-400 bg-opacity- text-black hover:bg-green-800"
+              // style={{ backgroundColor: "#85CF81" }}
+              type="submit"
+              value="Add"
             />
           </div>
-          <div className="flex gap-3">
-            <label>Starting price : </label>
-            <input
-              type="number"
-              name="price"
-              className="rounded-xl indent-4 text-white"
-              value={artInput.price}
-              onChange={handleChangeInput}
-              placeholder="your art price"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="files">Select files :</label>
-            <input
-              id="files"
-              name="files"
-              type="file"
-              multiple
-              onChange={handleFilesInput}
-            />
-          </div>
-          <div className="flex flex-col gap-2 w-20">
-            <label htmlFor="description" className="description">
-              Description :
-            </label>
-            <textarea
-              id="description"
-              className="rounded-3xl description text-white"
-              rows={5}
-              name="description"
-              value={artInput.description}
-              onChange={handleChangeInput}
-            ></textarea>
-          </div>
-          <input
-            className="rounded-2xl w-14 h-8 text-black"
-            style={{ backgroundColor: "#85CF81" }}
-            type="submit"
-            value="Add"
-          />
         </form>
       </div>
     </section>
