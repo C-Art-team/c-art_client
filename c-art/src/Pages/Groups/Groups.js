@@ -44,7 +44,7 @@ export default function Groups() {
                   />
                 </figure>
                 <div className="px-6 pt-4">
-                  <div className="flex gap-4">
+                  <div className="flex justify-between">
                     <div className="">
                       <h1 className="text-xs">CHATS</h1>
                       <h1 className="">120</h1>
