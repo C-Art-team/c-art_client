@@ -19,7 +19,7 @@ export default function Model(props) {
     );
 
     model = format === "glb" || format === "ltf" ? model.scene : model;
-
+        console.log(model);
     // const { scene } = useThree()
 
     useEffect(() => {
@@ -30,30 +30,38 @@ export default function Model(props) {
 
         let totalSize = x * y * z
 
-        if (totalSize > Math.pow(100, 3)) {
+        if (totalSize > 100000000) {
+            // console.log(`here 1 `);
+
             setTotal(1 / 1000)
-        } else if (totalSize > 100 && totalSize < 10000) {
+        } else if (totalSize > 10000) {
+            // console.log(`here 2`);
             setTotal(1 / 100)
+        }  else if (totalSize >= 1000 && totalSize <= 10000) {
+            // console.log(`here 2`);
+            setTotal(1 / 100)
+        } else if (totalSize >= 100 && totalSize <= 1000) {
+            // console.log(`here 3`);
+            setTotal(1 / 5)
         } else if (totalSize > 0.01 && totalSize < 0.1){
             setTotal(1 * 10)
         }
-      
-
+        // console.log(totalSize);
     }, [])
 
     //   console.log(asset.slice(asset.length - 3));
     // console.log(total);
 
 
-
     return (
-        <Suspense>
-            <mesh  scale={[total, total, total]}  >
+        // <Suspense>
+            <mesh  scale={[total, total, total]} receiveShadow >
                 <primitive
+                
                     object={model}
                     position={props.position}
                 />
             </mesh>
-        </Suspense>
+        // </Suspense>
     );
 }

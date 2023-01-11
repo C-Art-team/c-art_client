@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { fetchAllCategory } from "../../actions/actionCategory";
 import { newArt } from "../../actions/artAction";
 import "./style.css";
@@ -32,7 +33,21 @@ export default function ArtForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(newArt(artInput));
+
+    if (!artInput.name || !artInput.price || !artInput.description || !artInput.files || !artInput.CategoryId) {
+      toast.error("All input is required")
+    }
+
+    dispatch(newArt(artInput))
+      .then((data) => {
+        // console.log(data.art.name);
+        toast.success(`Art ${data.art.name} successfully created`)
+      })
+      .catch((error) => {
+        // console.log(error);
+        error.message ? toast.warn(`${error.response.data.message}`)
+          : toast.error("Internal Server Error");
+      })
     setArtInput({
       name: "",
       description: "",
@@ -76,22 +91,22 @@ export default function ArtForm() {
       <div className="flex flex-col items-center gap-4">
         <div
           className="min-w-full flex justify-center items-center pt-4 tab-form gap-3"
-          // style={{ backgroundColor: "#191B1F" }}
+        // style={{ backgroundColor: "#191B1F" }}
         >
           {!loading
             ? categories.map((el, i) => {
-                return (
-                  <button
-                    className="w-32 rounded-xl text-black"
-                    style={{ backgroundColor: "#85CF81" }}
-                    onClick={tabForm}
-                    value={el.id}
-                    key={i}
-                  >
-                    {el.name}
-                  </button>
-                );
-              })
+              return (
+                <button
+                  className="w-32 rounded-xl text-black"
+                  style={{ backgroundColor: "#85CF81" }}
+                  onClick={tabForm}
+                  value={el.id}
+                  key={i}
+                >
+                  {el.name}
+                </button>
+              );
+            })
             : null}
         </div>
         <div>
@@ -101,7 +116,7 @@ export default function ArtForm() {
       <div className="flex">
         <div
           className="w-1/2 pt-4 px-4 flex gap-2 flex-col items-center"
-          // style={{ backgroundColor: "#191B1F" }}
+        // style={{ backgroundColor: "#191B1F" }}
         >
           {/* <img
             id="uploadedimage"

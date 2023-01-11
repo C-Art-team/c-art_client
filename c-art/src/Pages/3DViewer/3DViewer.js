@@ -36,6 +36,7 @@ export default function ThreeDViewer() {
         <Canvas
           style={{ background: "transparent" }}
           camera={{ position: [3, 3, 3] }}
+          shadowMap
         >
           <Suspense>
             <Model position={[0, 0, 0]} asset={oneArt.source} />
