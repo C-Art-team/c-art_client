@@ -26,7 +26,7 @@ export default function Groups() {
   //   })
   // },[])
   return (
-    <div className="flex flex-wrap gap-4 px-8">
+    <div className="flex flex-wrap gap-4 px-8 w-1/2">
       {preference.map((el, i) => {
         return (
           <div className="pt-8" key={i}>
