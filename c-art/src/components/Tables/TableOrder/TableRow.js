@@ -30,7 +30,7 @@ export default function TableRow({ orders }) {
             <tr>
                 <th>{orders.id}</th>
                 <td>{orders.amount}</td>
-                <td>{orders.orderDate}</td>
+                <td>{new Date(orders.orderDate).toISOString().split('T')[0]} {new Date(orders.orderDate).toISOString().split('T')[1].slice(0,5)}</td>
                 <td>{orders.status}</td>
                 <td>
                     <Link to={`/art/${orders.id}`}>

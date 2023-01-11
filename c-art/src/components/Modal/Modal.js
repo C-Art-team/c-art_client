@@ -73,7 +73,7 @@ export default function Modal({ setModal, id, username }) {
 
   return (
     <div
-      class="fixed z-10"
+      class="fixed z-20"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"

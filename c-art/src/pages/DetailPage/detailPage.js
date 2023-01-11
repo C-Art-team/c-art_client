@@ -50,14 +50,14 @@ export default function DetailPage() {
       (res) => {
         if (res.isConfirmed) {
           dispatch(addOneOrder(orderInput))
-            .then((data) => {
+            .then(() => {
               // console.log(data);
               toast.success(`Successfully added ${detailArt.name} to your order list`)
             })
             .catch((err) => {
               // console.log(err.response.data.message);
               err.message
-                ? toast.error(`${err?.message}`)
+                ? toast.error(`${err?.response.data.message}`)
                 : toast.error("Internal Server Error");
             })
             .finally(() => {
@@ -132,7 +132,6 @@ export default function DetailPage() {
                         src={music} />
                     </div>
                     <audio src={el.sourceUrl} key={i} controls />
-
                   </>
                 );
               default:
@@ -148,22 +147,12 @@ export default function DetailPage() {
         <span className="text-lg text-center">
           created by : {detailArt.authorName}
         </span>
-        <span className="text-4xl text-center">{detailArt.price}</span>
+        <span className="text-4xl text-center">Price : {formatRupiah(detailArt.price)}</span>
         <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
 
         <form onSubmit={createOrder}>
-          <label htmlFor="amount" className="text-white mr-4">
-            Amount
-          </label>
-          <input
-            id="amount"
-            type="number"
-            name="amount"
-            value={orderInput.amount}
-            onChange={handleChange}
-            className="mr-4"
-          />
           <button
+          className="bg-green-400"
             onClick={() => {
               setArtId(detailArt.id);
             }}
