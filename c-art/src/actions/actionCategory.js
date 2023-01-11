@@ -1,5 +1,5 @@
 import { GET_ALL_CATEGORIES } from "./type_action";
-const BASE_URL = 'http://localhost:4000/categories'
+const BASE_URL = 'http://api.-art.site/categories'
 
 export const getAllCategory= (payload) => {
   return {

@@ -1,6 +1,6 @@
 import { GET_ALL_ORDERS } from "./type_action";
 import axios from "axios";
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "http://api.-art.site";
 
 export const getAllOrders = (payload) => {
   return {

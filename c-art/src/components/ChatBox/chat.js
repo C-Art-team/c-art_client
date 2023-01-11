@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { io } from "socket.io-client";
 import "./style.css";
-const socket = io("http://localhost:4000");
+const socket = io("http://api.-art.site");
 
 export default function ChatBox() {
   const { id } = useParams();
