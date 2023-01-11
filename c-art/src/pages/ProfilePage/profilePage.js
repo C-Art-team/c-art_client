@@ -48,6 +48,7 @@ export default function ProfilePage() {
 
     dispatch(fetchAllOrders())
       .then((data) => {
+        console.log(data)
         setLoading(false);
       })
       .catch((err) =>

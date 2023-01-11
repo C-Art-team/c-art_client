@@ -49,7 +49,7 @@ body {
 }
 
 #messages-forum {
-  height: 70vh !important;
+  height: 25rem !important;
   overflow-y: scroll;
   position: relative;
   list-style-type: none;
