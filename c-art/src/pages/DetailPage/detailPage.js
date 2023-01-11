@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-// import axios from "axios";
 import ChatBox from "../../components/ChatBox/chat";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import "./style.css"
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import "./style.css";
 import { fetchOneArt } from "../../actions/artAction";
 import { addOneOrder } from "../../actions/orderAction";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import music from "../../components/ImageCategory/icon/music.png"
-import sundEffect from "../../components/ImageCategory/icon/volume.png"
 
 export default function DetailPage() {
   const navigate = useNavigate();
@@ -28,13 +26,6 @@ export default function DetailPage() {
 
   const toPreview = (id) => {
     navigate(`/art/${id}/3d`);
-  };
-
-  const handleChange = (e) => {
-    setOrderInput({
-      ...orderInput,
-      [e.target.name]: e.target.value,
-    });
   };
 
   const setArtId = (id) => {
@@ -142,7 +133,7 @@ export default function DetailPage() {
           <LoadingSpinner />
         )}
       </div>
-      <div className="flex flex-col w-1/2 container-preview p-4 items-center bg-black bg-opacity-50 rounded-xl">
+      <div className="flex flex-col w-1/2 container-preview-2 p-4 items-center bg-black bg-opacity-50 rounded-xl">
         <span className="text-4xl text-center">{detailArt.name}</span>
         <span className="text-lg text-center">
           created by : {detailArt.authorName}

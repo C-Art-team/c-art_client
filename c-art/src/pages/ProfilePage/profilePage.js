@@ -16,16 +16,21 @@ export default function ProfilePage() {
   const orders = useSelector((state) => state.orderReducer.orders);
   const lastThreeOrders = orders.slice(0, 3)
   const dispatch = useDispatch()
-  const [editProfile, setEditProfile] = useState({
-    username: "",
-    address: "",
-    phone: ""
-  })
 
   const myArt = useSelector((state) => {
-    // console.log(state)
     return state.artReducer.myArt
   })
+
+  useEffect(() => {
+    dispatch(fetchArtByAuthorID(localStorage.access_token))
+    .then((data) => {
+      console.log(data)
+      setLoading(false)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  },[])
 
   useEffect(() => {
     dispatch(viewProfile())
@@ -49,8 +54,6 @@ export default function ProfilePage() {
           : toast.error("Internal Server Error")
       );
   }, []);
-
-  const changeToInput = (e) => { };
 
   return (
     <div
@@ -100,7 +103,7 @@ export default function ProfilePage() {
                 <h1>Category</h1>
               </div>
             </div>
-            {orders.length > 0 ?
+            { !loading && orders.length > 0 ?
               lastThreeOrders.map(el => {
                 return <HistoryTableRow histories={el} />
               }) : <div
@@ -129,11 +132,11 @@ export default function ProfilePage() {
           </Link>
         </div>
         <div className="grid grid-cols-4 gap-1 rounded-lg bg-base-300 bg-opacity-50 shadow-xl">
-          {myArt.map((el, index) => {
+          {!loading ? myArt.map((el, index) => {
             return (
               <Card art={el} key={index + 1} loading={loading} page="profile" />
             )
-          })}
+          }) : <h1 className="text-2xl">You dont have any uploaded art yet</h1>}
         </div>
       </div>
     </div>

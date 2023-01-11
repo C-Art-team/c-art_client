@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 import { newArt } from "../../actions/artAction";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 export default function ArtForm() {
   const categories = useSelector((state) => state.categoryReducer.categories);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const [artInput, setArtInput] = useState({
@@ -18,8 +20,7 @@ export default function ArtForm() {
   });
 
   const [uploadedFile, setUploadedFile] = useState([]);
-  console.log("uploadedFile", uploadedFile)
-
+  console.log("uploadedFile", uploadedFile);
 
   const handleChangeInput = (e) => {
     console.log(e.target.name);
@@ -32,20 +33,26 @@ export default function ArtForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(newArt(artInput));
-    setArtInput({
-      name: "",
-      description: "",
-      price: 0,
-      files: [],
-      CategoryId: "",
-    });
+    dispatch(newArt(artInput))
+      .then(() => {
+        navigate("/profile");
+      })
+      .catch(() => {})
+      .finally(() => {
+        setArtInput({
+          name: "",
+          description: "",
+          price: 0,
+          files: [],
+          CategoryId: "",
+        });
+      });
   };
 
   const handleFilesInput = (e) => {
     // console.log(e.target.files);
     const upload = e.target.files;
-    console.log("upload", upload)
+    console.log("upload", upload);
     // const { name } = upload;
 
     let obj = {
@@ -112,7 +119,7 @@ export default function ArtForm() {
           <h1 className="text-xl text-white">Uploaded File</h1>
           <ul className="flex flex-col gap-2">
             {uploadedFile.map((el) => {
-              console.log("el", el.name)
+              console.log("el", el.name);
               return (
                 <li
                   className="border p-2 rounded-3xl"
