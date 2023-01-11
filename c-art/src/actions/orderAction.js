@@ -31,6 +31,7 @@ export const fetchAllOrders = () => {
 export const addOneOrder = (payload) => {
     return async () => {
         try {
+            console.log(payload)
             const {data} = await axios({
                 method: 'post',
                 url: `${BASE_URL}/orders`,
