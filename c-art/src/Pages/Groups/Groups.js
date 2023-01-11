@@ -6,6 +6,7 @@ export default function Groups() {
   console.log(tag);
   const navigate = useNavigate();
   return (
+
     <div className="flex flex-col gap-2 px-10 ">
       {preference.map((el, i) => {
         return (

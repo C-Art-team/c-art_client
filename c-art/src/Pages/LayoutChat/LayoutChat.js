@@ -5,8 +5,8 @@ import Groups from '../Groups/Groups'
 
 function LayoutChat() {
     return (
-        <div className='flex pt-5 h-screen'>
-            <div className=' w-1/3'>
+        <div className='flex pt-5 '>
+            <div className=' w-1/3 h-screen'>
                 <Groups />
             </div>
             <div className=' w-2/3 h-full'>
