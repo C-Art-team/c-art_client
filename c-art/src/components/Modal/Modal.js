@@ -124,27 +124,16 @@ export default function Modal({
             <form onSubmit={submitModal}>
               <div className="static bg-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="pb-2 pt-4">
-                  <select
-                    id="preference"
-                    name="preference"
-                    className="block w-full p-4 text-lg rounded-xl bg-gray text-white"
-                    value={modalInput.preference}
-                    onChange={handlePreference}
-                    multiple
-                  >
-                    <option value="" selected disabled>
-                      Preferences
-                    </option>
-                    {!loading
-                      ? categories?.map((el) => {
-                          return (
-                            <option value={el.name} key={el.id}>
-                              {el.name}
-                            </option>
-                          );
-                        })
-                      : null}
-                  </select>
+                  {!loading
+                    ? categories?.map((el) => {
+                      return (
+                        <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
+                          <input onChange={handlePreference} multiple id="bordered-checkbox-1" type="checkbox" value={el.name} name="preference" key={el.id} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                          <label for="bordered-checkbox-1" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{el.name}</label>
+                        </div>
+                      );
+                    })
+                    : null}
                 </div>
                 {type === "edit" ? (
                   <div className="pb-2 pt-4">

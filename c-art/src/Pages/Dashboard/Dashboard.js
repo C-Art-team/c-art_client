@@ -68,7 +68,7 @@ function Dashboard() {
 
   return (
     <div className="px-8">
-      <motion.div className="flex justify-center"
+      <motion.div className="flex justify-center bg-black bg-opacity-25 rounded-xl"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 100, opacity: 0 }}

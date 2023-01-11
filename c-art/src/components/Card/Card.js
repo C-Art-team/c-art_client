@@ -60,7 +60,7 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
       </>
     )
   } else {
-    const { id: idArt, name: nameArt, Previews: PreviewsArt, CategoryId } = art
+    const { id: idArt, name: nameArt, Previews: PreviewsArt, CategoryId, status } = art
     const toNavigation = (idArt) => {
       navigate(`/art/${idArt}`);
     };
@@ -94,9 +94,9 @@ function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
                   }
                   {loading ? <LoadingSpinner /> : null}
                   <h2 className="title-font font-medium text-3xl py-3 text-white">
-                    2.7K
+                    {status}
                   </h2>
-                  <p className="leading-relaxed">{nameArt}</p>
+                  <p className="leading-relaxed text-white">{nameArt}</p>
                 </div>
               </div>
             </motion.div>
