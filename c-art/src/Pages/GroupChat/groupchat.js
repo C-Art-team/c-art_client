@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect} from "react";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -30,7 +30,7 @@ export default function ForumChat() {
 
   useEffect(() => {
     socket.emit("join room", tag);
-  }, []);
+  }, [tag]);
 
   useEffect(() => {
     socket.on("group chat sucess", (messages) => {
@@ -83,7 +83,6 @@ export default function ForumChat() {
               );
             })
             : null}
-          {/* <li id="toBottom" className="d-none" ref={lastChats}></li> */}
         </ul>
         <form
           className={`text-${theme === "dark" ? "white" : "black"}`}

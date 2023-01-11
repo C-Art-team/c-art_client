@@ -8,7 +8,8 @@ import "./style.css";
 export default function ArtForm() {
   const categories = useSelector((state) => state.categoryReducer.categories);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
+  const [previousSelect, setPreviousSelect] = useState("");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [artInput, setArtInput] = useState({
@@ -64,12 +65,18 @@ export default function ArtForm() {
   };
 
   const tabForm = (e) => {
-    console.log(e.target.value);
+    const selected = document.getElementById(e.target.value);
+    selected.style.backgroundColor = "green";
     setArtInput({
       ...artInput,
       CategoryId: +e.target.value,
     });
+    document.getElementById(previousSelect).style.backgroundColor = "#85CF81";
   };
+
+  useEffect(() => {
+    setPreviousSelect(artInput.CategoryId);
+  }, [artInput.CategoryId]);
 
   useEffect(() => {
     dispatch(fetchAllCategory()).then(() => {
@@ -81,15 +88,13 @@ export default function ArtForm() {
   return (
     <section className="flex flex-col  container-add rounded-sm">
       <div className="flex flex-col items-center gap-4">
-        <div
-          className="min-w-full flex justify-center items-center pt-4 tab-form gap-3"
-          // style={{ backgroundColor: "#191B1F" }}
-        >
+        <div className="min-w-full flex justify-center items-center pt-4 tab-form gap-3">
           {!loading
             ? categories.map((el, i) => {
                 return (
                   <button
                     className="w-32 rounded-xl text-black"
+                    id={el.id}
                     style={{ backgroundColor: "#85CF81" }}
                     onClick={tabForm}
                     value={el.id}
@@ -116,20 +121,27 @@ export default function ArtForm() {
             src={artInput.source}
             alt="upload here"
           /> */}
-          <h1 className="text-xl text-white">Uploaded File</h1>
-          <ul className="flex flex-col gap-2">
-            {uploadedFile.map((el) => {
-              console.log("el", el.name);
-              return (
-                <li
-                  className="border p-2 rounded-3xl"
-                  style={{ backgroundColor: "#3B3B3B", borderColor: "#3B3B3B" }}
-                >
-                  {el.name}
-                </li>
-              );
-            })}
-          </ul>
+          <h1 className="text-xl text-white">Uploaded file</h1>
+          {artInput.files.length ? (
+            <ul className="flex flex-col gap-2">
+              {uploadedFile.map((el) => {
+                console.log("el", el.name);
+                return (
+                  <li
+                    className="border p-2 rounded-3xl"
+                    style={{
+                      backgroundColor: "#3B3B3B",
+                      borderColor: "#3B3B3B",
+                    }}
+                  >
+                    {el.name}
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="text-xs text-bold text-white text-underline">PLEASE UPLOAD YOUR MAIN SOURCE FIRST, THEN UPLOAD THE PREVIEWS</p>
+          )}
         </div>
         <form
           onSubmit={handleSubmit}

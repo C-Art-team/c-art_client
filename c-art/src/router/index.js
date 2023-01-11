@@ -6,9 +6,9 @@ import { createBrowserRouter, redirect } from "react-router-dom";
 import ForumChat from "../pages/GroupChat/groupchat";
 import ArtForm from "../components/ArtForm/artForm";
 import ThreeDViewer from "../pages/3DViewer/3DViewer";
-import Groups from "../pages/Groups/Groups";
 import DetailPage from "../pages/DetailPage/detailPage";
 import ProfilePage from "../pages/ProfilePage/profilePage";
+import LayoutChat from "../pages/LayoutChat/LayoutChat"
 import OrderPage from "../pages/OrderPage/Order";
 
 const router = createBrowserRouter([
