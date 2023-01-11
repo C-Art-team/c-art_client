@@ -36,7 +36,6 @@ export default function Modal({
 
   const submitModal = (e) => {
     e.preventDefault();
-    console.log(modalInput);
     dispatch(editProfile(modalInput, id))
       .then(() => {
         setModal(false);
@@ -79,7 +78,6 @@ export default function Modal({
   };
 
   const handlePreference = (e) => {
-    console.log(e.target.value);
     setModalInput({
       ...modalInput,
       preference: [...modalInput.preference, e.target.value],

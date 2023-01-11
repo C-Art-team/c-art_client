@@ -41,7 +41,6 @@ export default function GoogleLoginButton({ setModal, setUser }) {
   }
   function handleResponseError(response) {
     toast.error("Internal Server Error");
-    console.log(response);
   }
 
   // useEffect(() => {

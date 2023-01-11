@@ -12,7 +12,6 @@ const actionTheme = (theme) => {
 }
 
 export const themeAction = (theme) => {
-    // console.log(theme)
     return (dispath, getState) => {
         dispath(actionTheme(theme))
     }

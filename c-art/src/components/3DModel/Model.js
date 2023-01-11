@@ -41,8 +41,6 @@ export default function Model(props) {
 
     }, [])
 
-    //   console.log(asset.slice(asset.length - 3));
-    // console.log(total);
 
 
 

@@ -25,7 +25,6 @@ export const getOneArt = (payload) => {
 }
 
 const getArtById = (payload) => {
-  // console.log(payload)
   return {
     type: GET_ART_BY_AUTHOR_ID,
     payload
@@ -33,15 +32,12 @@ const getArtById = (payload) => {
 }
 
 export const fetchOneArt = (id) => {
-  console.log(id)
   return async (dispatch) => {
     try {
       const { data } = await axios.get(baseUrl + `/${id}`)
-      console.log(data)
       dispatch(getOneArt(data))
       return data
     } catch (error) {
-      console.log(error)
       throw error
     }
   }
@@ -53,11 +49,9 @@ export const fetchAllArt = (filter, search) => {
       const { data } = await axios.get(baseUrl, {
         params: { filter, search }
       })
-      console.log(data)
       dispatch(getAllArt(data))
       return data
     } catch (error) {
-      console.log(error)
       throw error
     }
   }
@@ -68,8 +62,6 @@ export const newArt = (input) => {
     try {
       let filesToUpload;
       const form = new FormData();
-      console.log(input)
-      console.log(input.files);
 
 
 
@@ -87,10 +79,8 @@ export const newArt = (input) => {
         throw new Error("Please input at least 1 preview")
       }
 
-      console.log(filesToUpload)
 
       filesToUpload.forEach((el) => {
-        console.log(el, "dari append files")
         form.append("uploadedFile", el, el.name);
       });
       form.append("name", input.name);
@@ -98,15 +88,12 @@ export const newArt = (input) => {
       form.append("CategoryId", input.CategoryId);
       form.append("description", input.description);
 
-      // console.log(form.getAll("uploadedFile"), "form data)())(");
-      // console.log(input, "dari thunk add new art");
       const { data } = await axios.post(baseUrl, form, {
         headers: {
           access_token: localStorage.access_token,
         },
       });
 
-      // console.log(data);
       dispatch(addNewArt(data));
       return data;
     } catch (error) {
@@ -118,15 +105,12 @@ export const newArt = (input) => {
 export const fetchArtByAuthorID = (forAuthen) => {
   return async (dispatch) => {
     try {
-      console.log(forAuthen,'dari fetch by authoe')
       const { data } = await axios({
         url: baseUrl + '/myarts',
         headers: {access_token : forAuthen}
       })
-      console.log(data)
       dispatch(getArtById(data))
     } catch (error) {
-      // console.log(error)
       throw error
     }
   }

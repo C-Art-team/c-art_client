@@ -6,7 +6,6 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { motion } from "framer-motion";
 
 function Card({ art, loading, page, id, name, Previews, price, CategoryId }) {
-  // console.log(art.source)
   function formatRupiah(money) {
     return new Intl.NumberFormat('id-ID',
       { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 } // diletakkan dalam object

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-// import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import "./style.css";
 const socket = io("http://localhost:4000");
@@ -15,7 +14,6 @@ export default function ChatBox() {
   };
 
   const sendChat = () => {
-    console.log(chat);
     if (chat) {
       socket.emit("comment", {
         text: chat,

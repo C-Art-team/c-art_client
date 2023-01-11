@@ -25,7 +25,6 @@ export const oneUser = (payload) => {
 export const handleLogin = (input) => {
   return async (dispatch) => {
     try {
-      console.log(input, "dari thunk login");
       const response = await fetch("http://localhost:4000/users/login", {
         method: "post",
         headers: {
@@ -148,7 +147,6 @@ export const viewProfile = () => {
           access_token: localStorage.access_token,
         },
       });
-      console.log(data);
       dispatch(oneUser(data));
       return data;
     } catch (error) {
@@ -165,8 +163,6 @@ export const editProfile = (input, id) => {
         input,
         {}
       );
-      // const data = await response.json()
-      console.log(data);
       return data;
     } catch (error) {
       throw error;

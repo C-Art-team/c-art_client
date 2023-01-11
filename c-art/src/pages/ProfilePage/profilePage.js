@@ -19,25 +19,21 @@ export default function ProfilePage() {
   const dispatch = useDispatch();
 
   const myArt = useSelector((state) => {
-    // console.log(state)
     return state.artReducer.myArt;
   });
 
   useEffect(() => {
     dispatch(fetchArtByAuthorID(localStorage.access_token))
       .then((data) => {
-        console.log(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
       });
   }, []);
 
   useEffect(() => {
     dispatch(viewProfile())
       .then((data) => {
-        console.log(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -48,7 +44,6 @@ export default function ProfilePage() {
 
     dispatch(fetchAllOrders())
       .then((data) => {
-        console.log(data)
         setLoading(false);
       })
       .catch((err) =>

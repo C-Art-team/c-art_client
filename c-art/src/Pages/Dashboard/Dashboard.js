@@ -12,13 +12,11 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const categories = useSelector((state) => state.categoryReducer.categories);
   const arts = useSelector((state) => state.artReducer.arts);
-  // console.log(arts)
   const dispatch = useDispatch();
 
   const filterArt = (e) => {
     dispatch(fetchAllArt(e.target.value))
       .then((data) => {
-        console.log(data);
         if (data.length === 0) {
           dispatch(fetchAllArt()).then(() => {
             setTimeout(() => {
@@ -28,7 +26,6 @@ function Dashboard() {
         }
       })
       .catch((err) => {
-        // console.log(err);
         err.message
           ? toast.error(`${err?.message}`)
           : toast.error("Internal Server Error");
@@ -41,7 +38,6 @@ function Dashboard() {
         setLoading(false);
       })
       .catch((err) => {
-        // console.log(err);
         err.message
           ? toast.error(`${err?.message}`)
           : toast.error("Internal Server Error");
@@ -59,7 +55,6 @@ function Dashboard() {
         }, 5000);
       })
       .catch((error) => {
-        // console.log(error);
         error.message
           ? toast.error(`${error?.message}`)
           : toast.error("Internal Server Error");
@@ -86,9 +81,9 @@ function Dashboard() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}>
           {!loading
-            ? categories.map((el) => {
+            ? categories.map((el,i) => {
               return (
-                <div key={el.id}>
+                <div key={i}>
                   <button
                     onClick={filterArt}
                     className="badge badge-accent px-5 py-5 text-black font-semibold"

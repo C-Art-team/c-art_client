@@ -41,7 +41,6 @@ export const addOneOrder = (payload) => {
       fetch(fetchAllOrders);
       return data;
     } catch (error) {
-      console.log(error, "dari thunk add order");
       throw error;
     }
   };

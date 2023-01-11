@@ -42,11 +42,9 @@ export default function DetailPage() {
         if (res.isConfirmed) {
           dispatch(addOneOrder(orderInput))
             .then(() => {
-              // console.log(data);
               toast.success(`Successfully added ${detailArt.name} to your order list`)
             })
             .catch((err) => {
-              // console.log(err.response.data.message);
               err.message
                 ? toast.error(`${err?.response.data.message}`)
                 : toast.error("Internal Server Error");
@@ -65,7 +63,6 @@ export default function DetailPage() {
     window.scrollTo(0, 0);
     dispatch(fetchOneArt(id))
       .then((data) => {
-        console.log(data);
         setLoading(false);
       })
       .catch((err) => {

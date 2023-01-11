@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAllCategory } from "../../actions/actionCategory";
 import { newArt } from "../../actions/artAction";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./style.css";
 
 export default function ArtForm() {
@@ -21,10 +22,8 @@ export default function ArtForm() {
   });
 
   const [uploadedFile, setUploadedFile] = useState([]);
-  console.log("uploadedFile", uploadedFile);
 
   const handleChangeInput = (e) => {
-    console.log(e.target.name);
     let obj = {
       ...artInput,
       [e.target.name]: e.target.value,
@@ -38,7 +37,9 @@ export default function ArtForm() {
       .then(() => {
         navigate("/profile");
       })
-      .catch(() => { })
+      .catch((err) => {
+        toast.error(err.response.data.message)
+       })
       .finally(() => {
         setArtInput({
           name: "",
@@ -51,10 +52,7 @@ export default function ArtForm() {
   };
 
   const handleFilesInput = (e) => {
-    // console.log(e.target.files);
     const upload = e.target.files;
-    console.log("upload", upload);
-    // const { name } = upload;
 
     let obj = {
       ...artInput,
@@ -84,7 +82,7 @@ export default function ArtForm() {
     });
     // eslint-disable-next-line
   }, []);
-  console.log(artInput.files);
+
   return (
     <section className="flex flex-col  container-add rounded-sm">
       <div className="flex flex-col items-center gap-4">
@@ -119,7 +117,6 @@ export default function ArtForm() {
           {artInput.files.length ? (
             <ul className="flex flex-col gap-2">
               {uploadedFile.map((el) => {
-                console.log("el", el.name);
                 return (
                   <li
                     className="border p-2 rounded-3xl"

@@ -17,27 +17,22 @@ export default function MainNavbar() {
   const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
-    console.log(e.target.value);
     setSearch({ name: e.target.value });
   };
 
   const toProfile = () => {
-    console.log("ke profile");
     navigate("/profile");
   };
 
   const toCart = () => {
-    console.log("to cart");
     navigate('/cart')
   };
 
   const toRegister = () => {
-    console.log("ke register");
     navigate("/register");
   };
 
   const toLogin = () => {
-    console.log("ke login");
     navigate("/login");
   };
 
@@ -92,7 +87,6 @@ export default function MainNavbar() {
           <button
             className=" px-10"
             onClick={() => {
-              // console.log(theme)
               changeTheme(theme);
             }}
           >

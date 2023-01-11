@@ -1,13 +1,11 @@
 export default function HistoryTableRow({ histories }) {
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
-];console.log(histories,"ini bug")
+  "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
 
   const date = new Date(histories.orderDate).getDate()
   const month = (new Date(histories.orderDate).getMonth())
   const year = new Date(histories.orderDate).getFullYear()
 
-  console.log(date, month, year);
   return (
     <div
       className=" rounded-full w-80 shadow-lg"

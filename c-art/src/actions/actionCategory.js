@@ -24,7 +24,6 @@ export const fetchAllCategory = () => {
       const data = await response.json()
       dispatch(getAllCategory(data))
     } catch (error) {
-      console.log(error,'dari thunk category')
       throw error
     }
   }
