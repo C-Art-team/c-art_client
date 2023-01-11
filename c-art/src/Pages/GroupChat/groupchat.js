@@ -77,7 +77,7 @@ export default function ForumChat() {
                     {el.text}
                   </div>
                   <div className="chat-footer">
-                    <time className="text-xs opacity-50">{el.createdAt}</time>
+                    <time className="text-xs opacity-50">{new Date(el.createdAt).toISOString().split("T")[1].slice(0,5)}</time>
                   </div>
                 </div>
               );

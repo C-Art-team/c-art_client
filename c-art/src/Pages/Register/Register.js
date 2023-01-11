@@ -3,8 +3,11 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { handleRegister, handleVerify } from "../../actions/userAction";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import logo from "./C-art-logo.png";
 import Modal from "../../components/Modal/Modal";
+import FacebookLoginButton from "../../components/SocialMediaButton/FacebookLoginButton";
+import GoogleLoginButton from "../../components/SocialMediaButton/GoogleLoginButton";
 function Register() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -30,36 +33,41 @@ function Register() {
   };
 
   const handleSubmit = (e) => {
-    console.log(inputRegister);
+    // console.log(inputRegister);
     e.preventDefault();
     dispatch(handleRegister(inputRegister))
       .then((data) => {
-        console.log(data);
+        toast.info(`${data?.message}`);
+        setInputRegister({
+          username: "",
+          email: "",
+          password: "",
+        });
       })
       .catch((error) => {
-        console.log(error);
+        error.message
+          ? toast.warn(`${error?.message}`)
+          : toast.error("Internal Server Error");
       });
-    setInputRegister({
-      username: "",
-      email: "",
-      password: "",
-    });
   };
-  console.log(inputRegister);
+  // console.log(inputRegister);
   useEffect(() => {
     if (token) {
       dispatch(handleVerify(token))
         .then((data) => {
+          toast.success(`Successfully verified ${data.email}`);
           setUsername(data.username);
           setId(data.id);
           setModal(true);
         })
         .catch((error) => {
-          console.log(error);
+          error.message
+            ? toast.warn(`${error?.message}`)
+            : toast.error("Internal Server Error");
           navigate("/register");
         });
     }
-  }, []);
+  }, [token]);
   return (
     <section className="min-h-screen flex items-stretch text-white">
       <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center">
@@ -125,16 +133,8 @@ function Register() {
         <div className="w-full py-6 z-20">
           <h1 className="my-6">Sign up with :</h1>
           <div className="py-2 space-x-2">
-            <button>
-              <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">
-                f
-              </span>
-            </button>
-            <button>
-              <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">
-                G+
-              </span>
-            </button>
+            <FacebookLoginButton />
+            <GoogleLoginButton />
             <button>
               <span className="w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg border-2 border-white">
                 in

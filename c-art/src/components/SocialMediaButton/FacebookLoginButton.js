@@ -4,6 +4,7 @@ import { handleFacebookLogin } from "../../actions/userAction";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import Modal from "../../components/Modal/Modal";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function FacebookLoginButton() {
   const navigate = useNavigate();
@@ -28,11 +29,14 @@ export default function FacebookLoginButton() {
           });
           setModal(true);
         } else {
+          toast.success(`Welcome, ${data.username}`);
           navigate("/");
         }
       })
       .catch((error) => {
-        console.log(error);
+        error.message
+          ? toast.warn(`${error?.message}`)
+          : toast.error("Internal Server Error");
       });
   };
 
