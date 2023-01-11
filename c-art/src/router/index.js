@@ -5,20 +5,11 @@ import Register from "../pages/Register/Register";
 import { createBrowserRouter, redirect } from "react-router-dom";
 import ForumChat from "../pages/GroupChat/groupchat";
 import ArtForm from "../components/ArtForm/artForm";
-<<<<<<< HEAD
-import ThreeDViewer from "../Pages/3DViewer/3DViewer";
-import Groups from "../Pages/Groups/Groups";
-import DetailPage from "../Pages/DetailPage/detailPage";
-import ProfilePage from "../Pages/ProfilePage/profilePage";
-import OrderPage from "../Pages/OrderPage/Order";
-import LayoutChat from "../Pages/LayoutChat/LayoutChat";
-=======
 import ThreeDViewer from "../pages/3DViewer/3DViewer";
 import Groups from "../pages/Groups/Groups";
 import DetailPage from "../pages/DetailPage/detailPage";
 import ProfilePage from "../pages/ProfilePage/profilePage";
 import OrderPage from "../pages/OrderPage/Order";
->>>>>>> 32ab84f8bb32a0682fc5b86e8696f2abe4d4ea9d
 
 const router = createBrowserRouter([
   {
