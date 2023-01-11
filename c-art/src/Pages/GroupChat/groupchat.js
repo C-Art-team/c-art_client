@@ -47,8 +47,8 @@ export default function ForumChat() {
 
   useEffect(() => {
     const scroll = document.getElementById('messages-forum')
-    scroll.scroll({behavior:'smooth'})
-    scroll.scrollTo(0,scroll.scrollHeight)
+    scroll.scroll({ behavior: 'smooth' })
+    scroll.scrollTo(0, scroll.scrollHeight)
   }, [messages]);
 
   return (
@@ -58,30 +58,30 @@ export default function ForumChat() {
         <ul id="messages-forum" className="px-4">
           {!loading
             ? messages.map((el, i) => {
-                return (
-                  <div
-                    className={
-                      el.sender !== localStorage.username
-                        ? "chat chat-start max-w-1/2"
-                        : "chat chat-end max-w-1/2"
-                    }
-                    key={i}
-                  >
-                    <div className="chat-image avatar">
-                      <div className="w-10 rounded-full">
-                        <img src="https://placeimg.com/192/192/people" />
-                      </div>
-                    </div>
-                    <div className="chat-header">{el.sender}</div>
-                    <div className="chat-bubble bg-white-500 text-md font-bold">
-                      {el.text}
-                    </div>
-                    <div className="chat-footer">
-                      <time className="text-xs opacity-50">{new Date(el.createdAt).toISOString().split('T')[1].slice(0,5)}</time>
+              return (
+                <div
+                  className={
+                    el.sender !== localStorage.username
+                      ? "chat chat-start max-w-1/2"
+                      : "chat chat-end max-w-1/2"
+                  }
+                  key={i}
+                >
+                  <div className="chat-image avatar">
+                    <div className="w-10 rounded-full">
+                      <img src="https://placeimg.com/192/192/people" />
                     </div>
                   </div>
-                );
-              })
+                  <div className="chat-header">{el.sender}</div>
+                  <div className="chat-bubble bg-white-500 text-md font-bold">
+                    {el.text}
+                  </div>
+                  <div className="chat-footer">
+                    <time className="text-xs opacity-50">{new Date(el.createdAt).toISOString().split("T")[1].slice(0,5)}</time>
+                  </div>
+                </div>
+              );
+            })
             : null}
           {/* <li id="toBottom" className="d-none" ref={lastChats}></li> */}
         </ul>

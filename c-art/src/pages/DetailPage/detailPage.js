@@ -138,18 +138,25 @@ export default function DetailPage() {
         <span className="text-lg text-center">
           created by : {detailArt.authorName}
         </span>
-        <span className="text-4xl text-center">Price : {formatRupiah(detailArt.price)}</span>
-        <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
-
+        <span className="text-2xl text-center py-5">Price: {formatRupiah(detailArt.price)}</span>
+        <p className="w-4/8 text-justify">{detailArt.description}</p>
         <form onSubmit={createOrder}>
+          {/* <input
+            id="amount"
+            type="number"
+            name="amount"
+            value={orderInput.amount}
+            onChange={handleChange}
+            className="mr-4"
+          /> */}
           <button
-          className="bg-green-400 text-black rounded-2xl w-20 h-7"
+            className=" bg-green-500 bg-opacity-75 text-white rounded-lg"
             onClick={() => {
               setArtId(detailArt.id);
             }}
             type="submit"
           >
-            Order
+            Order now
           </button>
         </form>
         <ChatBox />
