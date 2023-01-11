@@ -46,6 +46,14 @@ export default function ForumChat() {
   }, []);
 
   useEffect(() => {
+    if(messages.length === 0 ) {
+      document.getElementById('messages-forum').style.overflowY = 'hidden'
+    } else {
+      document.getElementById('messages-forum').style.overflowY = 'scroll'
+    }
+  },[messages])
+
+  useEffect(() => {
     const scroll = document.getElementById('messages-forum')
     scroll.scroll({ behavior: 'smooth' })
     scroll.scrollTo(0, scroll.scrollHeight)

@@ -48,7 +48,7 @@ export default function ChatBox() {
 
 
   return (
-    <div className=" py-11 w-full">
+    <div className="py-11 w-full">
       <section className="chat-box bg-black bg-opacity-80 rounded-xl px-2">
         <h1 className=" text-center text-4xl font-mono">Comment</h1>
         <div>

@@ -142,8 +142,6 @@ export default function DetailPage() {
           <div className="w-2/3">
             <p className="w-4/8 h-1/3 text-justify mt-4">{detailArt.description}</p>
           </div>
-
-
           <form onSubmit={createOrder} className="py-10">
             <button
               className="bg-green-400 text-black rounded-md w-32 h-7 font-semibold hover:bg-green-700"

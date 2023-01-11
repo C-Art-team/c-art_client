@@ -66,7 +66,7 @@ export default function ArtForm() {
 
   const tabForm = (e) => {
     const selected = document.getElementById(e.target.value);
-    selected.style.backgroundColor = "green";
+    selected.style.backgroundColor = "rgb(21 128 61)";
     setArtInput({
       ...artInput,
       CategoryId: +e.target.value,

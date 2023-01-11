@@ -1,22 +1,9 @@
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function Groups() {
   const preference = localStorage.preference.split(", ");
   const { tag } = useParams();
-  // const [previousTag, setPreviousTag] = useState("");
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const onGroup = document.getElementById(tag);
-  //   onGroup.style.backgroundColor = "green";
-  //   setPreviousTag(tag);
-  // }, [tag]);
-
-  // useEffect(() => {
-  //   const onGroup = document.getElementById(tag);
-  //   onGroup.style.backgroundColor = "#1F242D";
-  // }, [previousTag]);
 
   return (
 
@@ -27,7 +14,7 @@ export default function Groups() {
             <div
               id={el}
               className="card w-full shadow-xl"
-              style={{ backgroundColor: "#1F242D" }}
+              style={{ backgroundColor: tag !== el ? "#1F242D" : "rgb(21 128 61)" }}
               onClick={() => navigate(`/groups/${el}`)}
             >
               <div className="px-6 pt-4">
