@@ -14,6 +14,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true)
   const profile = useSelector((state) => state.userReducer.oneUser)
   const orders = useSelector((state) => state.orderReducer.orders);
+  const lastThreeOrders = orders.slice(0, 3)
   const dispatch = useDispatch()
   const [editProfile, setEditProfile] = useState({
     username: "",
@@ -96,11 +97,11 @@ export default function ProfilePage() {
               <div className="py-2 px-3 flex justify-between">
                 <h1>Order Date</h1>
                 <h1>Art Name</h1>
-                <h1>Art Category</h1>
+                <h1>Category</h1>
               </div>
             </div>
             {orders.length > 0 ?
-              orders.map(el => {
+              lastThreeOrders.map(el => {
                 return <HistoryTableRow histories={el} />
               }) : <div
                 className=" rounded-full w-80 shadow-lg"
