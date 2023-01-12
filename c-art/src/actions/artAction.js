@@ -1,7 +1,7 @@
 import { ART_ADD, GET_ALL_ART, GET_ART_BY_AUTHOR_ID, GET_ONE_ART } from "./type_action";
 import FormData from "form-data";
 import axios from "axios";
-const baseUrl = "http://api.c-art.site/arts";
+const baseUrl = "https://satriyo.site/arts";
 
 export const addNewArt = (payload) => {
   return {

@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./style.css";
-const socket = io("http://api.c-art.site");
+const socket = io("https://satriyo.site");
 
 export default function ForumChat() {
   const theme = useSelector((state) => state.themeReducer.theme);
