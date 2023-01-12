@@ -1,13 +1,12 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./style.css";
-const socket = io("http://localhost:4000");
+const socket = io("http://api.c-art.site");
 
 export default function ForumChat() {
   const theme = useSelector((state) => state.themeReducer.theme);
-  console.log(theme);
   const { tag } = useParams();
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
@@ -17,7 +16,6 @@ export default function ForumChat() {
   };
 
   const sendChat = () => {
-    console.log(chat, tag, "dari send chat");
     if (chat) {
       socket.emit("group chat", {
         text: chat,
@@ -46,12 +44,12 @@ export default function ForumChat() {
   }, []);
 
   useEffect(() => {
-    if(messages.length === 0 ) {
+    if (messages.length === 0) {
       document.getElementById('messages-forum').style.overflowY = 'hidden'
     } else {
       document.getElementById('messages-forum').style.overflowY = 'scroll'
     }
-  },[messages])
+  }, [messages])
 
   useEffect(() => {
     const scroll = document.getElementById('messages-forum')
@@ -85,7 +83,7 @@ export default function ForumChat() {
                     {el.text}
                   </div>
                   <div className="chat-footer">
-                    <time className="text-xs opacity-50">{el.createdAt}</time>
+                    <time className="text-xs opacity-50">{new Date(el.createdAt).toISOString().split("T")[1].slice(0,5)}</time>
                   </div>
                 </div>
               );

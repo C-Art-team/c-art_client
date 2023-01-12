@@ -32,7 +32,6 @@ const LoginForm = () => {
   };
 
   const handleSubmit = (e) => {
-    // console.log(inputLogin);
     e.preventDefault();
     dispatch(handleLogin(inputLogin))
       .then((data) => {

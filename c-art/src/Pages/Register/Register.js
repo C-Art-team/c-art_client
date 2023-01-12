@@ -17,7 +17,6 @@ function Register() {
   const dispatch = useDispatch();
   const togglePreference = useSelector((state) => state.userReducer.toggle);
   const { token } = useParams();
-  // console.log(togglePreference);
 
   const [inputRegister, setInputRegister] = useState({
     username: "",
@@ -34,7 +33,6 @@ function Register() {
   };
 
   const handleSubmit = (e) => {
-    // console.log(inputRegister);
     e.preventDefault();
     dispatch(handleRegister(inputRegister))
       .then((data) => {
@@ -51,7 +49,6 @@ function Register() {
           : toast.error("Internal Server Error");
       });
   };
-  // console.log(inputRegister);
   useEffect(() => {
     if (token) {
       dispatch(handleVerify(token))

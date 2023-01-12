@@ -25,7 +25,7 @@ export const oneUser = (payload) => {
 export const handleLogin = (input) => {
   return async (dispatch) => {
     try {
-      const response = await fetch("http://api.-art.site/users/login", {
+      const response = await fetch("http://api.c-art.site/users/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export const handleLogin = (input) => {
 export const handleRegister = (input) => {
   return async (dispatch) => {
     try {
-      const response = await fetch("http://api.-art.site/users/register", {
+      const response = await fetch("http://api.c-art.site/users/register", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export const handleRegister = (input) => {
 export const handleVerify = (token) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`http://api.-art.site/users/register/verify/${token}`, {
+      const response = await fetch(`http://api.c-art.site/users/register/verify/${token}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -93,7 +93,7 @@ export const handleFacebookLogin = (fbRes) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        "http://api.-art.site/users/facebookLogin",
+        "http://api.c-art.site/users/facebookLogin",
         {
           method: "post",
           headers: {
@@ -119,7 +119,7 @@ export const handleFacebookLogin = (fbRes) => {
 export const handleGoogleLogin = (google_token) => {
   return async (dispatch) => {
     try {
-      const response = await fetch("http://api.-art.site/users/googleLogin", {
+      const response = await fetch("http://api.c-art.site/users/googleLogin", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export const handleGoogleLogin = (google_token) => {
 export const viewProfile = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://api.-art.site/users/profile", {
+      const { data } = await axios.get("http://api.c-art.site/users/profile", {
         headers: {
           access_token: localStorage.access_token,
         },
@@ -159,7 +159,7 @@ export const editProfile = (input, id) => {
   return async () => {
     try {
       const { data } = await axios.patch(
-        `http://api.-art.site/users/edit/${id}`,
+        `http://api.c-art.site/users/edit/${id}`,
         input,
         {}
       );

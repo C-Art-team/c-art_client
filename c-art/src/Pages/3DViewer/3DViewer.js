@@ -19,7 +19,6 @@ export default function ThreeDViewer() {
     dispatch(fetchOneArt(id))
       .then((data) => {
         setLoading(false);
-        console.log(data);
       })
       .catch((err) => {
         err.message
